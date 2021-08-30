@@ -1,7 +1,9 @@
-import React from "react";
-import { BrowserRouter, Redirect, Switch } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
-import { Route } from "react-router-dom";
+import React from 'react';
+import {
+  BrowserRouter, Redirect, Switch, Route,
+} from 'react-router-dom';
+import Dashboard from './pages/Dashboard';
+
 /**
  * Does the platform routing.
  */
