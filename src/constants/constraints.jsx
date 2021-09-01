@@ -3,6 +3,8 @@
  */
 
 export const sizes = {
+  infoBarWidth: 450,
+  infoBarHeaderHeight: 50,
 };
 
 export const transitions = {

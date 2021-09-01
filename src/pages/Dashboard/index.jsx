@@ -1,6 +1,6 @@
-import { Typography } from '@material-ui/core';
 import React from 'react';
-import ThemeButton from '../../components/ThemeButton';
+import InfoBar from './Content/InfoBar';
+import Map from './Content/MapView';
 import useStyles from './styles';
 
 export default function Dashboard() {
@@ -8,10 +8,10 @@ export default function Dashboard() {
 
   return (
     <div className={classes.wrapper}>
-      <Typography variant="h6">
-        Olá Amazônia Minada!
-      </Typography>
-      <ThemeButton />
+      <InfoBar />
+      <div className={classes.mapWrapper}>
+        <Map />
+      </div>
     </div>
   );
 }

@@ -4,8 +4,6 @@
 
 export const lightScheme = {
   primary: '#006CFF',
-  primaryHard: '#0057cf',
-  primaryHarder: '#0044a1',
   secondary: '#F2994A',
   stroke: '#E9E9E9',
   hover: '#e5f0ff',
@@ -44,8 +42,6 @@ export const lightScheme = {
 
 export const darkScheme = {
   primary: '#006CFF',
-  primaryHard: '#0057cf',
-  primaryHarder: '#0044a1',
   secondary: '#F2994A',
   stroke: '#1F1F1F',
   hover: '#0c141f',
@@ -53,12 +49,12 @@ export const darkScheme = {
   floatingShadow: '0px 0px 12px rgba(0,0,0,0.1)',
   grey: '#555555',
   background: {
-    primary: '#080808',
+    primary: '#181A1B',
     secondary: '#1F1F1F',
   },
   text: {
-    primary: '#C2C8CA',
-    secondary: '#C2C8CA',
+    primary: '#F9F9F9',
+    secondary: '#888A8B',
     tertiary: '#555555',
     legend: '#555555',
     soft: '#555555',
