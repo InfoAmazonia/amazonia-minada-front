@@ -1,6 +1,6 @@
 import React from 'react';
-import InfoBar from './Content/InfoBar';
-import Map from './Content/MapView';
+import InfoBar from './InfoBar';
+import Map from './MapView';
 import useStyles from './styles';
 
 export default function Dashboard() {

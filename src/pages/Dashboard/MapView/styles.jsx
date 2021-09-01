@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { createUseStyles } from 'react-jss';
-import { breakpoints, sizes } from '../../../../constants/constraints';
+import { breakpoints, sizes } from '../../../constants/constraints';
 
 const useStyles = createUseStyles((/* theme */) => ({
   wrapper: {

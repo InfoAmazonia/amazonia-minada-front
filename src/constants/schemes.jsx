@@ -3,13 +3,13 @@
  */
 
 export const lightScheme = {
-  primary: '#006CFF',
-  secondary: '#F2994A',
+  primary: '#E8E6E3',
+  secondary: '#E8E6E3',
   stroke: '#E9E9E9',
   hover: '#e5f0ff',
   shadow: '0px 4px 22px 0px rgba(0,0,0,0.1)',
   floatingShadow: '0px 0px 12px rgba(0,0,0,0.1)',
-  grey: '#555555',
+  grey: '#5C5C5C',
   white: '#ffffff',
   background: {
     primary: '#FFFFFF',
@@ -26,28 +26,16 @@ export const lightScheme = {
   header: {
     stroke: '#EAEAEA',
   },
-  map: {
-    scale: '#888A8B',
-    scaleSatellite: '#ffffff',
-    water: '#c2c8ca',
-    border: '#ababab',
-    selection: {
-      stroke: '#888A8B',
-      background: '#888A8B',
-      close: '#080808',
-      gifBackground: '#ffffff',
-    },
-  },
 };
 
 export const darkScheme = {
-  primary: '#006CFF',
-  secondary: '#F2994A',
+  primary: '#E8E6E3',
+  secondary: '#E8E6E3',
   stroke: '#1F1F1F',
   hover: '#0c141f',
   shadow: '0px 4px 22px 0px rgba(0,0,0,0.1)',
   floatingShadow: '0px 0px 12px rgba(0,0,0,0.1)',
-  grey: '#555555',
+  grey: '#5C5C5C',
   background: {
     primary: '#181A1B',
     secondary: '#1F1F1F',
@@ -62,17 +50,5 @@ export const darkScheme = {
   },
   header: {
     stroke: '#6D6D6D',
-  },
-  map: {
-    scale: '#888A8B',
-    scaleSatellite: '#cccccc',
-    water: '#1b1b1d',
-    border: '#6e6e6e',
-    selection: {
-      stroke: '#dedede',
-      background: '#ebebeb',
-      close: '#ffffff',
-      gifBackground: '#000000',
-    },
   },
 };
