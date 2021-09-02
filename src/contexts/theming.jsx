@@ -1,6 +1,4 @@
-import React, {
-  createContext, useState, useEffect, useMemo,
-} from 'react';
+import React, { createContext, useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider as JssThemeProvider } from 'react-jss';
 import { MuiThemeProvider, useMediaQuery } from '@material-ui/core';
@@ -53,31 +51,32 @@ export function ThemeProvider({ children }) {
    * Generate a theme to be used on Material-ui components.
    */
   const muiTheme = useMemo(
-    () => createTheme({
-      typography: {
-        fontFamily: '"Roboto", "Poppins", "Helvetica", "Arial", sans-serif',
-        fontWeight: 500,
-        fontSize: 12,
-        lineHeight: '16.93px',
-        letterSpacing: '-0.00833em',
-      },
-      palette: {
-        background: {
-          default: selectedTheme.background.primary,
+    () =>
+      createTheme({
+        typography: {
+          fontFamily: '"Roboto", "Poppins", "Helvetica", "Arial", sans-serif',
+          fontWeight: 500,
+          fontSize: 12,
+          lineHeight: '16.93px',
+          letterSpacing: '-0.00833em',
         },
-        primary: {
-          main: selectedTheme.primary,
+        palette: {
+          background: {
+            default: selectedTheme.background.primary,
+          },
+          primary: {
+            main: selectedTheme.primary,
+          },
+          secondary: {
+            main: selectedTheme.secondary,
+          },
+          text: {
+            primary: selectedTheme.text.primary,
+            secondary: selectedTheme.text.secondary,
+          },
         },
-        secondary: {
-          main: selectedTheme.secondary,
-        },
-        text: {
-          primary: selectedTheme.text.primary,
-          secondary: selectedTheme.text.secondary,
-        },
-      },
-    }),
-    [selectedTheme],
+      }),
+    [selectedTheme]
   );
 
   return (

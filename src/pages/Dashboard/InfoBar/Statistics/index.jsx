@@ -5,10 +5,6 @@ export default function Statistics() {
   return (
     <>
       <GeneralStatistics />
-      <GeneralStatistics />
-      <GeneralStatistics />
-      <GeneralStatistics />
-      <GeneralStatistics />
     </>
   );
 }

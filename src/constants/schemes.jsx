@@ -11,6 +11,7 @@ export const lightScheme = {
   background: {
     primary: '#FFFFFF',
     secondary: '#F5F5F5',
+    tertiary: '#888A8B',
   },
   text: {
     primary: '#555555',
@@ -42,6 +43,7 @@ export const darkScheme = {
   text: {
     primary: '#E8E6E3',
     secondary: '#5C5C5C',
+    tertiary: '#888A8B',
   },
   territorialUnits: {
     indigenousLand: '#791F49',
