@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import MapGL from 'react-map-gl';
 import useStyles from './styles';
 import { mapDefaults } from '../../../constants/options';
-import GeodatinLogo from '../../../assets/images/geodatin_map.svg'
+import GeodatinLogo from '../../../assets/images/geodatin_map.svg';
 
 /**
  * This component encapsulates the map container given by MapBox.
@@ -12,7 +12,7 @@ export default function MapView() {
   const theme = useTheme();
   const classes = useStyles({ theme });
 
-  const [viewport, setViewport] = useState({...mapDefaults.viewport});
+  const [viewport, setViewport] = useState({ ...mapDefaults.viewport });
 
   return (
     <div className={classes.wrapper}>
@@ -25,19 +25,19 @@ export default function MapView() {
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       >
 
-<a
-        href="https://geodatin.com"
-        target="blank"
-        className={classes.geodatinContainer}
-      >
-        <img
-          src={GeodatinLogo}
-          alt="Geodatin Logo"
-          className={classes.geodatinLogo}
-          unselectable="on"
-        />
-      </a>
-        </MapGL>
+        <a
+          href="https://geodatin.com"
+          target="blank"
+          className={classes.geodatinContainer}
+        >
+          <img
+            src={GeodatinLogo}
+            alt="Geodatin Logo"
+            className={classes.geodatinLogo}
+            unselectable="on"
+          />
+        </a>
+      </MapGL>
     </div>
   );
 }
