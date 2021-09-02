@@ -1,8 +1,8 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { useTheme } from 'react-jss';
 import React, { useState } from 'react';
 import MapGL from 'react-map-gl';
 import useStyles from './styles';
+import { mapDefaults } from '../../../constants/options';
 
 /**
  * This component encapsulates the map container given by MapBox.
@@ -11,11 +11,7 @@ export default function MapView() {
   const theme = useTheme();
   const classes = useStyles({ theme });
 
-  const [viewport, setViewport] = useState({
-    latitude: 37.7577,
-    longitude: -122.4376,
-    zoom: 8,
-  });
+  const [viewport, setViewport] = useState({...mapDefaults.viewport});
 
   return (
     <div className={classes.wrapper}>
@@ -23,7 +19,7 @@ export default function MapView() {
         {...viewport}
         width="100%"
         height="100%"
-        mapStyle="mapbox://styles/mapbox/dark-v8"
+        mapStyle="mapbox://styles/infoamazonia/ckhe037kt07on1aql47yvp2rn"
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       />
