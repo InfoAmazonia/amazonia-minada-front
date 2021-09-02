@@ -1,11 +1,13 @@
 import { useTheme } from 'react-jss';
 import React from 'react';
 import ListItem from '../../../../components/Dashboard/InfoBar/List/ListItem';
+import ListHeader from '../../../../components/Dashboard/InfoBar/List/ListHeader';
 
 export default function List() {
   const theme = useTheme();
   return (
     <>
+      <ListHeader />
       <ListItem
         title="EMPRESA DE MINERAÇÃO LTDA"
         circleColor={theme.miningProcesses.availableMiningArea}

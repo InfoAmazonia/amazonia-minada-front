@@ -10,36 +10,36 @@ const useStyles = createUseStyles(() => ({
     },
   },
   geodatinContainer: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 7,
     width: 115,
     height: 25,
-    left: "50%",
-    transform: "translateX(-50%)",
-    userSelect: "none",
+    left: '50%',
+    transform: 'translateX(-50%)',
+    userSelect: 'none',
 
-    "@media (max-width: 700px)": {
+    '@media (max-width: 700px)': {
       width: 25,
     },
-    "@media (max-width: 600px)": {
+    '@media (max-width: 600px)': {
       width: 115,
     },
-    "@media (max-width: 320px)": {
+    '@media (max-width: 320px)': {
       width: 25,
     },
-    "&::after": {
+    '&::after': {
       content: '""',
-      width: "100%",
-      height: "100%",
-      position: "absolute",
+      width: '100%',
+      height: '100%',
+      position: 'absolute',
       left: 0,
     },
   },
   geodatinLogo: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    objectPosition: "left",
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    objectPosition: 'left',
   },
 }));
 
