@@ -5,12 +5,9 @@
 export const lightScheme = {
   primary: '#E8E6E3',
   secondary: '#E8E6E3',
+  separator: '#313131',
   stroke: '#E9E9E9',
-  hover: '#e5f0ff',
-  shadow: '0px 4px 22px 0px rgba(0,0,0,0.1)',
-  floatingShadow: '0px 0px 12px rgba(0,0,0,0.1)',
   grey: '#5C5C5C',
-  white: '#ffffff',
   background: {
     primary: '#FFFFFF',
     secondary: '#F5F5F5',
@@ -18,37 +15,44 @@ export const lightScheme = {
   text: {
     primary: '#555555',
     secondary: '#888A8B',
-    tertiary: '#A3A3A3',
-    legend: '#555555',
-    soft: '#C2C8CA',
-    gray: '#888A8B',
   },
-  header: {
-    stroke: '#EAEAEA',
+  territorialUnits: {
+    indigenousLand: '#791F49',
+    protectionArea: '#005C53',
+  },
+  miningProcesses: {
+    miningConcession: '#FF0021',
+    smallScaleMining: '#DF374E',
+    miningResearchAuthorization: '#FF6846',
+    miningResearchRequest: '#CEB62B',
+    smallScaleMiningRequest: '#8AB128',
+    availableMiningArea: '#008BBB',
   },
 };
 
 export const darkScheme = {
   primary: '#E8E6E3',
   secondary: '#E8E6E3',
-  stroke: '#1F1F1F',
-  hover: '#0c141f',
-  shadow: '0px 4px 22px 0px rgba(0,0,0,0.1)',
-  floatingShadow: '0px 0px 12px rgba(0,0,0,0.1)',
+  separator: '#313131',
   grey: '#5C5C5C',
   background: {
     primary: '#181A1B',
     secondary: '#1F1F1F',
   },
   text: {
-    primary: '#F9F9F9',
-    secondary: '#888A8B',
-    tertiary: '#555555',
-    legend: '#555555',
-    soft: '#555555',
-    gray: '#888A8B',
+    primary: '#E8E6E3',
+    secondary: '#5C5C5C',
   },
-  header: {
-    stroke: '#6D6D6D',
+  territorialUnits: {
+    indigenousLand: '#791F49',
+    protectionArea: '#005C53',
+  },
+  miningProcesses: {
+    miningConcession: '#FF0021',
+    smallScaleMining: '#DF374E',
+    miningResearchAuthorization: '#FF6846',
+    miningResearchRequest: '#CEB62B',
+    smallScaleMiningRequest: '#8AB128',
+    availableMiningArea: '#008BBB',
   },
 };
