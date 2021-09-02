@@ -5,7 +5,7 @@
  export const mapDefaults = {
      viewport: {
         latitude: -6.536764,
-        longitude: -57.837697,
+        longitude: -58.837697,
         zoom: 4.4,
      }
   };
