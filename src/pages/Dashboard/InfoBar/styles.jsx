@@ -6,7 +6,7 @@ const useStyles = createUseStyles((theme) => ({
   wrapper: {
     display: 'flex',
     paddingTop: 60,
-    flexFlow: 'column nowrap',
+    flexFlow: "column nowrap",
     width: sizes.infoBarWidth,
     backgroundColor: theme.background.primary,
 
