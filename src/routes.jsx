@@ -13,10 +13,10 @@ function Routes() {
       <Switch>
         <Route
           exact
-          path="/map"
+          path="/"
           component={Dashboard}
         />
-        <Redirect from="*" to="/map" />
+        <Redirect from="*" to="/" />
       </Switch>
     </BrowserRouter>
   );
