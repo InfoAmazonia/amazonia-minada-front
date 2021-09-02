@@ -24,7 +24,6 @@ export default function MapView() {
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       >
-
         <a
           href="https://geodatin.com"
           target="blank"
