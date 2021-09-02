@@ -4,6 +4,9 @@ import React, { useState } from 'react';
 import MapGL from 'react-map-gl';
 import useStyles from './styles';
 
+/**
+ * This component encapsulates the map container given by MapBox.
+ */
 export default function MapView() {
   const theme = useTheme();
   const classes = useStyles({ theme });
