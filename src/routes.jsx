@@ -5,7 +5,7 @@ import {
 import Dashboard from './pages/Dashboard';
 
 /**
- * Does the platform routing.
+ * It does the platform routing.
  */
 function Routes() {
   return (
