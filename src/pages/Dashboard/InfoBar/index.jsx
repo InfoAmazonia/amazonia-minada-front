@@ -1,5 +1,4 @@
 /* eslint-disable react/forbid-prop-types */
-/* eslint-disable react/jsx-props-no-spreading */
 import { Tab, Tabs } from '@material-ui/core';
 import React, { useState } from 'react';
 import TabPanel from '../../../components/Dashboard/InfoBar/TabPanel';

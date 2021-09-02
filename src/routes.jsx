@@ -5,7 +5,7 @@ import {
 import Dashboard from './pages/Dashboard';
 
 /**
- * Does the platform routing.
+ * It does the platform routing.
  */
 function Routes() {
   return (
@@ -13,10 +13,10 @@ function Routes() {
       <Switch>
         <Route
           exact
-          path="/map"
+          path="/"
           component={Dashboard}
         />
-        <Redirect from="*" to="/map" />
+        <Redirect from="*" to="/" />
       </Switch>
     </BrowserRouter>
   );
