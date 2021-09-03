@@ -8,6 +8,7 @@ export const lightScheme = {
   separator: '#313131',
   stroke: '#E9E9E9',
   grey: '#5C5C5C',
+  defaultShadow: '0px 4px 7px 4px rgba(0, 0, 0, 0.25)',
   background: {
     primary: '#FFFFFF',
     secondary: '#F5F5F5',
@@ -36,6 +37,7 @@ export const darkScheme = {
   secondary: '#E8E6E3',
   separator: '#313131',
   grey: '#5C5C5C',
+  defaultShadow: '0px 4px 7px 4px rgba(0, 0, 0, 0.25)',
   background: {
     primary: '#181A1B',
     secondary: '#1F1F1F',

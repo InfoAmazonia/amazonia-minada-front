@@ -1,6 +1,8 @@
 import { Tab, Tabs } from '@material-ui/core';
 import React, { useState } from 'react';
+
 import TabPanel from '../../../components/Dashboard/InfoBar/TabPanel';
+import SimpleSearch from '../../../components/Dashboard/Search/SimpleSearch';
 import List from './List';
 import Statistics from './Statistics';
 import useStyles from './styles';
@@ -26,6 +28,9 @@ export default function InfoBar() {
 
   return (
     <div className={classes.wrapper}>
+      <div className={classes.searchContainer}>
+        <SimpleSearch />
+      </div>
       <Tabs
         className={classes.tab}
         value={value}
