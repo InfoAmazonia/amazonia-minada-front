@@ -3,6 +3,9 @@ import React from 'react';
 import { useTheme } from 'react-jss';
 import useStyles from './styles';
 
+/**
+ * This component provides general statistics content.
+ */
 export default function GeneralStatistics() {
   const theme = useTheme();
   const classes = useStyles({ theme });

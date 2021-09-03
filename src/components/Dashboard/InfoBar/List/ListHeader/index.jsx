@@ -4,6 +4,9 @@ import { useTheme } from 'react-jss';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import useStyles from './styles';
 
+/**
+ * This component represents a list header.
+ */
 export default function ListHeader() {
   const theme = useTheme();
   const classes = useStyles({ theme });

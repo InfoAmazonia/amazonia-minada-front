@@ -1,7 +1,7 @@
 import { createUseStyles } from 'react-jss';
 import { breakpoints } from '../../constants/constraints';
 
-const useStyles = createUseStyles((/* theme */) => ({
+const useStyles = createUseStyles(() => ({
   wrapper: {
     display: 'flex',
     position: 'fixed',

@@ -3,6 +3,9 @@ import React from 'react';
 import ListItem from '../../../../components/Dashboard/InfoBar/List/ListItem';
 import ListHeader from '../../../../components/Dashboard/InfoBar/List/ListHeader';
 
+/**
+ *  This function returns list content.
+ */
 export default function List() {
   const theme = useTheme();
   return (

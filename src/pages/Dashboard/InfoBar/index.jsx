@@ -1,5 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
- 
 import { Tab, Tabs } from '@material-ui/core';
 import React, { useState } from 'react';
 import TabPanel from '../../../components/Dashboard/InfoBar/TabPanel';
@@ -7,13 +5,9 @@ import List from './List';
 import Statistics from './Statistics';
 import useStyles from './styles';
 
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
+/**
+ *  This component provides the container for statistics and list.
+ */
 export default function InfoBar() {
   const classes = useStyles();
 
@@ -22,17 +16,23 @@ export default function InfoBar() {
     setValue(newValue);
   };
 
+  /* This function returns a11y properties */
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+    };
+  }
+
   return (
     <div className={classes.wrapper}>
       <Tabs
         className={classes.tab}
         value={value}
-        onChange={      handleChange}
-        indicatorColor='primary'
+        onChange={handleChange}
+        indicatorColor="primary"
         aria-label="simple tabs example"
-        variant="fullWidth" 
-
-        
+        variant="fullWidth"
       >
         <Tab label="Estatísticas" {...a11yProps(0)} />
         <Tab label="Listagem" {...a11yProps(1)} />
