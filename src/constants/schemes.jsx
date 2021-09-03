@@ -19,7 +19,7 @@ export const lightScheme = {
   },
   territorialUnits: {
     indigenousLand: '#791F49',
-    protectionArea: '#005C53',
+    protectedArea: '#005C53',
   },
   miningProcesses: {
     miningConcession: '#FF0021',
@@ -47,7 +47,7 @@ export const darkScheme = {
   },
   territorialUnits: {
     indigenousLand: '#791F49',
-    protectionArea: '#005C53',
+    protectedArea: '#005C53',
   },
   miningProcesses: {
     miningConcession: '#FF0021',

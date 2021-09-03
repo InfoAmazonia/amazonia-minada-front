@@ -20,7 +20,17 @@
           "singular": "Unidade de conservação",
           "plural": "Unidades de conservação"
         }
-      }
+      },
+      "miningProcesses": {
+        "miningConcession": "Concessão de lavra",
+        "smallScaleMining": "Lavra garimpeira",
+        "miningResearchAuthorization": "Autorização de pesquisa",
+        "miningResearchRequest": "Requerimento de pesquisa",
+        "smallScaleMiningRequest": "Requerimento de lavra garimpeira",
+        "availableMiningArea": "Disponibilidade"
+      },
+      "requiredArea": "Área requerida",
+      "requirementsIncidence": "Incidência de requerimentos"
     },
     "infoPanel": {
       "statistics": {
