@@ -31,6 +31,19 @@ const useStyles = createUseStyles((theme) => ({
     height: '2px',
     backgroundColor: theme.grey,
   },
+  searchContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    [breakpoints.max.sm]: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 100,
+    },
+  },
 }));
 
 export default useStyles;

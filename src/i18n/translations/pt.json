@@ -10,6 +10,10 @@
     }
   },
   "dashboard": {
+    "search": {
+      "bigPlaceholder": "Pesquise no Amazônia Minada",
+      "smallPlaceholder": "Pesquisar"
+    },
     "dataType": {
       "territorialUnits": {
         "indigenousLand": {
