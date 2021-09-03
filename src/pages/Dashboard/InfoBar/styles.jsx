@@ -5,7 +5,6 @@ import { breakpoints, sizes } from '../../../constants/constraints';
 const useStyles = createUseStyles((theme) => ({
   wrapper: {
     display: 'flex',
-    paddingTop: 60,
     flexFlow: 'column nowrap',
     width: sizes.infoBarWidth,
     backgroundColor: theme.background.primary,
