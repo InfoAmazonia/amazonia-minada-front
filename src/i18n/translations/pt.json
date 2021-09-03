@@ -1,1 +1,49 @@
-{}
+{
+  "general": {
+    "language": "Português",
+    "number": "{{value, number}}",
+    "roundNumber": "{{value, roundNumber}}",
+    "date": {
+      "year": "{{date, YYYY}}",
+      "monthYear": "{{date, MM/YYYY}}",
+      "monthNameYear": "{{date, MMMM, YYYY}}"
+    }
+  },
+  "dashboard": {
+    "dataType": {
+      "territorialUnits": {
+        "indigenousLand": {
+          "singular": "Terra indígena",
+          "plural": "Terras indígenas"
+        },
+        "protectedArea": {
+          "singular": "Unidade de conservação",
+          "plural": "Unidades de conservação"
+        }
+      }
+    },
+    "infoPanel": {
+      "statistics": {
+        "title": "Estatísticas",
+        "generalStatistics": {
+          "illegalRequirements": "Requerimentos ilegais",
+          "totalArea": "Área total requerida"
+        }
+      },
+      "list": {
+        "title": "Listagem",
+        "header": {
+          "results": "resultados encontrados",
+          "downloadCSV": "Baixar CSV"
+        },
+        "item": {
+          "process": "Processo",
+          "declaredArea": "Área declarada",
+          "openingYear": "Ano de abertura",
+          "areaType": "Tipo de área"
+        }
+      }
+    },
+    "map": {}
+  }
+}
