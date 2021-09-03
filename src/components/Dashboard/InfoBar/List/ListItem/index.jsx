@@ -1,7 +1,8 @@
 import { Typography } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { useTheme } from 'react-jss';
-import PropTypes from 'prop-types';
+
 import useStyles from './styles';
 
 /**

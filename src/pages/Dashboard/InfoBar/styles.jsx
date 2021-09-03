@@ -1,12 +1,11 @@
-/* eslint-disable no-unused-vars */
 import { createUseStyles } from 'react-jss';
+
 import { breakpoints, sizes } from '../../../constants/constraints';
 
 const useStyles = createUseStyles((theme) => ({
   wrapper: {
     display: 'flex',
-    paddingTop: 60,
-    flexFlow: "column nowrap",
+    flexFlow: 'column nowrap',
     width: sizes.infoBarWidth,
     backgroundColor: theme.background.primary,
 
@@ -20,6 +19,10 @@ const useStyles = createUseStyles((theme) => ({
     width: '100%',
     paddingLeft: sizes.infoBarSidePadding,
     paddingRight: sizes.infoBarSidePadding,
+
+    '& .MuiTab-root': {
+      textTransform: 'none',
+    },
   },
   tabFooter: {
     position: 'absolute',

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import GeneralStatistics from '../../../../components/Dashboard/InfoBar/Statistics/GeneralStatistics';
 
 /**

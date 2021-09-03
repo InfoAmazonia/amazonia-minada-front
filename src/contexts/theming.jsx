@@ -1,8 +1,9 @@
-import React, { createContext, useState, useEffect, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { ThemeProvider as JssThemeProvider } from 'react-jss';
 import { MuiThemeProvider, useMediaQuery } from '@material-ui/core';
 import { createTheme } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import React, { createContext, useState, useEffect, useMemo } from 'react';
+import { ThemeProvider as JssThemeProvider } from 'react-jss';
+
 import { lightScheme, darkScheme } from '../constants/schemes';
 
 const ThemeContext = createContext({});

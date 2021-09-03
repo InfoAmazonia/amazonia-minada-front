@@ -1,6 +1,7 @@
 import React from 'react';
-import InfoBar from './InfoBar';
+
 import Map from '../../components/Dashboard/MapView';
+import InfoBar from './InfoBar';
 import useStyles from './styles';
 
 /**

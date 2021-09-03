@@ -1,4 +1,5 @@
 import { createUseStyles } from 'react-jss';
+
 import { sizes } from '../../../../constants/constraints';
 
 const useStyles = createUseStyles((theme) => ({

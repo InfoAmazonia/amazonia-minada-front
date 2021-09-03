@@ -1,9 +1,10 @@
-import { useTheme } from 'react-jss';
 import React, { useState } from 'react';
+import { useTheme } from 'react-jss';
 import MapGL from 'react-map-gl';
-import useStyles from './styles';
-import { mapDefaults } from '../../../constants/options';
+
 import GeodatinLogo from '../../../assets/images/geodatin_map.svg';
+import { mapDefaults } from '../../../constants/options';
+import useStyles from './styles';
 
 /**
  * This component encapsulates the map container given by MapBox.
