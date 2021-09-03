@@ -1,12 +1,11 @@
-/* eslint-disable react/jsx-no-bind */
-import React, { useContext } from 'react';
 import { Button } from '@material-ui/core';
+import Brightness2RoundedIcon from '@material-ui/icons/Brightness2Rounded';
+import WbSunnyRoundedIcon from '@material-ui/icons/WbSunnyRounded';
+import React, { useContext } from 'react';
+
+import { lightScheme } from '../../constants/schemes';
 import ThemeContext from '../../contexts/theming';
 import useStyles from './styles';
-import { lightScheme } from '../../constants/schemes';
-import SvgDarkMode from '../Icons/DarkMode';
-import SvgLightMode from '../Icons/LightMode';
-
 /**
  * This functional component renders a button that allows the platform theme changing.
  * @returns A button that changes the platform theme.
@@ -28,11 +27,11 @@ function ThemeButton() {
   }
 
   return (
-    <Button className={classes.button} onClick={handleSwitchTheme}>
+    <Button className={classes.button} onClick={() => handleSwitchTheme()}>
       {selectedTheme === lightScheme ? (
-        <SvgDarkMode className={classes.darkIcon} />
+        <WbSunnyRoundedIcon />
       ) : (
-        <SvgLightMode className={classes.lightIcon} />
+        <Brightness2RoundedIcon />
       )}
     </Button>
   );

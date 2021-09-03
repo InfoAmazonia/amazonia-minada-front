@@ -1,5 +1,4 @@
 import { createUseStyles } from 'react-jss';
-/* import { breakpoints } from '../../../../../constants/constraints'; */
 
 const useStyles = createUseStyles((theme) => ({
   wrapper: {

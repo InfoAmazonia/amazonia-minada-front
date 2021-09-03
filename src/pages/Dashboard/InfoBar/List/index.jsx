@@ -1,7 +1,8 @@
-import { useTheme } from 'react-jss';
 import React from 'react';
-import ListItem from '../../../../components/Dashboard/InfoBar/List/ListItem';
+import { useTheme } from 'react-jss';
+
 import ListHeader from '../../../../components/Dashboard/InfoBar/List/ListHeader';
+import ListItem from '../../../../components/Dashboard/InfoBar/List/ListItem';
 
 export default function List() {
   const theme = useTheme();

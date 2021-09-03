@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles((/* theme */) => ({
+const useStyles = createUseStyles(() => ({
   wrapper: {
     display: 'flex',
     flexFlow: 'row wrap',

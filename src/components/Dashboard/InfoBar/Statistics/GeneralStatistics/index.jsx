@@ -1,6 +1,7 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
 import { useTheme } from 'react-jss';
+
 import useStyles from './styles';
 
 export default function GeneralStatistics() {

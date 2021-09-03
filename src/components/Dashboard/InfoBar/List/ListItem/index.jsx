@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
 import { Typography } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { useTheme } from 'react-jss';
-import PropTypes from 'prop-types';
+
 import useStyles from './styles';
 
 export default function ListItem({ circleColor, title, infos }) {
@@ -18,20 +19,34 @@ export default function ListItem({ circleColor, title, infos }) {
   return (
     <div className={classes.wrapper}>
       <div className={classes.title}>
-        <div className={classes.circle} style={{ backgroundColor: circleColor }} />
-        <Typography style={{ color: theme.text.primary, fontSize: 14 }} variant="overline">{title}</Typography>
+        <div
+          className={classes.circle}
+          style={{ backgroundColor: circleColor }}
+        />
+        <Typography
+          style={{ color: theme.text.primary, fontSize: 14 }}
+          variant="overline"
+        >
+          {title}
+        </Typography>
       </div>
       {infos && (
-      <div className={classes.infos}>
-        {infos.map((info) => (
-          <div key={info.title} className={classes.infoItem}>
-            <Typography style={{ color: theme.text.secondary }} variant="caption">{info.title}</Typography>
-            <Typography style={{ color: theme.text.primary }} variant="body1">{info.data}</Typography>
-          </div>
-        ))}
-      </div>
+        <div className={classes.infos}>
+          {infos.map((info) => (
+            <div key={info.title} className={classes.infoItem}>
+              <Typography
+                style={{ color: theme.text.secondary }}
+                variant="caption"
+              >
+                {info.title}
+              </Typography>
+              <Typography style={{ color: theme.text.primary }} variant="body1">
+                {info.data}
+              </Typography>
+            </div>
+          ))}
+        </div>
       )}
-
     </div>
   );
 }
