@@ -6,6 +6,7 @@ import React, { useContext } from 'react';
 import { lightScheme } from '../../constants/schemes';
 import ThemeContext from '../../contexts/theming';
 import useStyles from './styles';
+
 /**
  * This functional component renders a button that allows the platform theme changing.
  * @returns A button that changes the platform theme.
