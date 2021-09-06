@@ -18,6 +18,13 @@ const useStyles = createUseStyles(() => ({
     top: '50%',
     right: 15,
     transform: 'translateY(-50%)',
+
+    '& > *': {
+      marginBottom: 10,
+    },
+    '& div:last-child': {
+      marginBottom: 0,
+    },
   },
 }));
 

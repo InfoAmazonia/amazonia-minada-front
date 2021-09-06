@@ -6,6 +6,7 @@ import MapContext from '../../../contexts/mapping';
 import Geodatin from './Geodatin';
 import North from './North';
 import useStyles from './styles';
+import Zoom from './Zoom';
 
 /**
  * This component encapsulates the map container given by MapBox.
@@ -19,6 +20,7 @@ export default function MapView() {
     <div className={classes.wrapper}>
       <div className={classes.navigation}>
         <North />
+        <Zoom />
       </div>
       <MapGL
         {...viewport}
