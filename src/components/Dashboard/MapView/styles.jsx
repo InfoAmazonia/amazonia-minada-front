@@ -13,8 +13,8 @@ const useStyles = createUseStyles(() => ({
     },
   },
   navigation: {
-    zIndex: 10,
     position: 'absolute',
+    zIndex: 10,
     top: '50%',
     right: 15,
     transform: 'translateY(-50%)',
@@ -24,6 +24,20 @@ const useStyles = createUseStyles(() => ({
     },
     '& div:last-child': {
       marginBottom: 0,
+    },
+  },
+  options: {
+    position: 'absolute',
+    zIndex: 10,
+    top: 15,
+    left: '50%',
+    transform: 'translateX(-50%)',
+
+    '& > *': {
+      marginRight: 10,
+    },
+    '& div:last-child': {
+      marginRight: 0,
     },
   },
 }));

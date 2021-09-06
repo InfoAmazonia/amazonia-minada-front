@@ -50,6 +50,24 @@
           "semiCircle": {
             "title": "Porcentagem por unidade territorial",
             "info": "Este gráfico apresenta a porcentagem por unidade territorial"
+          },
+          "ranking": {
+            "indigenousLand": {
+              "title": "Ranking de terras indígenas por área</br>requerida",
+              "info": "Este gráfico apresenta o ranking de terras indígenas por área requerida"
+            },
+            "state": {
+              "title": "Ranking de estados por área requerida",
+              "info": "Este gráfico apresenta o ranking de estados por área requerida"
+            },
+            "protectedArea": {
+              "title": "Ranking de unidades de conservação<br>por área requerida",
+              "info": "Este gráfico apresenta o ranking de unidades de conservação por área requerida"
+            },
+            "company": {
+              "title": "Ranking de empresas por área requerida",
+              "info": "Este gráfico apresenta o ranking de empresas por área requerida"
+            }
           }
         }
       },

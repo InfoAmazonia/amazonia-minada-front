@@ -3,7 +3,7 @@
  */
 
 export const sizes = {
-  infoBarWidth: 550,
+  infoBarWidth: 400,
   infoBarHeaderHeight: 50,
   infoBarSidePadding: 20,
 };

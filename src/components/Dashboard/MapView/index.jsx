@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { useTheme } from 'react-jss';
 import MapGL from 'react-map-gl';
@@ -11,7 +12,17 @@ import Zoom from './Zoom';
 /**
  * This component encapsulates the map container given by MapBox.
  */
-export default function MapView() {
+export default function MapView({ children, navigationButtonsEnabled }) {
+  MapView.defaultProps = {
+    children: undefined,
+    navigationButtonsEnabled: true,
+  };
+
+  MapView.propTypes = {
+    children: PropTypes.shape(),
+    navigationButtonsEnabled: PropTypes.bool,
+  };
+
   const theme = useTheme();
   const classes = useStyles({ theme });
   const { mapRef, viewport, setViewport } = useContext(MapContext);
@@ -20,14 +31,21 @@ export default function MapView() {
     const map = mapRef.current.getMap();
     console.log(map.getStyle());
     console.log(map.getLayer('am-minada-requerimentos_UCs_fill'));
+    map.setPaintProperty('am-minada-requerimentos_UCs_fill', 'fill-opacity', 0);
+    map.setPaintProperty('am-minada-requerimentos_UCs_line', 'line-opacity', 0);
+    map.setPaintProperty('amzminada_ucs', 'fill-opacity', 0);
+    map.setPaintProperty('amzminada_ucs_line', 'line-opacity', 0);
   }
 
   return (
     <div className={classes.wrapper}>
-      <div className={classes.navigation}>
-        <North />
-        <Zoom />
-      </div>
+      {navigationButtonsEnabled && (
+        <div className={classes.navigation}>
+          <North />
+          <Zoom />
+        </div>
+      )}
+      {children && <div className={classes.options}>{children}</div>}
       <MapGL
         {...viewport}
         onLoad={() => onLoaded()}

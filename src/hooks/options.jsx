@@ -70,7 +70,7 @@ export default function useOptions() {
         fontSize: 14,
         lineHeight: '19.12px',
         letterSpacing: '-0.00833em',
-        color: theme.text.secondary,
+        color: theme.text.primary,
       },
     },
     xAxis: {
@@ -82,6 +82,7 @@ export default function useOptions() {
         style: {
           fontWeight: 500,
           fontFamily: `"Manrope", "Roboto", "Helvetica", "Arial", sans-serif`,
+          color: theme.text.tertiary,
         },
       },
     },
@@ -101,7 +102,7 @@ export default function useOptions() {
           fontSize: '10px',
           fontWeight: 500,
           fontFamily: `"Manrope", "Roboto", "Helvetica", "Arial", sans-serif`,
-          color: theme.text.secondary,
+          color: theme.text.tertiary,
         },
       },
       gridLineWidth: 0.5,
