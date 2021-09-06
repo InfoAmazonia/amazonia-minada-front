@@ -14,7 +14,13 @@ import Zoom from './Zoom';
 export default function MapView() {
   const theme = useTheme();
   const classes = useStyles({ theme });
-  const { viewport, setViewport } = useContext(MapContext);
+  const { mapRef, viewport, setViewport } = useContext(MapContext);
+
+  function onLoaded() {
+    const map = mapRef.current.getMap();
+    console.log(map.getStyle());
+    console.log(map.getLayer('am-minada-requerimentos_UCs_fill'));
+  }
 
   return (
     <div className={classes.wrapper}>
@@ -24,6 +30,8 @@ export default function MapView() {
       </div>
       <MapGL
         {...viewport}
+        onLoad={() => onLoaded()}
+        ref={mapRef}
         width="100%"
         height="100%"
         mapStyle="mapbox://styles/infoamazonia/ckhe037kt07on1aql47yvp2rn"
