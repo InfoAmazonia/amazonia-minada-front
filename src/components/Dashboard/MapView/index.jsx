@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { useTheme } from 'react-jss';
 import MapGL from 'react-map-gl';
 
-import { mapDefaults } from '../../../constants/options';
+import MapContext from '../../../contexts/mapping';
 import Geodatin from './Geodatin';
 import North from './North';
 import useStyles from './styles';
@@ -13,8 +13,7 @@ import useStyles from './styles';
 export default function MapView() {
   const theme = useTheme();
   const classes = useStyles({ theme });
-
-  const [viewport, setViewport] = useState({ ...mapDefaults.viewport });
+  const { viewport, setViewport } = useContext(MapContext);
 
   return (
     <div className={classes.wrapper}>
