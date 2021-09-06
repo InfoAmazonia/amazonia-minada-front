@@ -7,6 +7,8 @@ const useStyles = createUseStyles((theme) => ({
     display: 'flex',
     flexFlow: 'column nowrap',
     width: sizes.infoBarWidth,
+    minWidth: sizes.infoBarWidth,
+    maxWidth: sizes.infoBarWidth,
     zIndex: 1000,
     boxShadow: theme.defaultShadow,
     backgroundColor: theme.background.primary,
