@@ -24,6 +24,7 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-console': ['error', { allow: ['tron'] }],
     'react/jsx-props-no-spreading': 'off',
+    'react/no-this-in-sfc': 'off',
     'import-helpers/order-imports': [
       'warn',
       {
