@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useTheme } from 'react-jss';
 import MapGL from 'react-map-gl';
 
-import GeodatinLogo from '../../../assets/images/geodatin_map.svg';
 import { mapDefaults } from '../../../constants/options';
+import Geodatin from './Geodatin';
+import North from './North';
 import useStyles from './styles';
 
 /**
@@ -17,6 +18,7 @@ export default function MapView() {
 
   return (
     <div className={classes.wrapper}>
+      <North />
       <MapGL
         {...viewport}
         width="100%"
@@ -25,18 +27,7 @@ export default function MapView() {
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       >
-        <a
-          href="https://geodatin.com"
-          target="blank"
-          className={classes.geodatinContainer}
-        >
-          <img
-            src={GeodatinLogo}
-            alt="Geodatin Logo"
-            className={classes.geodatinLogo}
-            unselectable="on"
-          />
-        </a>
+        <Geodatin />
       </MapGL>
     </div>
   );
