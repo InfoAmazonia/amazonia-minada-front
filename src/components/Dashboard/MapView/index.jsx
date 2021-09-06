@@ -18,7 +18,9 @@ export default function MapView() {
 
   return (
     <div className={classes.wrapper}>
-      <North />
+      <div className={classes.navigation}>
+        <North />
+      </div>
       <MapGL
         {...viewport}
         width="100%"

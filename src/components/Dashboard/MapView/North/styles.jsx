@@ -9,6 +9,7 @@ const useStyles = createUseStyles((theme) => ({
     height: 40,
     position: 'relative',
     display: 'flex',
+    userSelect: 'none',
   },
   n: {
     position: 'absolute',
