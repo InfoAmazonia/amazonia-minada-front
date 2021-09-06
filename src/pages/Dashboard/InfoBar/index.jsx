@@ -1,9 +1,11 @@
-import { Tab, Tabs } from '@material-ui/core';
-import React, { useState } from 'react';
+import { Button, Tab, Tabs, useMediaQuery } from '@material-ui/core';
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import TabPanel from '../../../components/Dashboard/InfoBar/TabPanel';
 import SimpleSearch from '../../../components/Dashboard/Search/SimpleSearch';
+import { breakpoints } from '../../../constants/constraints';
 import List from './List';
 import Statistics from './Statistics';
 import useStyles from './styles';
@@ -18,6 +20,8 @@ export default function InfoBar() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const [minimized, setMinimized] = useState(false);
+  const isSm = useMediaQuery(breakpoints.max.sm);
 
   /* This function returns a11y properties */
   function a11yProps(index) {
@@ -27,32 +31,72 @@ export default function InfoBar() {
     };
   }
 
+  /**
+   * Set minimized value to false when the SM size is setted.
+   */
+  useEffect(() => {
+    if (isSm) {
+      setMinimized(false);
+    }
+  }, [isSm]);
+
   return (
-    <div className={classes.wrapper}>
-      <div className={classes.searchContainer}>
-        <SimpleSearch />
-      </div>
-      <Tabs
-        className={classes.tab}
-        value={value}
-        onChange={handleChange}
-        indicatorColor="primary"
-        aria-label="simple tabs example"
-        variant="fullWidth"
+    <div className={classes.container}>
+      {!isSm && (
+        <div className={classes.minimizeWrapper}>
+          <Button
+            className={classes.minimizeButton}
+            onClick={() => setMinimized(!minimized)}
+          >
+            <NavigateBeforeIcon
+              className={classes.icon}
+              style={{
+                transform: minimized ? 'rotate(180deg)' : 'rotate(0deg)',
+              }}
+            />
+          </Button>
+        </div>
+      )}
+      <div
+        className={classes.wrapper}
+        style={
+          minimized
+            ? {
+                width: 0,
+                minWidth: 0,
+                maxWidth: 0,
+                pointerEvents: 'none',
+                userSelect: 'none',
+                opacity: 0,
+              }
+            : {}
+        }
       >
-        <Tab
-          label={t('dashboard.infoPanel.statistics.title')}
-          {...a11yProps(0)}
-        />
-        <Tab label={t('dashboard.infoPanel.list.title')} {...a11yProps(1)} />
-        <div className={classes.tabFooter} />
-      </Tabs>
-      <TabPanel value={value} index={0}>
-        <Statistics />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <List />
-      </TabPanel>
+        <div className={classes.searchContainer}>
+          <SimpleSearch />
+        </div>
+        <Tabs
+          className={classes.tab}
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+          aria-label="simple tabs example"
+          variant="fullWidth"
+        >
+          <Tab
+            label={t('dashboard.infoPanel.statistics.title')}
+            {...a11yProps(0)}
+          />
+          <Tab label={t('dashboard.infoPanel.list.title')} {...a11yProps(1)} />
+          <div className={classes.tabFooter} />
+        </Tabs>
+        <TabPanel value={value} index={0}>
+          <Statistics />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <List />
+        </TabPanel>
+      </div>
     </div>
   );
 }
