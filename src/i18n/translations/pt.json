@@ -85,6 +85,11 @@
         }
       }
     },
-    "map": {}
+    "map": {
+      "visibility": {
+        "ti": "Terras Indígenas",
+        "uc": "Unidades de Conservação"
+      }
+    }
   }
 }

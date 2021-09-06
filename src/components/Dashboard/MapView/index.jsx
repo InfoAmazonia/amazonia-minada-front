@@ -7,48 +7,48 @@ import MapContext from '../../../contexts/mapping';
 import Geodatin from './Geodatin';
 import North from './North';
 import useStyles from './styles';
+import Visibility from './Visibility';
 import Zoom from './Zoom';
 
 /**
  * This component encapsulates the map container given by MapBox.
  */
-export default function MapView({ children, navigationButtonsEnabled }) {
+export default function MapView({
+  northEnabled,
+  zoomButtonsEnabled,
+  visibilityButtonsEnabled,
+}) {
   MapView.defaultProps = {
-    children: undefined,
-    navigationButtonsEnabled: true,
+    northEnabled: true,
+    zoomButtonsEnabled: true,
+    visibilityButtonsEnabled: true,
   };
 
   MapView.propTypes = {
-    children: PropTypes.shape(),
-    navigationButtonsEnabled: PropTypes.bool,
+    northEnabled: PropTypes.bool,
+    zoomButtonsEnabled: PropTypes.bool,
+    visibilityButtonsEnabled: PropTypes.bool,
   };
 
   const theme = useTheme();
   const classes = useStyles({ theme });
-  const { mapRef, viewport, setViewport } = useContext(MapContext);
-
-  function onLoaded() {
-    const map = mapRef.current.getMap();
-    console.log(map.getStyle());
-    console.log(map.getLayer('am-minada-requerimentos_UCs_fill'));
-    map.setPaintProperty('am-minada-requerimentos_UCs_fill', 'fill-opacity', 0);
-    map.setPaintProperty('am-minada-requerimentos_UCs_line', 'line-opacity', 0);
-    map.setPaintProperty('amzminada_ucs', 'fill-opacity', 0);
-    map.setPaintProperty('amzminada_ucs_line', 'line-opacity', 0);
-  }
+  const {
+    values: { mapRef, viewport },
+    setters: { setViewport, setMapLoaded },
+  } = useContext(MapContext);
 
   return (
     <div className={classes.wrapper}>
-      {navigationButtonsEnabled && (
-        <div className={classes.navigation}>
-          <North />
-          <Zoom />
-        </div>
-      )}
-      {children && <div className={classes.options}>{children}</div>}
+      <div className={classes.navigation}>
+        {northEnabled && <North />}
+        {zoomButtonsEnabled && <Zoom />}
+      </div>
+      <div className={classes.options}>
+        {visibilityButtonsEnabled && <Visibility />}
+      </div>
       <MapGL
         {...viewport}
-        onLoad={() => onLoaded()}
+        onLoad={() => setMapLoaded(true)}
         ref={mapRef}
         width="100%"
         height="100%"

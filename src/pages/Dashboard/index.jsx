@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Map from '../../components/Dashboard/MapView';
+import { FilteringProvider } from '../../contexts/filtering';
 import { MapProvider } from '../../contexts/mapping';
 import InfoBar from './InfoBar';
 import useStyles from './styles';
@@ -12,13 +13,15 @@ export default function Dashboard() {
   const classes = useStyles();
 
   return (
-    <MapProvider>
-      <div className={classes.wrapper}>
-        <InfoBar />
-        <div className={classes.mapWrapper}>
-          <Map />
+    <FilteringProvider>
+      <MapProvider>
+        <div className={classes.wrapper}>
+          <InfoBar />
+          <div className={classes.mapWrapper}>
+            <Map northEnabled zoomButtonsEnabled visibilityButtonsEnabled />
+          </div>
         </div>
-      </div>
-    </MapProvider>
+      </MapProvider>
+    </FilteringProvider>
   );
 }

@@ -11,7 +11,10 @@ import useStyles from './styles';
 export default function Zoom() {
   const classes = useStyles();
   const theme = useTheme();
-  const { viewport, setViewport } = useContext(MapContext);
+  const {
+    values: { viewport },
+    setters: { setViewport },
+  } = useContext(MapContext);
 
   /**
    * This function adds zoom to the map's viewport.
