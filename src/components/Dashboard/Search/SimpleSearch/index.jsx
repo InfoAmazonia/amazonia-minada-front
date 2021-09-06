@@ -14,9 +14,6 @@ export default function SimpleSearch() {
   const classes = useStyles({ theme });
   const { t } = useTranslation();
 
-  // eslint-disable-next-line no-console
-  console.log(classes);
-
   return (
     <div className={classes.container}>
       <Autocomplete

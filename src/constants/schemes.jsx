@@ -18,9 +18,13 @@ export const lightScheme = {
     primary: '#555555',
     secondary: '#888A8B',
   },
+  tooltip: {
+    background: '#080808',
+    text: '#C2C8CA',
+  },
   territorialUnits: {
-    indigenousLand: '#791F49',
-    protectedArea: '#005C53',
+    indigenousLand: '#C40460',
+    protectedArea: '#00AA58',
   },
   miningProcesses: {
     miningConcession: '#FF0021',
@@ -47,9 +51,13 @@ export const darkScheme = {
     secondary: '#5C5C5C',
     tertiary: '#888A8B',
   },
+  tooltip: {
+    background: '#080808',
+    text: '#C2C8CA',
+  },
   territorialUnits: {
-    indigenousLand: '#791F49',
-    protectedArea: '#005C53',
+    indigenousLand: '#C40460',
+    protectedArea: '#00AA58',
   },
   miningProcesses: {
     miningConcession: '#FF0021',

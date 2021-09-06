@@ -1,6 +1,7 @@
 import { Tab, Tabs } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import TabPanel from '../../../components/Dashboard/InfoBar/TabPanel';
 import SimpleSearch from '../../../components/Dashboard/Search/SimpleSearch';
 import List from './List';

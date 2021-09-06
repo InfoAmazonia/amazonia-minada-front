@@ -42,6 +42,15 @@
         "generalStatistics": {
           "illegalRequirements": "Requerimentos ilegais",
           "totalArea": "Área total requerida"
+        },
+        "charts": {
+          "printButton": "Baixar",
+          "export": "Exportar gráfico",
+          "thousandHectares": "Milhares de hectares",
+          "semiCircle": {
+            "title": "Porcentagem por unidade territorial",
+            "info": "Este gráfico apresenta a porcentagem por unidade territorial"
+          }
         }
       },
       "list": {
