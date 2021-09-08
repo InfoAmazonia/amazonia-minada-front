@@ -45,6 +45,7 @@
     "infoPanel": {
       "statistics": {
         "title": "Estatísticas",
+        "dataTypeSelectorLabel": "Visualizar dados por",
         "generalStatistics": {
           "illegalRequirements": "Requerimentos ilegais",
           "totalArea": "Área total requerida"
@@ -59,20 +60,20 @@
           },
           "ranking": {
             "indigenousLand": {
-              "title": "Ranking de terras indígenas por área</br>requerida",
-              "info": "Este gráfico apresenta o ranking de terras indígenas por área requerida"
+              "title": "Ranking de terras indígenas por<br>",
+              "info": "Este gráfico apresenta o ranking de terras indígenas por"
             },
             "state": {
-              "title": "Ranking de estados por área requerida",
-              "info": "Este gráfico apresenta o ranking de estados por área requerida"
+              "title": "Ranking de estados por",
+              "info": "Este gráfico apresenta o ranking de estados por"
             },
             "protectedArea": {
-              "title": "Ranking de unidades de conservação<br>por área requerida",
-              "info": "Este gráfico apresenta o ranking de unidades de conservação por área requerida"
+              "title": "Ranking de unidades de conservação<br>por",
+              "info": "Este gráfico apresenta o ranking de unidades de conservação por"
             },
             "company": {
-              "title": "Ranking de empresas por área requerida",
-              "info": "Este gráfico apresenta o ranking de empresas por área requerida"
+              "title": "Ranking de empresas por",
+              "info": "Este gráfico apresenta o ranking de empresas por"
             }
           }
         }

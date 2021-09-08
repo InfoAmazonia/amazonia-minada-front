@@ -10,7 +10,7 @@ import useStyles from './styles';
 
 export default function Legend({ data }) {
   Legend.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+    data: PropTypes.shape().isRequired,
   };
 
   const theme = useTheme();
@@ -35,7 +35,7 @@ export default function Legend({ data }) {
           style={{
             whiteSpace: 'nowrap',
             fontSize: 12,
-            color: theme.text.tertiary,
+            color: theme.text.primary,
           }}
           variant="caption"
         >
@@ -45,7 +45,8 @@ export default function Legend({ data }) {
           style={{ color, fontSize: 16, fontWeight: 700 }}
           variant="h6"
         >
-          {t('general.roundNumber', { value })} ha
+          {t('general.roundNumber', { value })}{' '}
+          {data.dataType === 'requiredArea' && 'ha'}
         </Typography>
       </div>
     </div>
@@ -55,7 +56,7 @@ export default function Legend({ data }) {
     <div style={{ marginTop: 0 }} className={generalClasses.wrapper}>
       <div className={classes.innerWrapper}>
         <div className={classes.line}>
-          {data.map((item) =>
+          {data.series.map((item) =>
             legendItem(item.id, item.name, item.y, item.color)
           )}
         </div>

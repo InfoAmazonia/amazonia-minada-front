@@ -54,23 +54,27 @@ export default function Ranking({
       type: 'bar',
       events: {
         render() {
-          const chart = this;
-          chart.series.forEach((s) => {
-            s.points.forEach((p) => {
-              if (p.dataLabel) {
-                p.dataLabel.attr({
-                  x: chart.plotWidth - p.dataLabel.width,
-                });
-              }
+          if (data.dataType === 'requiredArea') {
+            const chart = this;
+            chart.series.forEach((s) => {
+              s.points.forEach((p) => {
+                if (p.dataLabel) {
+                  p.dataLabel.attr({
+                    x: chart.plotWidth - p.dataLabel.width,
+                  });
+                }
+              });
             });
-          });
+          }
         },
       },
       ...defaultOptions.chart,
     },
     credits: defaultOptions.credits,
     title: {
-      text: title,
+      text: `${title} ${t(
+        `dashboard.dataType.${data.dataType}`
+      ).toLowerCase()}`,
       ...defaultOptions.title,
     },
     xAxis: {
@@ -97,19 +101,36 @@ export default function Ranking({
       labels: {
         enabled: false,
       },
-      width: isXsm ? '50%' : isSm ? '70%' : isSmd ? '80%' : '70%',
+      stackLabels: data.dataType === 'requirementsIncidence' && {
+        enabled: true,
+        style: {
+          color: theme.text.tertiary,
+          textOutline: false,
+          fontSize: '12px',
+          fontWeight: 800,
+          fontFamily: `"Manrope", "Roboto", "Helvetica", "Arial", sans-serif`,
+        },
+      },
+      width:
+        data.dataType === 'requiredArea' && isXsm
+          ? '50%'
+          : isSm
+          ? '70%'
+          : isSmd
+          ? '80%'
+          : '70%',
     },
     legend: defaultOptions.legend,
     tooltip: {
       useHTML: true,
       formatter() {
-        return `<b>${this.point.category}</b> </br>
-            <tr><td style="color: ${this.series.color}">${
-          this.series.name
-        }: </td>
+        return `<b>${this.series.name}</b> </br>
+            <tr><td style="color: ${this.series.color}">${t(
+          `dashboard.dataType.${data.dataType}`
+        )}: </td>
               <td style="text-align: right"><b>${t('general.roundNumber', {
                 value: this.point.y,
-              })} ha
+              })} ${data.dataType === 'requiredArea' ? 'ha' : ''}
             </b></td></tr>`;
       },
     },
@@ -122,26 +143,31 @@ export default function Ranking({
         pointStart: 0,
         stacking: 'normal',
         dataLabels: {
-          color: theme.text.tertiary,
           enabled: true,
-          style: {
-            textOutline: false,
-            fontSize: '11px',
-            fontWeight: 500,
-            /* ...defaultOptions.series.dataLabels.style, */
-          },
+          style:
+            data.dataType === 'requiredArea'
+              ? {
+                  color: theme.text.tertiary,
+                  textOutline: false,
+                  fontSize: '12px',
+                  fontWeight: 500,
+                }
+              : {
+                  color: theme.text.primary,
+                  textOutline: false,
+                  fontSize: '12px',
+                  fontWeight: 800,
+                  fontFamily: `"Manrope", "Roboto", "Helvetica", "Arial", sans-serif`,
+                },
           formatter() {
-            if (data.values) {
-              if (this.point.series.index === 0) {
-                return `${t('general.roundNumber', {
-                  value: data.values[this.point.index],
-                })} ha`;
-              }
-              return '';
+            if (data.dataType === 'requiredArea') {
+              return `${t('general.roundNumber', {
+                value: this.total,
+              })} ha`;
             }
             return `${t('general.roundNumber', {
-              value: this.total,
-            })} ha`;
+              value: this.y,
+            })}`;
           },
         },
       },
@@ -188,7 +214,12 @@ export default function Ranking({
         }}
       />
       <div className={classes.tooltip} style={{ right: 55, top: 7 }}>
-        <CustomTooltip title={info} placement="bottom">
+        <CustomTooltip
+          title={`${info} ${t(
+            `dashboard.dataType.${data.dataType}`
+          ).toLowerCase()}`}
+          placement="bottom"
+        >
           <InfoOutlined
             style={{
               color: theme.text.primary,

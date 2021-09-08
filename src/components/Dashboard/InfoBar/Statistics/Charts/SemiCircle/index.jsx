@@ -19,7 +19,7 @@ export default function SemiCircle({ title, data, info }) {
   SemiCircle.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
-    data: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+    data: PropTypes.shape().isRequired,
   };
 
   /**
@@ -56,7 +56,7 @@ export default function SemiCircle({ title, data, info }) {
     },
     series: [
       {
-        data,
+        data: data.series,
       },
     ],
     plotOptions: {
