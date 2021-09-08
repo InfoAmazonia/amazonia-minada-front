@@ -35,6 +35,7 @@ export default function MapView({
   const {
     values: { mapRef, viewport },
     setters: { setViewport, setMapLoaded },
+    functions: { onMapLoad },
   } = useContext(MapContext);
 
   return (
@@ -48,7 +49,10 @@ export default function MapView({
       </div>
       <MapGL
         {...viewport}
-        onLoad={() => setMapLoaded(true)}
+        onLoad={() => {
+          onMapLoad();
+          setMapLoaded(true);
+        }}
         ref={mapRef}
         width="100%"
         height="100%"

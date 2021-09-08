@@ -23,7 +23,6 @@ const useStyles = createUseStyles((theme) => ({
       display: 'flex',
     },
   },
-  n: {},
 }));
 
 export default useStyles;

@@ -34,6 +34,12 @@ export const lightScheme = {
     smallScaleMiningRequest: '#8AB128',
     availableMiningArea: '#008BBB',
   },
+  button: {
+    focused: '#202223',
+    active: '#5b5d5d',
+    selected: '#404040',
+    selectedHover: '#4f4f4f',
+  },
 };
 
 export const darkScheme = {
@@ -66,5 +72,11 @@ export const darkScheme = {
     miningResearchRequest: '#CEB62B',
     smallScaleMiningRequest: '#8AB128',
     availableMiningArea: '#008BBB',
+  },
+  button: {
+    focused: '#202223',
+    active: '#5b5d5d',
+    selected: '#404040',
+    selectedHover: '#4f4f4f',
   },
 };

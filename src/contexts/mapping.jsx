@@ -118,7 +118,15 @@ export function MapProvider({ children }) {
       handleUcVisibility(ucVisibility);
       handleTiVisibility(tiVisibility);
     }
-  }, [ucVisibility, tiVisibility]);
+  }, [ucVisibility, tiVisibility, mapLoaded]);
+
+  /**
+   * Fired when the map style is loaded.
+   */
+  function onMapLoad() {
+    handleUcVisibility(ucVisibility);
+    handleTiVisibility(tiVisibility);
+  }
 
   return (
     <MapContext.Provider
@@ -135,6 +143,7 @@ export function MapProvider({ children }) {
         functions: {
           handleUcVisibility,
           handleTiVisibility,
+          onMapLoad,
         },
       }}
     >

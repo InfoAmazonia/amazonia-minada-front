@@ -12,7 +12,13 @@
   "dashboard": {
     "search": {
       "bigPlaceholder": "Pesquise no Amazônia Minada",
-      "smallPlaceholder": "Pesquisar"
+      "smallPlaceholder": "Pesquisar",
+      "grouping": {
+        "company": "Solicitante",
+        "state": "Estado",
+        "reserve": "Terra Indígena",
+        "unity": "Unidade de Conservação"
+      }
     },
     "dataType": {
       "territorialUnits": {
