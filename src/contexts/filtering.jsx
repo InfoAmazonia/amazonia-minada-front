@@ -19,22 +19,24 @@ export function FilteringProvider({ children }) {
 
   /**
    * This function handles the UC's visibility.
-   * If the TI's visibility is currently setted to off, it's not possible to set off the UC's visibility.
    */
   function handleUcVisibility(newValue) {
-    if (newValue || (!newValue && tiVisibility)) {
+    // Commented logic: If the TI's visibility is currently setted to off, it's not possible to set off the UC's visibility.
+    /* if (newValue || (!newValue && tiVisibility)) {
       setUcVisibility(newValue);
-    }
+    } */
+    setUcVisibility(newValue);
   }
 
   /**
    * This function handles the TI's visibility.
-   * If the UC's visibility is currently setted to off, it's not possible to set off the TI's visibility.
    */
   function handleTiVisibility(newValue) {
-    if (newValue || (!newValue && ucVisibility)) {
+    // Commented logic: If the UC's visibility is currently setted to off, it's not possible to set off the TI's visibility.
+    /* if (newValue || (!newValue && ucVisibility)) {
       setTiVisibility(newValue);
-    }
+    } */
+    setTiVisibility(newValue);
   }
 
   return (
