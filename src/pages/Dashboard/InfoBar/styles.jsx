@@ -20,6 +20,8 @@ const useStyles = createUseStyles((theme) => ({
 
     [breakpoints.max.sm]: {
       width: '100%',
+      minWidth: 'initial',
+      maxWidth: 'initial',
       marginTop: -61 - sizes.infoBarHeaderHeight,
     },
   },
@@ -44,12 +46,22 @@ const useStyles = createUseStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 20,
 
     [breakpoints.max.sm]: {
+      display: 'none',
+    },
+  },
+  mobileSearchContainer: {
+    display: 'none',
+
+    [breakpoints.max.sm]: {
+      display: 'block',
       position: 'absolute',
+      padding: 20,
       top: 0,
       left: 0,
-      right: 0,
+      width: '100%',
       zIndex: 100,
     },
   },

@@ -4,7 +4,6 @@ const useStyles = createUseStyles((theme) => ({
   container: {
     boxShadow: theme.defaultShadow,
     width: '100%',
-    margin: 20,
     padding: '10px 0px',
     borderRadius: 5,
     backgroundColor: theme.background.primary,
