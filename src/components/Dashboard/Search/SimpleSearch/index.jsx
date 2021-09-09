@@ -75,6 +75,10 @@ export default function SimpleSearch() {
     };
   }, [simpleSearchValue, inputValue]);
 
+  /**
+   * Handles the autocomplete's extra button, that works as a cleaner when there is
+   * an input value, and as an expansion button when the autocomplete is empty.
+   */
   function handleExtraButton() {
     if (simpleSearchValue || inputValue.length > 0) {
       inputRef.current.blur();
@@ -82,14 +86,6 @@ export default function SimpleSearch() {
       setSimpleSearchValue(null);
     }
   }
-
-  /* function handleSearchButton() {
-    if (options[0]) {
-      setSimpleSearchValue(options[0]);
-    }
-
-    inputRef.current.blur();
-  } */
 
   return (
     <div className={classes.container}>
