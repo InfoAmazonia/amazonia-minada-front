@@ -17,6 +17,7 @@ export function FilteringProvider({ children }) {
   const [ucVisibility, setUcVisibility] = useState(true);
   const [tiVisibility, setTiVisibility] = useState(true);
   const [dataType, setDataType] = useState('requiredArea');
+  const [simpleSearchValue, setSimpleSearchValue] = useState(null);
 
   /**
    * This function handles the UC's visibility.
@@ -47,8 +48,9 @@ export function FilteringProvider({ children }) {
           ucVisibility,
           tiVisibility,
           dataType,
+          simpleSearchValue,
         },
-        setters: { setDataType },
+        setters: { setDataType, setSimpleSearchValue },
         functions: {
           handleUcVisibility,
           handleTiVisibility,
