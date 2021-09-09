@@ -27,7 +27,7 @@ export default function SimpleSearch() {
   const classes = useStyles({ theme });
   const { t } = useTranslation();
   const sm = useMediaQuery(breakpoints.max.sm);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(false);

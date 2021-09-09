@@ -40,6 +40,8 @@ const useStyles = createUseStyles(() => ({
       marginRight: 0,
     },
     [breakpoints.max.sm]: {
+      left: 15,
+      transform: 'none',
       top: 15 + 58 + 15,
     },
   },

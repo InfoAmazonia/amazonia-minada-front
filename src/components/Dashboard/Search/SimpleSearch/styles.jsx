@@ -98,6 +98,7 @@ const useStyles = createUseStyles((theme) => ({
   },
   searchIcon: {
     marginRight: 5,
+
     '&.MuiIconButton-root': {
       color: theme.text.primary,
     },
