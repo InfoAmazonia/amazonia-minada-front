@@ -59,20 +59,42 @@ export default function Statistics() {
   const [companyRankingPage, setCompanyRankingPage] = useState(1);
   const [companyRankingOrder, setCompanyRankingOrder] = useState(true);
 
+  const getVisibility = (territorialUnit) => {
+    if (territorialUnit === 'indigenousLand') {
+      return tiVisibility;
+    }
+    if (territorialUnit === 'protectedArea') {
+      return ucVisibility;
+    }
+    return false;
+  };
+
+  useEffect(() => {
+    if (semiCircleData) {
+      setSemiCircleData((prev) => ({
+        ...prev,
+        series: prev.series.map((serie) => ({
+          ...serie,
+          visible: getVisibility(serie.id),
+        })),
+      }));
+    }
+  }, [ucVisibility, tiVisibility]);
+
   useEffect(() => {
     const data = {
       series: [
-        { name: 'indigenousLand', data: 62070.621 },
-        { name: 'protectedArea', data: 86898.87 },
+        { id: 'indigenousLand', data: 62070.621 },
+        { id: 'protectedArea', data: 86898.87 },
       ],
       dataType,
     };
     data.series.map((obj) => {
-      obj.color = theme.territorialUnits[obj.name];
+      obj.color = theme.territorialUnits[obj.id];
+      obj.visible = getVisibility(obj.id);
       obj.y = obj.data;
       delete obj.data;
-      obj.id = obj.name;
-      obj.name = t(`dashboard.dataType.territorialUnits.${obj.name}.singular`);
+      obj.name = t(`dashboard.dataType.territorialUnits.${obj.id}.singular`);
       return obj;
     });
     setSemiCircleData(data);
@@ -84,11 +106,11 @@ export default function Statistics() {
       position: [1, 2, 3, 4, 5],
       series: [
         {
-          name: 'indigenousLand',
+          id: 'indigenousLand',
           data: [10638678.67, 2134950.19, 1807626.79, 1449245.12, 1031380.07],
         },
         {
-          name: 'protectedArea',
+          id: 'protectedArea',
           data: [10638678.67, 2134950.19, 1807626.79, 1449245.12, 1031380.07],
         },
       ],
@@ -96,8 +118,9 @@ export default function Statistics() {
       dataType,
     };
     data.series = data.series.map((obj) => {
-      obj.color = theme.territorialUnits[`${obj.name}`];
-      obj.name = t(`dashboard.dataType.territorialUnits.${obj.name}.singular`);
+      obj.color = theme.territorialUnits[`${obj.id}`];
+      obj.visible = getVisibility(obj.id);
+      obj.name = t(`dashboard.dataType.territorialUnits.${obj.id}.singular`);
       return obj;
     });
     setStateRankingData(data);
@@ -110,7 +133,7 @@ export default function Statistics() {
       position: [1, 2, 3, 4, 5],
       series: [
         {
-          name: 'indigenousLand',
+          id: 'indigenousLand',
           data: [10638678.67, 2134950.19, 1807626.79, 1449245.12, 1031380.07],
         },
       ],
@@ -118,8 +141,9 @@ export default function Statistics() {
       dataType,
     };
     data.series = data.series.map((obj) => {
-      obj.color = theme.territorialUnits[`${obj.name}`];
-      obj.name = t(`dashboard.dataType.territorialUnits.${obj.name}.singular`);
+      obj.color = theme.territorialUnits[`${obj.id}`];
+      obj.visible = getVisibility(obj.id);
+      obj.name = t(`dashboard.dataType.territorialUnits.${obj.id}.singular`);
       return obj;
     });
     setIndigenousLandRankingData(data);
@@ -138,7 +162,7 @@ export default function Statistics() {
       position: [1, 2, 3, 4, 5],
       series: [
         {
-          name: 'protectedArea',
+          id: 'protectedArea',
           data: [10638678.67, 2134950.19, 1807626.79, 1449245.12, 1031380.07],
         },
       ],
@@ -146,8 +170,9 @@ export default function Statistics() {
       dataType,
     };
     data.series = data.series.map((obj) => {
-      obj.color = theme.territorialUnits[`${obj.name}`];
-      obj.name = t(`dashboard.dataType.territorialUnits.${obj.name}.singular`);
+      obj.color = theme.territorialUnits[`${obj.id}`];
+      obj.visible = getVisibility(obj.id);
+      obj.name = t(`dashboard.dataType.territorialUnits.${obj.id}.singular`);
       return obj;
     });
     setProtectedAreaRankingData(data);
@@ -166,11 +191,11 @@ export default function Statistics() {
       position: [1, 2, 3, 4, 5],
       series: [
         {
-          name: 'indigenousLand',
+          id: 'indigenousLand',
           data: [10638678.67, 2134950.19, 1807626.79, 1449245.12, 1031380.07],
         },
         {
-          name: 'protectedArea',
+          id: 'protectedArea',
           data: [10638678.67, 2134950.19, 1807626.79, 1449245.12, 1031380.07],
         },
       ],
@@ -178,8 +203,9 @@ export default function Statistics() {
       dataType,
     };
     data.series = data.series.map((obj) => {
-      obj.color = theme.territorialUnits[`${obj.name}`];
-      obj.name = t(`dashboard.dataType.territorialUnits.${obj.name}.singular`);
+      obj.color = theme.territorialUnits[`${obj.id}`];
+      obj.visible = getVisibility(obj.id);
+      obj.name = t(`dashboard.dataType.territorialUnits.${obj.id}.singular`);
       return obj;
     });
     setCompanyRankingData(data);
