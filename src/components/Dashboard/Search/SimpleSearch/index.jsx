@@ -91,7 +91,6 @@ export default function SimpleSearch() {
   useEffect(() => {
     if (value) {
       setSearchValue(() => ({
-        ...filterDefaults.searchValue,
         [value.type]: [value.value],
       }));
     } else {
