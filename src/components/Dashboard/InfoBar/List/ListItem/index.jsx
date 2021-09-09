@@ -23,7 +23,7 @@ export default function ListItem({ circleColor, title, infos }) {
       <div className={classes.title}>
         <div
           className={classes.circle}
-          style={{ backgroundColor: circleColor }}
+          style={{ backgroundColor: circleColor, display: 'none' }}
         />
         <Typography
           style={{ color: theme.text.primary, fontSize: 14 }}

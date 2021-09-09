@@ -1,67 +1,73 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
 import ListHeader from '../../../../components/Dashboard/InfoBar/List/ListHeader';
 import ListItem from '../../../../components/Dashboard/InfoBar/List/ListItem';
+import FilteringContext from '../../../../contexts/filtering';
+import api from '../../../../services/api';
 
 /**
  *  This function returns list content.
  */
 export default function List() {
   const theme = useTheme();
+  const { t } = useTranslation();
+  const {
+    values: { searchValue, tiVisibility, ucVisibility },
+  } = useContext(FilteringContext);
+
+  const [contentList, setContentList] = useState();
+
+  useEffect(() => {
+    let isSubscribed = true;
+
+    api
+      .post(
+        `/invasions`,
+        {
+          filters: searchValue,
+          enableUnity: ucVisibility,
+          enableReserve: tiVisibility,
+        },
+        { params: { page: 1, pageSize: 50 } }
+      )
+      .then(({ data }) => {
+        if (isSubscribed) {
+          setContentList(data);
+        }
+      });
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [searchValue, tiVisibility, ucVisibility]);
+
   return (
     <>
-      <ListHeader />
-      <ListItem
-        title="EMPRESA DE MINERAÇÃO LTDA"
-        circleColor={theme.miningProcesses.availableMiningArea}
-        infos={[
-          { title: 'Processo', data: '1244214-00' },
-          { title: 'Ano de abertura', data: '2019' },
-          { title: 'Área declarada', data: '124323.20 ha' },
-          { title: 'Tipo de área', data: 'Indígena' },
-        ]}
-      />
-      <ListItem
-        title="EMPRESA DE OURO LTDA"
-        circleColor={theme.miningProcesses.smallScaleMining}
-        infos={[
-          { title: 'Processo', data: '1244214-00' },
-          { title: 'Ano de abertura', data: '2019' },
-          { title: 'Área declarada', data: '124323.20 ha' },
-          { title: 'Tipo de área', data: 'Indígena' },
-        ]}
-      />
-      <ListItem
-        title="EMPRESA DE PRATA LTDA"
-        circleColor={theme.miningProcesses.miningResearchAuthorization}
-        infos={[
-          { title: 'Processo', data: '1244214-00' },
-          { title: 'Ano de abertura', data: '2019' },
-          { title: 'Área declarada', data: '124323.20 ha' },
-          { title: 'Tipo de área', data: 'Indígena' },
-        ]}
-      />
-      <ListItem
-        title="EMPRESA DE DIAMANTE LTDA"
-        circleColor={theme.miningProcesses.miningResearchRequest}
-        infos={[
-          { title: 'Processo', data: '1244214-00' },
-          { title: 'Ano de abertura', data: '2019' },
-          { title: 'Área declarada', data: '124323.20 ha' },
-          { title: 'Tipo de área', data: 'Indígena' },
-        ]}
-      />
-      <ListItem
-        title="EMPRESA DE NÍQUEL LTDA"
-        circleColor={theme.miningProcesses.smallScaleMiningRequest}
-        infos={[
-          { title: 'Processo', data: '1244214-00' },
-          { title: 'Ano de abertura', data: '2019' },
-          { title: 'Área declarada', data: '124323.20 ha' },
-          { title: 'Tipo de área', data: 'Indígena' },
-        ]}
-      />
+      {contentList && <ListHeader results={contentList.results} />}
+      {contentList &&
+        contentList.values.map((item) => (
+          <ListItem
+            key={item.id}
+            title={item.company}
+            circleColor={theme.miningProcesses.availableMiningArea}
+            infos={[
+              { title: 'Processo', data: item.process },
+              { title: 'Ano de abertura', data: item.year },
+              {
+                title: 'Área declarada',
+                data: `${t('general.number', { value: item.area })} ha`,
+              },
+              {
+                title: 'Tipo de área',
+                data: t(
+                  `dashboard.dataType.territorialUnits.${item.type}.singular`
+                ),
+              },
+            ]}
+          />
+        ))}
     </>
   );
 }

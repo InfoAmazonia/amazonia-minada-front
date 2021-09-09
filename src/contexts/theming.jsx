@@ -1,4 +1,4 @@
-import { MuiThemeProvider, useMediaQuery } from '@material-ui/core';
+import { MuiThemeProvider } from '@material-ui/core';
 import { createTheme } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import React, { createContext, useState, useEffect, useMemo } from 'react';
@@ -19,7 +19,7 @@ export function ThemeProvider({ children }) {
     ]).isRequired,
   };
 
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const prefersDarkMode = true; /* useMediaQuery('(prefers-color-scheme: dark)') */
   const [selectedTheme, setSelectedTheme] = useState(lightScheme);
 
   /**

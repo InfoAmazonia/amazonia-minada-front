@@ -100,6 +100,10 @@ const useStyles = createUseStyles((theme) => ({
     top: 0,
     zIndex: 100,
     userSelect: 'none',
+
+    [breakpoints.min.sm]: {
+      display: 'none',
+    },
   },
   arrowIcon: {
     position: 'absolute',

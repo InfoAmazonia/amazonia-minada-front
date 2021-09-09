@@ -217,12 +217,19 @@ export default function Statistics() {
       <>
         <DataTypeSelector />
         <GeneralStatistics />
-        <SemiCircle
-          data={semiCircleData}
-          title={t(`dashboard.infoPanel.statistics.charts.semiCircle.title`)}
-          info={t(`dashboard.infoPanel.statistics.charts.semiCircle.info`)}
-        />
-        <Legend data={semiCircleData} />
+        {semiCircleData && (
+          <>
+            <SemiCircle
+              data={semiCircleData}
+              title={t(
+                `dashboard.infoPanel.statistics.charts.semiCircle.title`
+              )}
+              info={t(`dashboard.infoPanel.statistics.charts.semiCircle.info`)}
+            />
+            <Legend data={semiCircleData} />
+          </>
+        )}
+
         <Ranking
           title={t(`dashboard.infoPanel.statistics.charts.ranking.state.title`)}
           info={t(`dashboard.infoPanel.statistics.charts.ranking.state.info`)}
