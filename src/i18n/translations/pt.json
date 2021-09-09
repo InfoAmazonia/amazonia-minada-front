@@ -19,7 +19,9 @@
         "reserve": "Terra Indígena",
         "unity": "Unidade de Conservação"
       },
-      "searchFor": "Procurar por"
+      "searchFor": "Procurar por",
+      "noOptions": "Nenhum resultado encontrado",
+      "searching": "Buscando..."
     },
     "dataType": {
       "territorialUnits": {

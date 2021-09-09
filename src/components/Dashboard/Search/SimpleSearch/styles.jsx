@@ -2,11 +2,18 @@ import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles((theme) => ({
   container: {
+    position: 'relative',
     boxShadow: theme.defaultShadow,
     width: '100%',
     padding: '10px 0px',
     borderRadius: 5,
     backgroundColor: theme.background.primary,
+  },
+  autocomplete: {
+    '& .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"][class*="MuiOutlinedInput-marginDense"]':
+      {
+        paddingRight: 95,
+      },
   },
   textfield: {
     '& .MuiInputBase-input': {
@@ -66,6 +73,33 @@ const useStyles = createUseStyles((theme) => ({
       '&:hover': {
         backgroundColor: theme.button.selectedHover,
       },
+    },
+  },
+  buttons: {
+    position: 'absolute',
+    top: '50%',
+    right: 10,
+    transform: 'translateY(-50%)',
+    zIndex: 10,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  iconButton: {
+    '&.MuiIconButton-root': {
+      color: theme.text.primary,
+    },
+  },
+  separator: {
+    width: 1,
+    height: 30,
+    margin: '0px 10px',
+    backgroundColor: theme.separator,
+  },
+  searchIcon: {
+    marginRight: 5,
+    '&.MuiIconButton-root': {
+      color: theme.text.primary,
     },
   },
 }));
