@@ -22,12 +22,12 @@ export default function Legend({ data }) {
     return null;
   }
 
-  const legendItem = (id, name, value, color) => (
+  const legendItem = (id, name, value, color, visible) => (
     <div key={id} role="button" tabIndex={0} className={classes.legendItem}>
       <div
         className={classes.circle}
         style={{
-          backgroundColor: color,
+          backgroundColor: visible ? color : theme.grey,
         }}
       />
       <div className={classes.columnLegendItem}>
@@ -35,14 +35,18 @@ export default function Legend({ data }) {
           style={{
             whiteSpace: 'nowrap',
             fontSize: 12,
-            color: theme.text.primary,
+            color: visible ? theme.text.primary : theme.grey,
           }}
           variant="caption"
         >
           {name}
         </Typography>
         <Typography
-          style={{ color, fontSize: 16, fontWeight: 700 }}
+          style={{
+            color: visible ? theme.text.primary : theme.grey,
+            fontSize: 16,
+            fontWeight: 700,
+          }}
           variant="h6"
         >
           {t('general.roundNumber', { value })}{' '}
@@ -57,7 +61,7 @@ export default function Legend({ data }) {
       <div className={classes.innerWrapper}>
         <div className={classes.line}>
           {data.series.map((item) =>
-            legendItem(item.id, item.name, item.y, item.color)
+            legendItem(item.id, item.name, item.y, item.color, item.visible)
           )}
         </div>
       </div>
