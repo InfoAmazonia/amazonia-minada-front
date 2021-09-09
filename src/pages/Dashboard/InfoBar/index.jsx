@@ -1,7 +1,15 @@
-import { Button, Tab, Tabs, useMediaQuery } from '@material-ui/core';
+import {
+  Button,
+  Tab,
+  Tabs,
+  Typography,
+  useMediaQuery,
+} from '@material-ui/core';
+import ExpandLessRoundedIcon from '@material-ui/icons/ExpandLessRounded';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useTheme } from 'react-jss';
 
 import TabPanel from '../../../components/Dashboard/InfoBar/TabPanel';
 import SimpleSearch from '../../../components/Dashboard/Search/SimpleSearch';
@@ -22,6 +30,7 @@ export default function InfoBar() {
   };
   const [minimized, setMinimized] = useState(false);
   const isSm = useMediaQuery(breakpoints.max.sm);
+  const theme = useTheme();
 
   /* This function returns a11y properties */
   function a11yProps(index) {
@@ -74,6 +83,20 @@ export default function InfoBar() {
       >
         <div className={classes.searchContainer}>
           <SimpleSearch />
+        </div>
+        <div className={classes.dropBar}>
+          <Typography
+            style={{
+              color: theme.text.secondary,
+              fontWeight: 500,
+            }}
+          >
+            {t('dashboard.infoPanel.dropBar.viewStatistics')}
+          </Typography>
+          <ExpandLessRoundedIcon
+            className={classes.arrowIcon}
+            style={{ color: theme.text.secondary }}
+          />
         </div>
         <Tabs
           className={classes.tab}

@@ -46,6 +46,9 @@
       "requirementsIncidence": "Incidência de requerimentos"
     },
     "infoPanel": {
+      "dropBar": {
+        "viewStatistics": "Visualizar estatísticas"
+      },
       "statistics": {
         "title": "Estatísticas",
         "dataTypeSelectorLabel": "Visualizar dados por",

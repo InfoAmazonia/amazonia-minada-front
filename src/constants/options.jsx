@@ -11,11 +11,5 @@ export const mapDefaults = {
 };
 
 export const filterDefaults = {
-  searchValue: {
-    state: [],
-    company: [],
-    reserve: [],
-    unity: [],
-    year: [],
-  },
+  searchValue: {},
 };

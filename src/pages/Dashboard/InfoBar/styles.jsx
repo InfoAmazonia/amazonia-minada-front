@@ -88,6 +88,25 @@ const useStyles = createUseStyles((theme) => ({
   icon: {
     color: theme.text.primary,
   },
+  dropBar: {
+    width: '100%',
+    height: 54,
+    backgroundColor: theme.background.primary,
+    borderBottom: `1px solid ${theme.separator}`,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'sticky',
+    top: 0,
+    zIndex: 100,
+    userSelect: 'none',
+  },
+  arrowIcon: {
+    position: 'absolute',
+    right: 15,
+    top: '50%',
+    transform: 'translateY(-50%)',
+  },
 }));
 
 export default useStyles;
