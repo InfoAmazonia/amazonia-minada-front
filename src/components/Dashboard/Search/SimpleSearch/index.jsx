@@ -63,7 +63,6 @@ export default function SimpleSearch() {
     <div className={classes.container}>
       <Autocomplete
         id="search-box"
-        freeSolo
         autoHighlight
         selectOnFocus
         disableClearable

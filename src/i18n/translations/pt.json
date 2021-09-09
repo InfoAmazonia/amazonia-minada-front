@@ -18,7 +18,8 @@
         "state": "Estado",
         "reserve": "Terra Indígena",
         "unity": "Unidade de Conservação"
-      }
+      },
+      "searchFor": "Procurar por"
     },
     "dataType": {
       "territorialUnits": {
