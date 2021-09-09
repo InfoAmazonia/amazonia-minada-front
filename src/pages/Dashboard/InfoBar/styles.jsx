@@ -6,6 +6,7 @@ const useStyles = createUseStyles((theme) => ({
   container: {
     position: 'relative',
     display: 'flex',
+    zIndex: 100,
   },
   wrapper: {
     position: 'relative',
@@ -49,20 +50,12 @@ const useStyles = createUseStyles((theme) => ({
     padding: 20,
 
     [breakpoints.max.sm]: {
-      display: 'none',
-    },
-  },
-  mobileSearchContainer: {
-    display: 'none',
-
-    [breakpoints.max.sm]: {
-      display: 'block',
       position: 'absolute',
-      padding: 20,
-      top: 0,
+      padding: 15,
+      top: `calc(61px + ${sizes.infoBarHeaderHeight}px - 100vh)`,
       left: 0,
       width: '100%',
-      zIndex: 100,
+      zIndex: 1000,
     },
   },
   minimizeWrapper: {
