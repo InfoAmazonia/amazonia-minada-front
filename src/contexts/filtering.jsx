@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { createContext, useState } from 'react';
 
+import { filterDefaults } from '../constants/options';
+
 const FilteringContext = createContext({});
 
 /**
@@ -17,7 +19,7 @@ export function FilteringProvider({ children }) {
   const [ucVisibility, setUcVisibility] = useState(true);
   const [tiVisibility, setTiVisibility] = useState(true);
   const [dataType, setDataType] = useState('requiredArea');
-  const [simpleSearchValue, setSimpleSearchValue] = useState(null);
+  const [searchValue, setSearchValue] = useState(filterDefaults.searchValue);
 
   /**
    * This function handles the UC's visibility.
@@ -48,9 +50,9 @@ export function FilteringProvider({ children }) {
           ucVisibility,
           tiVisibility,
           dataType,
-          simpleSearchValue,
+          searchValue,
         },
-        setters: { setDataType, setSimpleSearchValue },
+        setters: { setDataType, setSearchValue },
         functions: {
           handleUcVisibility,
           handleTiVisibility,

@@ -9,3 +9,13 @@ export const mapDefaults = {
     zoom: 4.4,
   },
 };
+
+export const filterDefaults = {
+  searchValue: {
+    state: [],
+    company: [],
+    reserve: [],
+    unity: [],
+    year: [],
+  },
+};

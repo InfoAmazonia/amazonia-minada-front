@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
 import { breakpoints } from '../../../../constants/constraints';
+import { filterDefaults } from '../../../../constants/options';
 import FilteringContext from '../../../../contexts/filtering';
 import api from '../../../../services/api';
 import useStyles from './styles';
@@ -26,14 +27,14 @@ export default function SimpleSearch() {
   const classes = useStyles({ theme });
   const { t } = useTranslation();
   const sm = useMediaQuery(breakpoints.max.sm);
+  const [value, setValue] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef();
   const autocompleteRef = useRef();
   const {
-    values: { simpleSearchValue },
-    setters: { setSimpleSearchValue },
+    setters: { setSearchValue },
   } = useContext(FilteringContext);
 
   /**
@@ -51,14 +52,11 @@ export default function SimpleSearch() {
           let newOptions = [];
 
           if (
-            simpleSearchValue &&
-            data.filter(
-              (o) =>
-                o.type === simpleSearchValue.type &&
-                o.value === simpleSearchValue.value
-            ).length === 0
+            value &&
+            data.filter((o) => o.type === value.type && o.value === value.value)
+              .length === 0
           ) {
-            newOptions = [simpleSearchValue];
+            newOptions = [value];
           }
 
           if (data) {
@@ -73,19 +71,33 @@ export default function SimpleSearch() {
     return () => {
       subscribed = false;
     };
-  }, [simpleSearchValue, inputValue]);
+  }, [value, inputValue]);
 
   /**
    * Handles the autocomplete's extra button, that works as a cleaner when there is
    * an input value, and as an expansion button when the autocomplete is empty.
    */
   function handleExtraButton() {
-    if (simpleSearchValue || inputValue.length > 0) {
+    if (value || inputValue.length > 0) {
       inputRef.current.blur();
       setInputValue('');
-      setSimpleSearchValue(null);
+      setValue(null);
     }
   }
+
+  /**
+   * This useEffect converts the value to the searchValue.
+   */
+  useEffect(() => {
+    if (value) {
+      setSearchValue(() => ({
+        ...filterDefaults.searchValue,
+        [value.type]: [value.value],
+      }));
+    } else {
+      setSearchValue(filterDefaults.searchValue);
+    }
+  }, [value]);
 
   return (
     <div className={classes.container}>
@@ -99,16 +111,15 @@ export default function SimpleSearch() {
         forcePopupIcon={false}
         options={options}
         getOptionLabel={(option) => option.value}
-        value={simpleSearchValue}
+        value={value}
         noOptionsText={t('dashboard.search.noOptions')}
         className={classes.autocomplete}
         getOptionSelected={(option) =>
-          option.type === simpleSearchValue.type &&
-          option.value === simpleSearchValue.value
+          option.type === value.type && option.value === value.value
         }
         onChange={(event, newValue) => {
           setOptions(newValue ? [newValue, ...options] : options);
-          setSimpleSearchValue(newValue);
+          setValue(newValue);
         }}
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);

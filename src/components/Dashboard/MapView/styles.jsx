@@ -39,6 +39,9 @@ const useStyles = createUseStyles(() => ({
     '& div:last-child': {
       marginRight: 0,
     },
+    [breakpoints.max.sm]: {
+      top: 15 + 58 + 15,
+    },
   },
 }));
 
