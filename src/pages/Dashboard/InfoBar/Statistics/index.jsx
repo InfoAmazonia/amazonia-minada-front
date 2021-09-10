@@ -9,6 +9,7 @@ import SemiCircle from '../../../../components/Dashboard/InfoBar/Statistics/Char
 import DataTypeSelector from '../../../../components/Dashboard/InfoBar/Statistics/DataTypeSelector';
 import GeneralStatistics from '../../../../components/Dashboard/InfoBar/Statistics/GeneralStatistics';
 import FilteringContext from '../../../../contexts/filtering';
+import api from '../../../../services/api';
 
 /**
  *  This function returns statistics content.
@@ -17,9 +18,22 @@ export default function Statistics() {
   const { t } = useTranslation();
   const theme = useTheme();
   const {
-    values: { ucVisibility, tiVisibility, dataType },
+    values: { searchValue, ucVisibility, tiVisibility, dataType },
   } = useContext(FilteringContext);
 
+  /**
+   * This state stores the result of request that comprises general statistics and semi circle.
+   */
+  const [statisticsData, setStatisticsData] = useState();
+
+  /**
+   * This state stores the formatted data to send to the general statistics component.
+   */
+  const [generalStatisticsData, setGeneralStatisticsData] = useState();
+
+  /**
+   * This state stores the formatted data to send to the semi circle component.
+   */
   const [semiCircleData, setSemiCircleData] = useState();
 
   /**
@@ -51,6 +65,7 @@ export default function Statistics() {
   const [protectedAreaRankingPage, setProtectedAreaRankingPage] = useState(1);
   const [protectedAreaRankingOrder, setProtectedAreaRankingOrder] =
     useState(true);
+
   /**
    * Company ranking states
    */
@@ -59,6 +74,10 @@ export default function Statistics() {
   const [companyRankingPage, setCompanyRankingPage] = useState(1);
   const [companyRankingOrder, setCompanyRankingOrder] = useState(true);
 
+  /**
+   * This function returns current visibility of a territorial unit.
+   * @param {string} territorialUnit
+   */
   const getVisibility = (territorialUnit) => {
     if (territorialUnit === 'indigenousLand') {
       return tiVisibility;
@@ -69,6 +88,9 @@ export default function Statistics() {
     return false;
   };
 
+  /**
+   * This useEffect updates semi circle data when the visibility is changed.
+   */
   useEffect(() => {
     if (semiCircleData) {
       setSemiCircleData((prev) => ({
@@ -81,24 +103,74 @@ export default function Statistics() {
     }
   }, [ucVisibility, tiVisibility]);
 
+  /**
+   * This useEffect fetch statistics data from server and set general statistics.
+   */
   useEffect(() => {
-    const data = {
-      series: [
-        { id: 'indigenousLand', data: 62070.621 },
-        { id: 'protectedArea', data: 86898.87 },
-      ],
-      dataType,
+    let isSubscribed = true;
+
+    api
+      .post(`/statistics`, {
+        filters: searchValue,
+      })
+      .then(({ data }) => {
+        if (isSubscribed) {
+          setStatisticsData(data);
+          setGeneralStatisticsData([
+            {
+              title: t(
+                'dashboard.infoPanel.statistics.generalStatistics.illegalRequirements'
+              ),
+              data: data.requirementsIncidence.total,
+            },
+            {
+              title: t(
+                'dashboard.infoPanel.statistics.generalStatistics.totalArea'
+              ),
+              data: `${t('general.number', {
+                value: data.requiredArea.total,
+              })} ha`,
+            },
+          ]);
+        }
+      });
+
+    return () => {
+      isSubscribed = false;
     };
-    data.series.map((obj) => {
-      obj.color = theme.territorialUnits[obj.id];
-      obj.visible = getVisibility(obj.id);
-      obj.y = obj.data;
-      delete obj.data;
-      obj.name = t(`dashboard.dataType.territorialUnits.${obj.id}.singular`);
-      return obj;
-    });
-    setSemiCircleData(data);
-  }, [dataType]);
+  }, [searchValue]);
+
+  /**
+   * This useEffect updates semi circle data when data or datatype is changed.
+   */
+  useEffect(() => {
+    if (statisticsData) {
+      const data = {
+        series: [
+          {
+            id: 'indigenousLand',
+            name: t(
+              `dashboard.dataType.territorialUnits.indigenousLand.singular`
+            ),
+            color: theme.territorialUnits.indigenousLand,
+            y: statisticsData[dataType].reserve,
+            visible: getVisibility('indigenousLand'),
+          },
+          {
+            id: 'protectedArea',
+            name: t(
+              `dashboard.dataType.territorialUnits.protectedArea.singular`
+            ),
+            color: theme.territorialUnits.protectedArea,
+            y: statisticsData[dataType].unity,
+            visible: getVisibility('protectedArea'),
+          },
+        ],
+        dataType,
+      };
+      setSemiCircleData(data);
+    }
+  }, [statisticsData, dataType]);
 
   useEffect(() => {
     const data = {
@@ -215,10 +287,10 @@ export default function Statistics() {
   return useMemo(
     () => (
       <>
-        <DataTypeSelector />
-        <GeneralStatistics />
         {semiCircleData && (
           <>
+            <DataTypeSelector />
+            <GeneralStatistics statistics={generalStatisticsData} />
             <SemiCircle
               data={semiCircleData}
               title={t(
@@ -277,6 +349,7 @@ export default function Statistics() {
       </>
     ),
     [
+      generalStatisticsData,
       semiCircleData,
       indigenousLandRankingData,
       protectedAreaRankingData,
