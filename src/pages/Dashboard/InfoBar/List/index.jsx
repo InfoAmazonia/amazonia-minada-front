@@ -49,7 +49,7 @@ export default function List() {
       {contentList &&
         contentList.values.map((item) => (
           <ListItem
-            key={item.id}
+            key={`${item.process}-${item.type}`}
             title={item.company}
             circleColor={theme.miningProcesses.availableMiningArea}
             infos={[

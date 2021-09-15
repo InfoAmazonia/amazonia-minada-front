@@ -39,18 +39,16 @@ export default function Statistics() {
   /**
    * UF ranking states
    */
-  const [stateRankingData, setStateRankingData] = useState({});
-  const [stateRankingTotalPages /* setRankingTotalPages */] = useState(1);
+  const [stateRankingData, setStateRankingData] = useState();
+  const [stateRankingTotalPages, setStateRankingTotalPages] = useState(1);
   const [stateRankingPage, setStateRankingPage] = useState(1);
   const [stateRankingOrder, setStateRankingOrder] = useState(true);
 
   /**
    * Indigenous land ranking states
    */
-  const [indigenousLandRankingData, setIndigenousLandRankingData] = useState(
-    {}
-  );
-  const [indiginegousLandRankingTotalPages /* setRankingTotalPages */] =
+  const [indigenousLandRankingData, setIndigenousLandRankingData] = useState();
+  const [indigenousLandRankingTotalPages, setIndigenousLandRankingTotalPages] =
     useState(1);
   const [indigenousLandRankingPage, setIndigenousLandRankingPage] = useState(1);
   const [indigenousLandRankingOrder, setIndigenousLandRankingOrder] =
@@ -59,8 +57,8 @@ export default function Statistics() {
   /**
    * Protected area ranking states
    */
-  const [protectedAreaRankingData, setProtectedAreaRankingData] = useState({});
-  const [protectedAreaRankingTotalPages /* setRankingTotalPages */] =
+  const [protectedAreaRankingData, setProtectedAreaRankingData] = useState();
+  const [protectedAreaRankingTotalPages, setProtectedAreaRankingTotalPages] =
     useState(1);
   const [protectedAreaRankingPage, setProtectedAreaRankingPage] = useState(1);
   const [protectedAreaRankingOrder, setProtectedAreaRankingOrder] =
@@ -69,8 +67,8 @@ export default function Statistics() {
   /**
    * Company ranking states
    */
-  const [companyRankingData, setCompanyRankingData] = useState({});
-  const [companyTotalPages /* setRankingTotalPages */] = useState(1);
+  const [companyRankingData, setCompanyRankingData] = useState();
+  const [companyRankingTotalPages, setCompanyRankingTotalPages] = useState(1);
   const [companyRankingPage, setCompanyRankingPage] = useState(1);
   const [companyRankingOrder, setCompanyRankingOrder] = useState(true);
 
@@ -89,11 +87,29 @@ export default function Statistics() {
   };
 
   /**
-   * This useEffect updates semi circle data when the visibility is changed.
+   * This useEffect updates statistics when the visibility is changed.
    */
   useEffect(() => {
     if (semiCircleData) {
       setSemiCircleData((prev) => ({
+        ...prev,
+        series: prev.series.map((serie) => ({
+          ...serie,
+          visible: getVisibility(serie.id),
+        })),
+      }));
+    }
+    if (stateRankingData) {
+      setStateRankingData((prev) => ({
+        ...prev,
+        series: prev.series.map((serie) => ({
+          ...serie,
+          visible: getVisibility(serie.id),
+        })),
+      }));
+    }
+    if (companyRankingData) {
+      setCompanyRankingData((prev) => ({
         ...prev,
         series: prev.series.map((serie) => ({
           ...serie,
@@ -173,116 +189,120 @@ export default function Statistics() {
   }, [statisticsData, dataType]);
 
   useEffect(() => {
-    const data = {
-      x: ['Amazonas', 'Amapá', 'Pará', 'Roraima', 'Tocantins'],
-      position: [1, 2, 3, 4, 5],
-      series: [
-        {
-          id: 'indigenousLand',
-          data: [10638678.67, 2134950.19, 1807626.79, 1449245.12, 1031380.07],
+    let isSubscribed = true;
+
+    api
+      .get(`/invasions/ranking/state/${dataType}`, {
+        params: {
+          page: stateRankingPage,
         },
-        {
-          id: 'protectedArea',
-          data: [10638678.67, 2134950.19, 1807626.79, 1449245.12, 1031380.07],
-        },
-      ],
-      pageAmount: 1,
-      dataType,
+      })
+      .then(({ data }) => {
+        if (isSubscribed) {
+          setStateRankingTotalPages(data.pageAmount);
+          data.series = data.series.map((obj) => {
+            obj.color = theme.territorialUnits[obj.id];
+            obj.visible = getVisibility(obj.id);
+            obj.name = t(
+              `dashboard.dataType.territorialUnits.${obj.id}.singular`
+            );
+            return obj;
+          });
+          setStateRankingData(data);
+        }
+      });
+
+    return () => {
+      isSubscribed = false;
     };
-    data.series = data.series.map((obj) => {
-      obj.color = theme.territorialUnits[`${obj.id}`];
-      obj.visible = getVisibility(obj.id);
-      obj.name = t(`dashboard.dataType.territorialUnits.${obj.id}.singular`);
-      return obj;
-    });
-    setStateRankingData(data);
-    setStateRankingPage(1);
-  }, [dataType]);
+  }, [dataType, stateRankingPage]);
 
   useEffect(() => {
-    const data = {
-      x: ['Sai-cinza', 'Munduruku', 'Kayabi', 'Baú', 'Kayapó'],
-      position: [1, 2, 3, 4, 5],
-      series: [
-        {
-          id: 'indigenousLand',
-          data: [10638678.67, 2134950.19, 1807626.79, 1449245.12, 1031380.07],
+    let isSubscribed = true;
+
+    api
+      .get(`/invasions/ranking/reserve/${dataType}`, {
+        params: {
+          page: indigenousLandRankingPage,
         },
-      ],
-      pageAmount: 1,
-      dataType,
+      })
+      .then(({ data }) => {
+        if (isSubscribed) {
+          setIndigenousLandRankingTotalPages(data.pageAmount);
+          data.series = data.series.map((obj) => {
+            obj.color = theme.territorialUnits[obj.id];
+            obj.visible = getVisibility(obj.id);
+            obj.name = t(
+              `dashboard.dataType.territorialUnits.${obj.id}.singular`
+            );
+            return obj;
+          });
+          setIndigenousLandRankingData(data);
+        }
+      });
+
+    return () => {
+      isSubscribed = false;
     };
-    data.series = data.series.map((obj) => {
-      obj.color = theme.territorialUnits[`${obj.id}`];
-      obj.visible = getVisibility(obj.id);
-      obj.name = t(`dashboard.dataType.territorialUnits.${obj.id}.singular`);
-      return obj;
-    });
-    setIndigenousLandRankingData(data);
-    setIndigenousLandRankingPage(1);
-  }, [dataType]);
+  }, [dataType, indigenousLandRankingPage]);
 
   useEffect(() => {
-    const data = {
-      x: [
-        'Serra do pardo',
-        'Chapada das mesas',
-        'Jaú',
-        'Uatumã',
-        'Rio Trombetas',
-      ],
-      position: [1, 2, 3, 4, 5],
-      series: [
-        {
-          id: 'protectedArea',
-          data: [10638678.67, 2134950.19, 1807626.79, 1449245.12, 1031380.07],
+    let isSubscribed = true;
+
+    api
+      .get(`/invasions/ranking/unity/${dataType}`, {
+        params: {
+          page: protectedAreaRankingPage,
         },
-      ],
-      pageAmount: 1,
-      dataType,
+      })
+      .then(({ data }) => {
+        if (isSubscribed) {
+          setProtectedAreaRankingTotalPages(data.pageAmount);
+          data.series = data.series.map((obj) => {
+            obj.color = theme.territorialUnits[obj.id];
+            obj.visible = getVisibility(obj.id);
+            obj.name = t(
+              `dashboard.dataType.territorialUnits.${obj.id}.singular`
+            );
+            return obj;
+          });
+          setProtectedAreaRankingData(data);
+        }
+      });
+
+    return () => {
+      isSubscribed = false;
     };
-    data.series = data.series.map((obj) => {
-      obj.color = theme.territorialUnits[`${obj.id}`];
-      obj.visible = getVisibility(obj.id);
-      obj.name = t(`dashboard.dataType.territorialUnits.${obj.id}.singular`);
-      return obj;
-    });
-    setProtectedAreaRankingData(data);
-    setProtectedAreaRankingPage(1);
-  }, [dataType]);
+  }, [dataType, protectedAreaRankingPage]);
 
   useEffect(() => {
-    const data = {
-      x: [
-        'Gold LTDA',
-        'Silver LTDA',
-        'Nickel LTDA',
-        'Diamond LTDA',
-        'Bronze LTDA',
-      ],
-      position: [1, 2, 3, 4, 5],
-      series: [
-        {
-          id: 'indigenousLand',
-          data: [10638678.67, 2134950.19, 1807626.79, 1449245.12, 1031380.07],
+    let isSubscribed = true;
+
+    api
+      .get(`/invasions/ranking/company/${dataType}`, {
+        params: {
+          page: companyRankingPage,
         },
-        {
-          id: 'protectedArea',
-          data: [10638678.67, 2134950.19, 1807626.79, 1449245.12, 1031380.07],
-        },
-      ],
-      pageAmount: 1,
-      dataType,
+      })
+      .then(({ data }) => {
+        if (isSubscribed) {
+          setCompanyRankingTotalPages(data.pageAmount);
+          data.series = data.series.map((obj) => {
+            obj.color = theme.territorialUnits[obj.id];
+            obj.visible = getVisibility(obj.id);
+            obj.name = t(
+              `dashboard.dataType.territorialUnits.${obj.id}.singular`
+            );
+            return obj;
+          });
+          setCompanyRankingData(data);
+        }
+      });
+
+    return () => {
+      isSubscribed = false;
     };
-    data.series = data.series.map((obj) => {
-      obj.color = theme.territorialUnits[`${obj.id}`];
-      obj.visible = getVisibility(obj.id);
-      obj.name = t(`dashboard.dataType.territorialUnits.${obj.id}.singular`);
-      return obj;
-    });
-    setCompanyRankingData(data);
-    setCompanyRankingPage(1);
-  }, [dataType]);
+  }, [dataType, companyRankingPage]);
 
   return useMemo(
     () => (
@@ -302,14 +322,22 @@ export default function Statistics() {
           </>
         )}
 
-        <Ranking
-          title={t(`dashboard.infoPanel.statistics.charts.ranking.state.title`)}
-          info={t(`dashboard.infoPanel.statistics.charts.ranking.state.info`)}
-          data={stateRankingData}
-          rankingOrder={stateRankingOrder}
-          setRankingOrder={setStateRankingOrder}
-        />
-        {tiVisibility && (
+        {stateRankingData && (
+          <Ranking
+            title={t(
+              `dashboard.infoPanel.statistics.charts.ranking.state.title`
+            )}
+            info={t(`dashboard.infoPanel.statistics.charts.ranking.state.info`)}
+            data={stateRankingData}
+            page={stateRankingPage}
+            totalPages={stateRankingTotalPages}
+            setRankingPage={setStateRankingPage}
+            rankingOrder={stateRankingOrder}
+            setRankingOrder={setStateRankingOrder}
+          />
+        )}
+
+        {tiVisibility && indigenousLandRankingData && (
           <Ranking
             title={t(
               `dashboard.infoPanel.statistics.charts.ranking.indigenousLand.title`
@@ -318,12 +346,15 @@ export default function Statistics() {
               `dashboard.infoPanel.statistics.charts.ranking.indigenousLand.info`
             )}
             data={indigenousLandRankingData}
+            page={indigenousLandRankingPage}
+            totalPages={indigenousLandRankingTotalPages}
+            setRankingPage={setIndigenousLandRankingPage}
             rankingOrder={indigenousLandRankingOrder}
             setRankingOrder={setIndigenousLandRankingOrder}
           />
         )}
 
-        {ucVisibility && (
+        {ucVisibility && protectedAreaRankingData && (
           <Ranking
             title={t(
               `dashboard.infoPanel.statistics.charts.ranking.protectedArea.title`
@@ -332,20 +363,30 @@ export default function Statistics() {
               `dashboard.infoPanel.statistics.charts.ranking.protectedArea.info`
             )}
             data={protectedAreaRankingData}
+            page={protectedAreaRankingPage}
+            totalPages={protectedAreaRankingTotalPages}
+            setRankingPage={setProtectedAreaRankingPage}
             rankingOrder={protectedAreaRankingOrder}
             setRankingOrder={setProtectedAreaRankingOrder}
           />
         )}
 
-        <Ranking
-          title={t(
-            `dashboard.infoPanel.statistics.charts.ranking.company.title`
-          )}
-          info={t(`dashboard.infoPanel.statistics.charts.ranking.company.info`)}
-          data={companyRankingData}
-          rankingOrder={companyRankingOrder}
-          setRankingOrder={setCompanyRankingOrder}
-        />
+        {companyRankingData && (
+          <Ranking
+            title={t(
+              `dashboard.infoPanel.statistics.charts.ranking.company.title`
+            )}
+            info={t(
+              `dashboard.infoPanel.statistics.charts.ranking.company.info`
+            )}
+            data={companyRankingData}
+            page={companyRankingPage}
+            totalPages={companyRankingTotalPages}
+            setRankingPage={setCompanyRankingPage}
+            rankingOrder={companyRankingOrder}
+            setRankingOrder={setCompanyRankingOrder}
+          />
+        )}
       </>
     ),
     [

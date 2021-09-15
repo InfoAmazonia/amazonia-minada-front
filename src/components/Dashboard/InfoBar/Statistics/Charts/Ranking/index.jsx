@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import { useMediaQuery } from '@material-ui/core';
 import { InfoOutlined } from '@material-ui/icons';
+import { Pagination } from '@material-ui/lab';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import highchartsMore from 'highcharts/highcharts-more';
@@ -24,10 +25,16 @@ export default function Ranking({
   info,
   setRankingOrder,
   rankingOrder,
+  totalPages,
+  page,
+  setRankingPage,
 }) {
   Ranking.propTypes = {
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
+    totalPages: PropTypes.number.isRequired,
+    page: PropTypes.number.isRequired,
+    setRankingPage: PropTypes.func.isRequired,
     rankingOrder: PropTypes.bool.isRequired,
     setRankingOrder: PropTypes.func.isRequired,
     data: PropTypes.shape().isRequired,
@@ -228,6 +235,13 @@ export default function Ranking({
           />
         </CustomTooltip>
       </div>
+      <Pagination
+        className={classes.pagination}
+        size="small"
+        count={totalPages}
+        page={page}
+        onChange={(event, value) => setRankingPage(value)}
+      />
     </div>
   );
 }
