@@ -5,6 +5,7 @@ import MapGL from 'react-map-gl';
 
 import MapContext from '../../../contexts/mapping';
 import Geodatin from './Geodatin';
+import Legend from './Legend';
 import North from './North';
 import useStyles from './styles';
 import Visibility from './Visibility';
@@ -46,6 +47,9 @@ export default function MapView({
       </div>
       <div className={classes.options}>
         {visibilityButtonsEnabled && <Visibility />}
+      </div>
+      <div className={classes.legendContainer}>
+        <Legend />
       </div>
       <MapGL
         {...viewport}

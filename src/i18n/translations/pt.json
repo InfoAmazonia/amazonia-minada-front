@@ -17,7 +17,8 @@
         "company": "Solicitante",
         "state": "Estado",
         "reserve": "Terra Indígena",
-        "unity": "Unidade de Conservação"
+        "unity": "Unidade de Conservação",
+        "substance": "Substância"
       },
       "searchFor": "Procurar por",
       "noOptions": "Nenhum resultado encontrado",
