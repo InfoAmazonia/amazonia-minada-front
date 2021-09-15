@@ -32,6 +32,7 @@ const useStyles = createUseStyles(() => ({
     top: 15,
     left: '50%',
     transform: 'translateX(-50%)',
+    display: 'flex',
 
     '& > *': {
       marginRight: 10,
@@ -46,6 +47,12 @@ const useStyles = createUseStyles(() => ({
       transform: 'translateX(-50%)',
       top: 15 + 58 + 15,
     },
+  },
+  legendContainer: {
+    position: 'absolute',
+    top: 15,
+    right: 15,
+    zIndex: 10,
   },
 }));
 

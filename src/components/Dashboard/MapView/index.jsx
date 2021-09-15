@@ -48,7 +48,9 @@ export default function MapView({
       <div className={classes.options}>
         {visibilityButtonsEnabled && <Visibility />}
       </div>
-      <Legend />
+      <div className={classes.legendContainer}>
+        <Legend />
+      </div>
       <MapGL
         {...viewport}
         onLoad={() => {
