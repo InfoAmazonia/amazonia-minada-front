@@ -64,6 +64,8 @@ export const darkScheme = {
   territorialUnits: {
     indigenousLand: '#C40460',
     protectedArea: '#00AA58',
+    mapIndigenousLand: '#791F49',
+    mapProtectedArea: '#005C53',
   },
   miningProcesses: {
     miningConcession: '#FF0021',

@@ -24,6 +24,10 @@
       "noOptions": "Nenhum resultado encontrado",
       "searching": "Buscando..."
     },
+    "legend": {
+      "territorialTitle": "Unidades territoriais",
+      "miningProcessesTitle": "Processos minerários"
+    },
     "dataType": {
       "territorialUnits": {
         "indigenousLand": {

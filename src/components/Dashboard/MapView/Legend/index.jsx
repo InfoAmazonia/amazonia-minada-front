@@ -1,4 +1,8 @@
-import React from 'react';
+import { Button, Typography } from '@material-ui/core';
+import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useTheme } from 'react-jss';
 
 import useStyles from './styles';
 
@@ -7,16 +11,154 @@ import useStyles from './styles';
  */
 export default function Legend() {
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
+  const theme = useTheme();
 
   return (
     <div className={classes.container}>
-      <div className={classes.firstCircle}>
-        <div className={classes.secondCircle}>
-          <div className={classes.thirdCircle}>
-            <div className={classes.fourthCircle} />
+      <div
+        className={classes.buttonContainer}
+        style={open ? {} : { boxShadow: theme.defaultShadow }}
+      >
+        <Button
+          className={classes.button}
+          onClick={() => {
+            setOpen(!open);
+          }}
+        >
+          {!open && (
+            <div className={classes.firstCircle}>
+              <div className={classes.secondCircle}>
+                <div className={classes.thirdCircle}>
+                  <div className={classes.fourthCircle} />
+                </div>
+              </div>
+            </div>
+          )}
+          {open && (
+            <div className={classes.closeButtonContainer}>
+              <CloseRoundedIcon />
+            </div>
+          )}
+        </Button>
+      </div>
+      {open && (
+        <div className={classes.openedContainer}>
+          <div className={classes.contentBlock}>
+            <div className={classes.title}>
+              <Typography style={{ color: theme.text.primary }}>
+                {t('dashboard.legend.territorialTitle')}
+              </Typography>
+            </div>
+            <div className={classes.item}>
+              <div
+                className={classes.circle}
+                style={{
+                  backgroundColor: theme.territorialUnits.mapIndigenousLand,
+                }}
+              />
+              <Typography style={{ color: theme.text.primary }}>
+                {t(
+                  'dashboard.dataType.territorialUnits.indigenousLand.singular'
+                )}
+              </Typography>
+            </div>
+            <div className={classes.item}>
+              <div
+                className={classes.circle}
+                style={{
+                  backgroundColor: theme.territorialUnits.mapProtectedArea,
+                }}
+              />
+              <Typography style={{ color: theme.text.primary }}>
+                {t(
+                  'dashboard.dataType.territorialUnits.protectedArea.singular'
+                )}
+              </Typography>
+            </div>
+          </div>
+          <div className={classes.contentBlock}>
+            <div className={classes.title}>
+              <Typography style={{ color: theme.text.primary }}>
+                {t('dashboard.legend.miningProcessesTitle')}
+              </Typography>
+            </div>
+            <div className={classes.item}>
+              <div
+                className={classes.circle}
+                style={{
+                  backgroundColor: theme.miningProcesses.miningConcession,
+                }}
+              />
+              <Typography style={{ color: theme.text.primary }}>
+                {t('dashboard.dataType.miningProcesses.miningConcession')}
+              </Typography>
+            </div>
+            <div className={classes.item}>
+              <div
+                className={classes.circle}
+                style={{
+                  backgroundColor: theme.miningProcesses.smallScaleMining,
+                }}
+              />
+              <Typography style={{ color: theme.text.primary }}>
+                {t('dashboard.dataType.miningProcesses.smallScaleMining')}
+              </Typography>
+            </div>
+            <div className={classes.item}>
+              <div
+                className={classes.circle}
+                style={{
+                  backgroundColor:
+                    theme.miningProcesses.miningResearchAuthorization,
+                }}
+              />
+              <Typography style={{ color: theme.text.primary }}>
+                {t(
+                  'dashboard.dataType.miningProcesses.miningResearchAuthorization'
+                )}
+              </Typography>
+            </div>
+            <div className={classes.item}>
+              <div
+                className={classes.circle}
+                style={{
+                  backgroundColor: theme.miningProcesses.miningResearchRequest,
+                }}
+              />
+              <Typography style={{ color: theme.text.primary }}>
+                {t('dashboard.dataType.miningProcesses.miningResearchRequest')}
+              </Typography>
+            </div>
+            <div className={classes.item}>
+              <div
+                className={classes.circle}
+                style={{
+                  backgroundColor:
+                    theme.miningProcesses.smallScaleMiningRequest,
+                }}
+              />
+              <Typography style={{ color: theme.text.primary }}>
+                {t(
+                  'dashboard.dataType.miningProcesses.smallScaleMiningRequest'
+                )}
+              </Typography>
+            </div>
+            <div className={classes.item}>
+              <div
+                className={classes.circle}
+                style={{
+                  backgroundColor: theme.miningProcesses.availableMiningArea,
+                }}
+              />
+              <Typography style={{ color: theme.text.primary }}>
+                {t('dashboard.dataType.miningProcesses.availableMiningArea')}
+              </Typography>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

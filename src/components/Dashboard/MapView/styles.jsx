@@ -48,11 +48,20 @@ const useStyles = createUseStyles(() => ({
       top: 15 + 58 + 15,
     },
   },
-  legendContainer: {
+  legendContainerExpanded: {
     position: 'absolute',
     top: 15,
     right: 15,
     zIndex: 10,
+
+    [breakpoints.max.md]: {
+      display: 'none',
+    },
+  },
+  legendContainerContained: {
+    [breakpoints.min.md]: {
+      display: 'none',
+    },
   },
 }));
 

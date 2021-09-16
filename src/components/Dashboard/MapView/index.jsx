@@ -44,11 +44,14 @@ export default function MapView({
       <div className={classes.navigation}>
         {northEnabled && <North />}
         {zoomButtonsEnabled && <Zoom />}
+        <div className={classes.legendContainerContained}>
+          <Legend />
+        </div>
       </div>
       <div className={classes.options}>
         {visibilityButtonsEnabled && <Visibility />}
       </div>
-      <div className={classes.legendContainer}>
+      <div className={classes.legendContainerExpanded}>
         <Legend />
       </div>
       <MapGL

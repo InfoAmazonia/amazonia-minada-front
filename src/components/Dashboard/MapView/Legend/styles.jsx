@@ -2,8 +2,10 @@ import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles((theme) => ({
   container: {
+    position: 'relative',
+  },
+  buttonContainer: {
     backgroundColor: theme.background.primary,
-    boxShadow: theme.defaultShadow,
     borderRadius: 5,
     width: 40,
     height: 40,
@@ -12,6 +14,17 @@ const useStyles = createUseStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     userSelect: 'none',
+    zIndex: 10,
+  },
+  closeButtonContainer: {
+    width: 40,
+    height: 40,
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    userSelect: 'none',
+    zIndex: 10,
   },
   firstCircle: {
     display: 'flex',
@@ -52,6 +65,59 @@ const useStyles = createUseStyles((theme) => ({
     borderRadius: 20,
     backgroundColor: theme.miningProcesses.miningResearchRequest,
     padding: 1,
+  },
+  button: {
+    '&.MuiButtonBase-root': {
+      borderRadius: 5,
+      minWidth: 40,
+      maxWidth: 40,
+      minHeight: 40,
+      maxHeight: 40,
+      position: 'relative',
+      alignItems: 'center',
+      justifyContent: 'center',
+      display: 'flex',
+      padding: 0,
+      zIndex: 10,
+    },
+  },
+  openedContainer: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    backgroundColor: theme.background.primary,
+    padding: '10px 15px',
+    borderRadius: 5,
+    whiteSpace: 'nowrap',
+    display: 'flex',
+    flexDirection: 'column',
+    boxShadow: theme.defaultShadow,
+    zIndex: 0,
+  },
+  title: {
+    marginBottom: 5,
+
+    '&:first-of-type': {
+      paddingRight: 35,
+    },
+  },
+  item: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  contentBlock: {
+    display: 'flex',
+    flexDirection: 'column',
+
+    '&:not(:first-of-type)': {
+      marginTop: 10,
+    },
+  },
+  circle: {
+    width: 12,
+    height: 12,
+    marginRight: 5,
+    borderRadius: 100,
   },
 }));
 
