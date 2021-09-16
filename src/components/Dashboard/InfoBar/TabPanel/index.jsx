@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -19,11 +20,21 @@ export default function TabPanel({ children, value, index }) {
     <div
       className={classes.wrapper}
       role="tabpanel"
-      hidden={value !== index}
+      style={
+        value === index
+          ? { opacity: 1, height: '100%' }
+          : { opacity: 0, height: 0, pointerEvents: 'none', userSelect: 'none' }
+      }
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
     >
-      {value === index && <div style={{ marginTop: 20 }}>{children}</div>}
+      <div
+        style={{
+          marginTop: 20,
+        }}
+      >
+        {children}
+      </div>
     </div>
   );
 }
