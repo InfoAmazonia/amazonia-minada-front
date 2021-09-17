@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
+import FilteringContext from '../../../../../../contexts/filtering';
 import useGeneralStyles from '../styles';
 import useStyles from './styles';
 
@@ -12,6 +13,11 @@ export default function Legend({ data }) {
   Legend.propTypes = {
     data: PropTypes.shape().isRequired,
   };
+
+  const {
+    values: { ucVisibility, tiVisibility },
+    setters: { setTiVisibility, setUcVisibility },
+  } = useContext(FilteringContext);
 
   const theme = useTheme();
   const generalClasses = useGeneralStyles();
@@ -22,8 +28,24 @@ export default function Legend({ data }) {
     return null;
   }
 
+  const handleFilters = (id) => {
+    if (id === 'protectedArea') {
+      setUcVisibility(!ucVisibility);
+    }
+    if (id === 'indigenousLand') {
+      setTiVisibility(!tiVisibility);
+    }
+  };
+
   const legendItem = (id, name, value, color, visible) => (
-    <div key={id} role="button" tabIndex={0} className={classes.legendItem}>
+    <div
+      key={id}
+      role="button"
+      tabIndex={0}
+      className={classes.legendItem}
+      onClick={() => handleFilters(id)}
+      onKeyDown={() => handleFilters(id)}
+    >
       <div
         className={classes.circle}
         style={{

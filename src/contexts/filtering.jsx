@@ -52,7 +52,12 @@ export function FilteringProvider({ children }) {
           dataType,
           searchValue,
         },
-        setters: { setDataType, setSearchValue },
+        setters: {
+          setDataType,
+          setSearchValue,
+          setUcVisibility,
+          setTiVisibility,
+        },
         functions: {
           handleUcVisibility,
           handleTiVisibility,
