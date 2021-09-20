@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import { InfoOutlined } from '@mui/icons-material/';
-import { Pagination } from '@mui/lab';
-import { useMediaQuery } from '@mui/material';
+import { Pagination, useMediaQuery } from '@mui/material';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import highchartsMore from 'highcharts/highcharts-more';
