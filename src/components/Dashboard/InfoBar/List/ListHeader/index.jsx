@@ -1,5 +1,5 @@
-import { Button, Typography } from '@material-ui/core';
-import GetAppIcon from '@material-ui/icons/GetApp';
+import { Button, Typography } from '@mui/material';
+import GetAppIcon from '@mui/icons-material/GetApp';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useTheme } from 'react-jss';
