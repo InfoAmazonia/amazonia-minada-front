@@ -1,5 +1,5 @@
-import { Typography } from '@mui/material';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import { Typography } from '@mui/material';
 import React from 'react';
 import { useTheme } from 'react-jss';
 

@@ -7,6 +7,7 @@ import MapContext from '../../../contexts/mapping';
 import Geodatin from './Geodatin';
 import Legend from './Legend';
 import North from './North';
+import Share from './Share';
 import useStyles from './styles';
 import Visibility from './Visibility';
 import Zoom from './Zoom';
@@ -50,6 +51,7 @@ export default function MapView({
       </div>
       <div className={classes.options}>
         {visibilityButtonsEnabled && <Visibility />}
+        <Share />
       </div>
       <div className={classes.legendContainerExpanded}>
         <Legend />

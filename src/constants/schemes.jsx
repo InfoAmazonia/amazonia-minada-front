@@ -35,10 +35,17 @@ export const lightScheme = {
     availableMiningArea: '#008BBB',
   },
   button: {
+    primary: '#047FC4',
+    primaryHover: '#005d91',
     focused: '#202223',
     active: '#5b5d5d',
     selected: '#404040',
     selectedHover: '#4f4f4f',
+  },
+  share: {
+    twitter: '#00acee',
+    whatsapp: '#128c7E',
+    facebook: '#3B5998',
   },
 };
 
@@ -76,9 +83,16 @@ export const darkScheme = {
     availableMiningArea: '#008BBB',
   },
   button: {
+    primary: '#047FC4',
+    primaryHover: '#005d91',
     focused: '#202223',
     active: '#5b5d5d',
     selected: '#404040',
     selectedHover: '#4f4f4f',
+  },
+  share: {
+    twitter: '#00acee',
+    whatsapp: '#128c7E',
+    facebook: '#3B5998',
   },
 };
