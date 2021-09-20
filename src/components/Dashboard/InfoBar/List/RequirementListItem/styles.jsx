@@ -7,7 +7,7 @@ const useStyles = createUseStyles((theme) => ({
     borderBottom: '1px solid',
     borderBottomColor: theme.separator,
   },
-  title: {
+  company: {
     display: 'flex',
     flexFlow: 'row nowrap',
     alignItems: 'center',
@@ -16,7 +16,6 @@ const useStyles = createUseStyles((theme) => ({
     display: 'flex',
     flexFlow: 'row wrap',
     justifyContent: 'flex-start',
-    marginBottom: 10,
   },
   infoItem: {
     minWidth: '120px',

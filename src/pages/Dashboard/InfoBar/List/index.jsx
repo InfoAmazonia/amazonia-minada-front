@@ -1,16 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
+import GetAppIcon from '@mui/icons-material/GetApp';
+import { Button, Typography } from '@mui/material';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
-import ListHeader from '../../../../components/Dashboard/InfoBar/List/ListHeader';
-import ListItem from '../../../../components/Dashboard/InfoBar/List/ListItem';
+import RequirementListItem from '../../../../components/Dashboard/InfoBar/List/RequirementListItem';
 import FilteringContext from '../../../../contexts/filtering';
 import api from '../../../../services/api';
+import useStyles from '../styles';
 
 /**
  *  This function returns list content.
  */
 export default function List() {
+  const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
   const {
@@ -43,31 +46,62 @@ export default function List() {
     };
   }, [searchValue, tiVisibility, ucVisibility]);
 
-  return (
-    <>
-      {contentList && <ListHeader results={contentList.results} />}
-      {contentList &&
-        contentList.values.map((item) => (
-          <ListItem
-            key={`${item.process}-${item.type}`}
-            title={item.company}
-            circleColor={theme.miningProcesses.availableMiningArea}
-            infos={[
-              { title: 'Processo', data: item.process },
-              { title: 'Ano de abertura', data: item.year },
-              {
-                title: 'Área declarada',
-                data: `${t('general.number', { value: item.area })} ha`,
-              },
-              {
-                title: 'Tipo de área',
-                data: t(
-                  `dashboard.dataType.territorialUnits.${item.type}.singular`
-                ),
-              },
-            ]}
-          />
-        ))}
-    </>
+  const handleDownloadCSV = () => {
+    api
+      .post(
+        `/invasions`,
+        {
+          filters: searchValue,
+          enableUnity: ucVisibility,
+          enableReserve: tiVisibility,
+        },
+        { params: { page: 1, pageSize: 50, output: 'csv' } }
+      )
+      .then(({ data }) => {
+        const linkCSV = document.createElement('a');
+        linkCSV.href = URL.createObjectURL(
+          new Blob([data], { type: 'text/csv;charset=utf-8;' })
+        );
+        linkCSV.setAttribute('download', 'requirements_list.csv');
+        linkCSV.click();
+      });
+  };
+
+  return useMemo(
+    () => (
+      <div className={classes.wrapperList}>
+        {contentList && (
+          <>
+            <div className={classes.listHeader}>
+              <Typography
+                variant="body2"
+                style={{ color: theme.text.secondary }}
+              >
+                {t('general.number', { value: contentList.results })}{' '}
+                {t(`dashboard.infoPanel.list.header.results`)}
+              </Typography>
+              <Button
+                onClick={() => handleDownloadCSV()}
+                startIcon={<GetAppIcon />}
+              >
+                <Typography
+                  variant="caption"
+                  style={{ color: theme.text.primary }}
+                >
+                  {t(`dashboard.infoPanel.list.header.downloadCSV`)}
+                </Typography>
+              </Button>
+            </div>
+            {contentList.values.map((item) => (
+              <RequirementListItem
+                key={`${item.process}-${item.type}`}
+                data={item}
+              />
+            ))}
+          </>
+        )}
+      </div>
+    ),
+    [contentList]
   );
 }

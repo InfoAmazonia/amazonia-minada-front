@@ -98,9 +98,12 @@
         },
         "item": {
           "process": "Processo",
-          "declaredArea": "Área declarada",
-          "openingYear": "Ano de abertura",
-          "areaType": "Tipo de área"
+          "area": "Área declarada",
+          "year": "Ano de abertura",
+          "type": "Tipo de área",
+          "state": "Estado",
+          "substance": "Substância",
+          "territory": "Território"
         }
       }
     },

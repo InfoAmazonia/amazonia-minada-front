@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
-import { useMediaQuery } from '@mui/material';
-import { Pagination } from '@mui/lab';
 import { InfoOutlined } from '@mui/icons-material/';
+import { Pagination, useMediaQuery } from '@mui/material';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import highchartsMore from 'highcharts/highcharts-more';
@@ -131,14 +130,17 @@ export default function Ranking({
     tooltip: {
       useHTML: true,
       formatter() {
-        return `<b>${this.series.name}</b> </br>
-            <tr><td style="color: ${this.series.color}">${t(
+        return `<b>${this.x}</b> </br>
+          <tr><td style="color: ${this.series.color}">${t(
           `dashboard.dataType.${data.dataType}`
         )}: </td>
               <td style="text-align: right"><b>${t('general.roundNumber', {
                 value: this.point.y,
               })} ${data.dataType === 'requiredArea' ? 'ha' : ''}
-            </b></td></tr>`;
+            </b></td>
+            </br>
+            </td>Território: <b>${this.series.name}</b></td>
+            </tr>`;
       },
     },
     plotOptions: {
