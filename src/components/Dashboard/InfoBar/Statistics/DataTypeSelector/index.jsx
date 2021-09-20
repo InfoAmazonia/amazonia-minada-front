@@ -1,4 +1,4 @@
-import { FormControl, MenuItem, Select, Typography } from '@material-ui/core';
+import { FormControl, MenuItem, Select, Typography } from '@mui/material';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';

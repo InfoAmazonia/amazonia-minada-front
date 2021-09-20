@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { InfoOutlined } from '@material-ui/icons';
+import { InfoOutlined } from '@mui/icons-material/';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import highchartsMore from 'highcharts/highcharts-more';

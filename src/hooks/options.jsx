@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
-import { useMediaQuery } from '@material-ui/core';
+import { useMediaQuery } from '@mui/material';
 import Highcharts from 'highcharts';
 import dataExporting from 'highcharts/modules/export-data';
 import { useTranslation } from 'react-i18next';

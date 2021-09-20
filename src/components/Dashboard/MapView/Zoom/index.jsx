@@ -1,4 +1,4 @@
-import { Button, Typography } from '@material-ui/core';
+import { Button, Typography } from '@mui/material';
 import React, { useContext } from 'react';
 import { useTheme } from 'react-jss';
 

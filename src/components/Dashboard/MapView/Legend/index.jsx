@@ -1,5 +1,5 @@
-import { Button, Typography } from '@material-ui/core';
-import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
+import { Button, Typography } from '@mui/material';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';

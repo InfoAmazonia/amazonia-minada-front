@@ -1,12 +1,6 @@
-import {
-  Button,
-  Tab,
-  Tabs,
-  Typography,
-  useMediaQuery,
-} from '@material-ui/core';
-import ExpandLessRoundedIcon from '@material-ui/icons/ExpandLessRounded';
-import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import { Button, Tab, Tabs, Typography, useMediaQuery } from '@mui/material';
+import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';

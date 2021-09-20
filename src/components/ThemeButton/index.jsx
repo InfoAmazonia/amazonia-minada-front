@@ -1,6 +1,6 @@
-import { Button } from '@material-ui/core';
-import Brightness2RoundedIcon from '@material-ui/icons/Brightness2Rounded';
-import WbSunnyRoundedIcon from '@material-ui/icons/WbSunnyRounded';
+import Brightness2RoundedIcon from '@mui/icons-material/Brightness2Rounded';
+import WbSunnyRoundedIcon from '@mui/icons-material/WbSunnyRounded';
+import { Button } from '@mui/material/core';
 import React, { useContext } from 'react';
 
 import { lightScheme } from '../../constants/schemes';

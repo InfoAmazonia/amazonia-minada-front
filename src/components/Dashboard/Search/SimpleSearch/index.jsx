@@ -1,14 +1,14 @@
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
 import {
   IconButton,
   ListSubheader,
   Popper,
   TextField,
   useMediaQuery,
-} from '@material-ui/core';
-import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
-import TuneRoundedIcon from '@material-ui/icons/TuneRounded';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+} from '@mui/material';
+import Autocomplete from '@mui/material/Autocomplete';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';

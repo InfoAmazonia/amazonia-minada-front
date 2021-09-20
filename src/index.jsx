@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { CssBaseline } from '@material-ui/core';
+import { CssBaseline } from '@mui/material';
 import Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 import React from 'react';
