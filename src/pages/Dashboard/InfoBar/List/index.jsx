@@ -1,18 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Button, Typography } from '@material-ui/core';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTheme } from 'react-jss';
 
-import ListHeader from '../../../../components/Dashboard/InfoBar/List/ListHeader';
-import ListItem from '../../../../components/Dashboard/InfoBar/List/ListItem';
+import RequirementListItem from '../../../../components/Dashboard/InfoBar/List/RequirementListItem';
 import FilteringContext from '../../../../contexts/filtering';
 import api from '../../../../services/api';
+import useStyles from '../styles';
 
 /**
  *  This function returns list content.
  */
 export default function List() {
+  const classes = useStyles();
   const theme = useTheme();
-  const { t } = useTranslation();
   const {
     values: { searchValue, tiVisibility, ucVisibility },
   } = useContext(FilteringContext);
@@ -43,31 +44,37 @@ export default function List() {
     };
   }, [searchValue, tiVisibility, ucVisibility]);
 
-  return (
-    <>
-      {contentList && <ListHeader results={contentList.results} />}
-      {contentList &&
-        contentList.values.map((item) => (
-          <ListItem
-            key={`${item.process}-${item.type}`}
-            title={item.company}
-            circleColor={theme.miningProcesses.availableMiningArea}
-            infos={[
-              { title: 'Processo', data: item.process },
-              { title: 'Ano de abertura', data: item.year },
-              {
-                title: 'Área declarada',
-                data: `${t('general.number', { value: item.area })} ha`,
-              },
-              {
-                title: 'Tipo de área',
-                data: t(
-                  `dashboard.dataType.territorialUnits.${item.type}.singular`
-                ),
-              },
-            ]}
-          />
-        ))}
-    </>
+  return useMemo(
+    () => (
+      <div className={classes.wrapperList}>
+        {contentList && (
+          <>
+            <div className={classes.listHeader}>
+              <Typography
+                variant="body2"
+                style={{ color: theme.text.secondary }}
+              >
+                {contentList.results} resultados encontrados
+              </Typography>
+              <Button startIcon={<GetAppIcon />}>
+                <Typography
+                  variant="caption"
+                  style={{ color: theme.text.primary }}
+                >
+                  Baixar CSV
+                </Typography>
+              </Button>
+            </div>
+            {contentList.values.map((item) => (
+              <RequirementListItem
+                key={`${item.process}-${item.type}`}
+                data={item}
+              />
+            ))}
+          </>
+        )}
+      </div>
+    ),
+    [contentList]
   );
 }

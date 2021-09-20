@@ -10,12 +10,14 @@ import DataTypeSelector from '../../../../components/Dashboard/InfoBar/Statistic
 import GeneralStatistics from '../../../../components/Dashboard/InfoBar/Statistics/GeneralStatistics';
 import FilteringContext from '../../../../contexts/filtering';
 import api from '../../../../services/api';
+import useStyles from '../styles';
 
 /**
  *  This function returns statistics content.
  */
 export default function Statistics() {
   const { t } = useTranslation();
+  const classes = useStyles();
   const theme = useTheme();
   const {
     values: { searchValue, ucVisibility, tiVisibility, dataType },
@@ -306,7 +308,7 @@ export default function Statistics() {
 
   return useMemo(
     () => (
-      <>
+      <div className={classes.wrapperStatistics}>
         {semiCircleData && (
           <>
             <DataTypeSelector />
@@ -387,7 +389,7 @@ export default function Statistics() {
             setRankingOrder={setCompanyRankingOrder}
           />
         )}
-      </>
+      </div>
     ),
     [
       generalStatisticsData,

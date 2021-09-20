@@ -26,6 +26,22 @@ const useStyles = createUseStyles((theme) => ({
       marginTop: -61 - sizes.infoBarHeaderHeight,
     },
   },
+  wrapperList: {
+    '& > *:last-child': {
+      borderBottom: 'none',
+    },
+  },
+  wrapperStatistics: {
+    '& > *:last-child': {
+      marginBottom: 10,
+    },
+  },
+  listHeader: {
+    display: 'flex',
+    flexFlow: 'row wrap',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   tab: {
     position: 'relative',
     width: '100%',
