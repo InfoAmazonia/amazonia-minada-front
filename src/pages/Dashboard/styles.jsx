@@ -20,6 +20,7 @@ const useStyles = createUseStyles(() => ({
   mapWrapper: {
     width: '100%',
     height: '100%',
+    zIndex: 0,
 
     [breakpoints.max.sm]: {
       height: '100vh',

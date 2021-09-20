@@ -6,7 +6,7 @@ const useStyles = createUseStyles((theme) => ({
   container: {
     position: 'relative',
     display: 'flex',
-    zIndex: 100,
+    zIndex: 1000,
   },
   wrapper: {
     position: 'relative',
@@ -15,7 +15,7 @@ const useStyles = createUseStyles((theme) => ({
     width: sizes.infoBarWidth,
     minWidth: sizes.infoBarWidth,
     maxWidth: sizes.infoBarWidth,
-    zIndex: 10,
+    zIndex: 100,
     boxShadow: theme.defaultShadow,
     backgroundColor: theme.background.primary,
 
@@ -55,7 +55,7 @@ const useStyles = createUseStyles((theme) => ({
       top: `calc(61px + ${sizes.infoBarHeaderHeight}px - 100vh)`,
       left: 0,
       width: '100%',
-      zIndex: 1000,
+      zIndex: 100,
     },
   },
   minimizeWrapper: {
