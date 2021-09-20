@@ -1,5 +1,5 @@
-import { Button, Typography } from '@material-ui/core';
-import GetAppIcon from '@material-ui/icons/GetApp';
+import GetAppIcon from '@mui/icons-material/GetApp';
+import { Button, Typography } from '@mui/material';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTheme } from 'react-jss';
 
