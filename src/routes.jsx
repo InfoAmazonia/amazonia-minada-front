@@ -11,6 +11,7 @@ function Routes() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Dashboard} />
+        <Route exact path="/filtrar" component={Dashboard} />
         <Redirect from="*" to="/" />
       </Switch>
     </BrowserRouter>
