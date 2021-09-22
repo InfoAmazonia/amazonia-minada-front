@@ -3,7 +3,7 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import ShareRoundedIcon from '@mui/icons-material/ShareRounded';
 import { Button, Typography, IconButton, TextField } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
-import React, { useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 import {
@@ -12,6 +12,8 @@ import {
   WhatsappShareButton,
 } from 'react-share';
 
+import { filterDefaults } from '../../../../constants/options';
+import FilteringContext from '../../../../contexts/filtering';
 import useStyles from './styles';
 
 /**
@@ -23,7 +25,40 @@ export default function Share() {
   const [openShare, setOpenShare] = useState(false);
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
-  const url = window.location.href;
+
+  const {
+    values: { ucVisibility, itVisibility, dataType },
+  } = useContext(FilteringContext);
+
+  const url = useMemo(() => {
+    let query = '/filter?';
+    const initialSize = query.length;
+
+    /**
+     * This function verifies if there is a need to add a separator between the query params.
+     */
+    function trySeparator() {
+      if (query.length > initialSize) {
+        query += '&';
+      }
+    }
+
+    if (ucVisibility !== filterDefaults.ucVisibility) {
+      query += `ucVisibility=${ucVisibility}`;
+    }
+
+    if (itVisibility !== filterDefaults.itVisibility) {
+      trySeparator();
+      query += `itVisibility=${itVisibility}`;
+    }
+
+    if (dataType !== filterDefaults.dataType) {
+      trySeparator();
+      query += `dataType=${dataType}`;
+    }
+
+    return window.location.origin + query;
+  }, [ucVisibility, itVisibility, dataType]);
 
   /**
    * This function handles the share dialog opening.
