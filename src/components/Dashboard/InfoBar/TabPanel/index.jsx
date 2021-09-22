@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useRef } from 'react';
 
 import useStyles from './styles';
 
@@ -14,10 +14,12 @@ export default function TabPanel({ children, value, index }) {
     value: PropTypes.number.isRequired,
   };
 
+  const tabPanelRef = useRef();
   const classes = useStyles();
 
   return (
     <div
+      ref={tabPanelRef}
       className={classes.wrapper}
       role="tabpanel"
       style={
@@ -33,7 +35,7 @@ export default function TabPanel({ children, value, index }) {
           marginTop: 20,
         }}
       >
-        {children}
+        {React.cloneElement(children, { tabPanelRef })}
       </div>
     </div>
   );
