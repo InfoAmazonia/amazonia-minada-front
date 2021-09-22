@@ -44,12 +44,12 @@ export default function Share() {
     }
 
     if (ucVisibility !== filterDefaults.ucVisibility) {
-      query += `ucVisibility=${ucVisibility}`;
+      query += `uc=${ucVisibility}`;
     }
 
     if (itVisibility !== filterDefaults.itVisibility) {
       trySeparator();
-      query += `itVisibility=${itVisibility}`;
+      query += `it=${itVisibility}`;
     }
 
     if (dataType !== filterDefaults.dataType) {
