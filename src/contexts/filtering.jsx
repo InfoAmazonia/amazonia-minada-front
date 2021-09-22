@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 
-import { filterDefaults } from '../constants/options';
+import { dataTypes, filterDefaults } from '../constants/options';
+import { useQuery } from '../hooks/useQuery';
 
 const FilteringContext = createContext({});
 
@@ -16,9 +17,10 @@ export function FilteringProvider({ children }) {
     ]).isRequired,
   };
 
-  const [ucVisibility, setUcVisibility] = useState(true);
-  const [tiVisibility, setTiVisibility] = useState(true);
-  const [dataType, setDataType] = useState('requiredArea');
+  const query = useQuery();
+  const [ucVisibility, setUcVisibility] = useState(filterDefaults.ucVisibility);
+  const [tiVisibility, setTiVisibility] = useState(filterDefaults.tiVisibility);
+  const [dataType, setDataType] = useState(filterDefaults.dataType);
   const [searchValue, setSearchValue] = useState(filterDefaults.searchValue);
 
   /**
@@ -26,9 +28,6 @@ export function FilteringProvider({ children }) {
    */
   function handleUcVisibility(newValue) {
     // Commented logic: If the TI's visibility is currently setted to off, it's not possible to set off the UC's visibility.
-    /* if (newValue || (!newValue && tiVisibility)) {
-      setUcVisibility(newValue);
-    } */
     setUcVisibility(newValue);
   }
 
@@ -37,11 +36,38 @@ export function FilteringProvider({ children }) {
    */
   function handleTiVisibility(newValue) {
     // Commented logic: If the UC's visibility is currently setted to off, it's not possible to set off the TI's visibility.
-    /* if (newValue || (!newValue && ucVisibility)) {
-      setTiVisibility(newValue);
-    } */
     setTiVisibility(newValue);
   }
+
+  /**
+   * This useEffect loads the filtering provider with the query search params.
+   */
+  useEffect(() => {
+    const ucParam = query.get('uc');
+    const tiParam = query.get('ti');
+    const dataTypeParam = query.get('dataType');
+
+    /**
+     * Loads the uc's visibility.
+     */
+    if (ucParam && (ucParam === 'true' || ucParam === 'false')) {
+      setUcVisibility(ucParam === 'true');
+    }
+
+    /**
+     * Loads the ti's visibility.
+     */
+    if (tiParam && (tiParam === 'true' || tiParam === 'false')) {
+      setTiVisibility(tiParam === 'true');
+    }
+
+    /**
+     * Loads the dataType.
+     */
+    if (dataTypeParam && dataTypes[dataTypeParam]) {
+      setDataType(dataTypeParam);
+    }
+  }, []);
 
   return (
     <FilteringContext.Provider

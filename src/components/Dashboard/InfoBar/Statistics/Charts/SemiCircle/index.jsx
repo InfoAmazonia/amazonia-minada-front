@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useTheme } from 'react-jss';
 
-import useOptions from '../../../../../../hooks/options';
+import useOptions from '../../../../../../hooks/useOptions';
 import CustomTooltip from '../../../../../CustomTooltip';
 import useStyles from '../styles';
 

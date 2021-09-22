@@ -10,6 +10,20 @@ export const mapDefaults = {
   },
 };
 
+export const dataTypes = {
+  requiredArea: {
+    key: 'requiredArea',
+    translation: 'dashboard.dataType.requiredArea',
+  },
+  requirementsIncidence: {
+    key: 'requirementsIncidence',
+    translation: 'dashboard.dataType.requirementsIncidence',
+  },
+};
+
 export const filterDefaults = {
   searchValue: {},
+  ucVisibility: true,
+  tiVisibility: true,
+  dataType: dataTypes.requiredArea.key,
 };
