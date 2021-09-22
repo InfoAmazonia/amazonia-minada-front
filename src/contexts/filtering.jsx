@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { createContext, useEffect, useState } from 'react';
 
-import { filterDefaults } from '../constants/options';
+import { dataTypes, filterDefaults } from '../constants/options';
 import { useQuery } from '../hooks/useQuery';
 
 const FilteringContext = createContext({});
@@ -39,8 +39,34 @@ export function FilteringProvider({ children }) {
     setTiVisibility(newValue);
   }
 
+  /**
+   * This useEffect loads the filtering provider with the query search params.
+   */
   useEffect(() => {
-    console.log(query.get('uc'));
+    const ucParam = query.get('uc');
+    const tiParam = query.get('ti');
+    const dataTypeParam = query.get('dataType');
+
+    /**
+     * Loads the uc's visibility.
+     */
+    if (ucParam && (ucParam === 'true' || ucParam === 'false')) {
+      setUcVisibility(ucParam === 'true');
+    }
+
+    /**
+     * Loads the ti's visibility.
+     */
+    if (tiParam && (tiParam === 'true' || tiParam === 'false')) {
+      setTiVisibility(tiParam === 'true');
+    }
+
+    /**
+     * Loads the dataType.
+     */
+    if (dataTypeParam && dataTypes[dataTypeParam]) {
+      setDataType(dataTypeParam);
+    }
   }, []);
 
   return (
