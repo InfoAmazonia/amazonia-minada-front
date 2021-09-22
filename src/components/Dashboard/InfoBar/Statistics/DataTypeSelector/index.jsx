@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
+import { dataTypes } from '../../../../../constants/options';
 import FilteringContext from '../../../../../contexts/filtering';
 import useStyles from './styles';
 
@@ -41,12 +42,11 @@ export default function DataTypeSelector() {
           MenuProps={{ PopoverClasses: { root: classes.menuPopOver } }}
           inputProps={{ 'aria-label': 'Without label' }}
         >
-          <MenuItem value="requiredArea">
-            {t(`dashboard.dataType.requiredArea`)}
-          </MenuItem>
-          <MenuItem value="requirementsIncidence">
-            {t(`dashboard.dataType.requirementsIncidence`)}
-          </MenuItem>
+          {Object.keys(dataTypes).map((key) => (
+            <MenuItem key={key} value={key}>
+              {t(dataTypes[key].translation)}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </div>

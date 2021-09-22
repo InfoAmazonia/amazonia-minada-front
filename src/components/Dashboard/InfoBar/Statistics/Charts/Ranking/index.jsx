@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
 import { breakpoints } from '../../../../../../constants/constraints';
-import useOptions from '../../../../../../hooks/options';
+import useOptions from '../../../../../../hooks/useOptions';
 import CustomTooltip from '../../../../../CustomTooltip';
 import useStyles from '../styles';
 
