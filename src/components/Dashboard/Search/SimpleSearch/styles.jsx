@@ -29,6 +29,7 @@ const useStyles = createUseStyles((theme) => ({
     '& .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child':
       {
         paddingLeft: 15,
+        paddingRight: 95,
         width: '100%',
       },
   },
