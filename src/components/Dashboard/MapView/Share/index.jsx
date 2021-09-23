@@ -27,7 +27,7 @@ export default function Share() {
   const [copied, setCopied] = useState(false);
 
   const {
-    values: { ucVisibility, tiVisibility, dataType },
+    values: { ucVisibility, tiVisibility, dataType, searchValue },
   } = useContext(FilteringContext);
 
   const url = useMemo(() => {
@@ -57,12 +57,19 @@ export default function Share() {
       query += `dataType=${dataType}`;
     }
 
+    if (Object.keys(searchValue).length > 0) {
+      trySeparator();
+      const searchValueParams = JSON.stringify(searchValue);
+      const searchValueEncoded = encodeURI(searchValueParams);
+      query += `search=${searchValueEncoded}`;
+    }
+
     if (query.length === initialSize) {
       return window.location.origin;
     }
 
     return window.location.origin + query;
-  }, [ucVisibility, tiVisibility, dataType]);
+  }, [ucVisibility, tiVisibility, dataType, searchValue]);
 
   /**
    * This function handles the share dialog opening.

@@ -23,6 +23,12 @@ import useStyles from './styles';
  * This component works as the simple search autocomplete.
  */
 export default function SimpleSearch() {
+  const {
+    values: { searchValue },
+    setters: { setSearchValue },
+    loaders: { paramsLoaded },
+  } = useContext(FilteringContext);
+
   const theme = useTheme();
   const classes = useStyles({ theme });
   const { t } = useTranslation();
@@ -33,9 +39,18 @@ export default function SimpleSearch() {
   const [loading, setLoading] = useState(false);
   const inputRef = useRef();
   const autocompleteRef = useRef();
-  const {
-    setters: { setSearchValue },
-  } = useContext(FilteringContext);
+
+  /**
+   * This useEffect loads the search value with the route params.
+   */
+  useEffect(() => {
+    const searchValueKeys = Object.keys(searchValue);
+
+    if (Object.keys(searchValue).length > 0) {
+      const firstKey = searchValueKeys[0];
+      setValue({ type: firstKey, value: searchValue[firstKey][0] });
+    }
+  }, [paramsLoaded]);
 
   /**
    * This usEffect does the search.

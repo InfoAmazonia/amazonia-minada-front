@@ -22,7 +22,8 @@ export function FilteringProvider({ children }) {
   const [tiVisibility, setTiVisibility] = useState(filterDefaults.tiVisibility);
   const [dataType, setDataType] = useState(filterDefaults.dataType);
   const [searchValue, setSearchValue] = useState(filterDefaults.searchValue);
-  console.log(Object.keys(searchValue));
+  const [paramsLoaded, setParamsLoaded] = useState(false);
+
   /**
    * This function handles the UC's visibility.
    */
@@ -44,6 +45,7 @@ export function FilteringProvider({ children }) {
     const ucParam = query.get('uc');
     const tiParam = query.get('ti');
     const dataTypeParam = query.get('dataType');
+    const searchParam = query.get('search');
 
     /**
      * Loads the uc's visibility.
@@ -65,6 +67,17 @@ export function FilteringProvider({ children }) {
     if (dataTypeParam && dataTypes[dataTypeParam]) {
       setDataType(dataTypeParam);
     }
+
+    /**
+     * Loads the search params.
+     */
+    if (searchParam) {
+      const decodedURI = decodeURI(searchParam);
+      const queryObject = JSON.parse(decodedURI);
+      setSearchValue(queryObject);
+    }
+
+    setParamsLoaded(true);
   }, []);
 
   return (
@@ -85,6 +98,9 @@ export function FilteringProvider({ children }) {
         functions: {
           handleUcVisibility,
           handleTiVisibility,
+        },
+        loaders: {
+          paramsLoaded,
         },
       }}
     >
