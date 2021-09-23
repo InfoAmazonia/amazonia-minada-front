@@ -80,6 +80,9 @@ export function FilteringProvider({ children }) {
     setParamsLoaded(true);
   }, []);
 
+  /**
+   * This useEffect puts the current states into the route.
+   */
   useEffect(() => {
     if (paramsLoaded) {
       let newQuery = '/filter?';

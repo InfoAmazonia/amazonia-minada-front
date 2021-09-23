@@ -61,6 +61,7 @@ export default function SimpleSearch() {
     // The search will work only if the input value has a length bigger than 0 characters.
     if (inputValue.length > 0 && inputValue.trim().length > 0) {
       setLoading(true);
+
       api.get(`search/${inputValue}`).then(({ data }) => {
         if (subscribed) {
           setLoading(false);
