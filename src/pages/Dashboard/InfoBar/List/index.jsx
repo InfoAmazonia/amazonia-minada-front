@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import GetAppIcon from '@mui/icons-material/GetApp';
-import { Button, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
@@ -26,7 +26,9 @@ export default function List({ tabPanelRef }) {
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
   const [isBottom, setIsBottom] = useState(false);
-
+  const [isLoadingPage, setIsLoadingPage] = useState(false);
+  const [isLoadingFirst, setIsLoadingFirst] = useState(false);
+  const [isDownloadingCSV, setIsDownloadingCSV] = useState(false);
   /**
    * This userEffect check if the bottom is reached by scroll bar.
    */
@@ -55,6 +57,7 @@ export default function List({ tabPanelRef }) {
     let isSubscribed = true;
     const nextPage = page + 1;
     if (isBottom && nextPage <= maxPage) {
+      setIsLoadingPage(true);
       api
         .post(
           `/invasions`,
@@ -68,6 +71,7 @@ export default function List({ tabPanelRef }) {
         .then(({ data }) => {
           if (isSubscribed) {
             setContentList(contentList.concat(data.values));
+            setIsLoadingPage(false);
             setPage(nextPage);
           }
         });
@@ -82,6 +86,8 @@ export default function List({ tabPanelRef }) {
    */
   useEffect(() => {
     let isSubscribed = true;
+    setIsLoadingFirst(true);
+    setContentList([]);
     api
       .post(
         `/invasions`,
@@ -98,6 +104,7 @@ export default function List({ tabPanelRef }) {
           setMaxPage(data.pages);
           tabPanelRef.current.scrollTo(0, 0);
           setContentList(data.values);
+          setIsLoadingFirst(false);
           setPage(1);
         }
       });
@@ -111,6 +118,7 @@ export default function List({ tabPanelRef }) {
    * This function fetches CSV file from server to download.
    */
   const handleDownloadCSV = () => {
+    setIsDownloadingCSV(true);
     api
       .post(
         `/invasions`,
@@ -128,13 +136,14 @@ export default function List({ tabPanelRef }) {
         );
         linkCSV.setAttribute('download', 'requirements_list.csv');
         linkCSV.click();
+        setIsDownloadingCSV(false);
       });
   };
 
   return useMemo(
     () => (
       <div className={classes.wrapperList}>
-        {contentList && (
+        {contentList && !isLoadingFirst && (
           <>
             <div className={classes.listHeader}>
               <Typography
@@ -146,7 +155,13 @@ export default function List({ tabPanelRef }) {
               </Typography>
               <Button
                 onClick={() => handleDownloadCSV()}
-                startIcon={<GetAppIcon />}
+                startIcon={
+                  isDownloadingCSV ? (
+                    <CircularProgress size={15} />
+                  ) : (
+                    <GetAppIcon />
+                  )
+                }
                 disabled={!(resultsAmount > 0)}
               >
                 <Typography
@@ -165,8 +180,32 @@ export default function List({ tabPanelRef }) {
             ))}
           </>
         )}
+        <div className={classes.listFooter}>
+          <CircularProgress
+            style={{
+              display: isLoadingPage || isLoadingFirst ? 'inline' : 'none',
+            }}
+            size={20}
+          />
+          <Typography
+            style={{
+              display: page === maxPage && !isLoadingFirst ? 'inline' : 'none',
+              color: theme.text.secondary,
+            }}
+            variant="caption"
+          >
+            {t(`dashboard.infoPanel.list.footer.noMoreResults`)}
+          </Typography>
+        </div>
       </div>
     ),
-    [contentList]
+    [
+      contentList,
+      isDownloadingCSV,
+      isLoadingFirst,
+      isLoadingPage,
+      page,
+      maxPage,
+    ]
   );
 }
