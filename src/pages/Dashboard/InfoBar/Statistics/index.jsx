@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
@@ -190,15 +189,19 @@ export default function Statistics() {
     }
   }, [statisticsData, dataType]);
 
+  /**
+   * This userEffect fetch state ranking data.
+   */
   useEffect(() => {
     let isSubscribed = true;
-
     api
-      .get(`/invasions/ranking/state/${dataType}`, {
-        params: {
-          page: stateRankingPage,
+      .post(
+        `/invasions/ranking/state/${dataType}`,
+        {
+          filters: searchValue,
         },
-      })
+        { params: { page: stateRankingPage } }
+      )
       .then(({ data }) => {
         if (isSubscribed) {
           setStateRankingTotalPages(data.pageAmount);
@@ -217,17 +220,21 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [dataType, stateRankingPage]);
+  }, [searchValue, dataType, stateRankingPage]);
 
+  /**
+   * This userEffect fetch indigenous land ranking data.
+   */
   useEffect(() => {
     let isSubscribed = true;
-
     api
-      .get(`/invasions/ranking/reserve/${dataType}`, {
-        params: {
-          page: indigenousLandRankingPage,
+      .post(
+        `/invasions/ranking/reserve/${dataType}`,
+        {
+          filters: searchValue,
         },
-      })
+        { params: { page: indigenousLandRankingPage } }
+      )
       .then(({ data }) => {
         if (isSubscribed) {
           setIndigenousLandRankingTotalPages(data.pageAmount);
@@ -246,17 +253,21 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [dataType, indigenousLandRankingPage]);
+  }, [searchValue, dataType, indigenousLandRankingPage]);
 
+  /**
+   * This userEffect fetch protected area ranking data.
+   */
   useEffect(() => {
     let isSubscribed = true;
-
     api
-      .get(`/invasions/ranking/unity/${dataType}`, {
-        params: {
-          page: protectedAreaRankingPage,
+      .post(
+        `/invasions/ranking/unity/${dataType}`,
+        {
+          filters: searchValue,
         },
-      })
+        { params: { page: protectedAreaRankingPage } }
+      )
       .then(({ data }) => {
         if (isSubscribed) {
           setProtectedAreaRankingTotalPages(data.pageAmount);
@@ -275,17 +286,21 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [dataType, protectedAreaRankingPage]);
+  }, [searchValue, dataType, protectedAreaRankingPage]);
 
+  /**
+   * This userEffect fetch company ranking data.
+   */
   useEffect(() => {
     let isSubscribed = true;
-
     api
-      .get(`/invasions/ranking/company/${dataType}`, {
-        params: {
-          page: companyRankingPage,
+      .post(
+        `/invasions/ranking/company/${dataType}`,
+        {
+          filters: searchValue,
         },
-      })
+        { params: { page: companyRankingPage } }
+      )
       .then(({ data }) => {
         if (isSubscribed) {
           setCompanyRankingTotalPages(data.pageAmount);
@@ -304,7 +319,7 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [dataType, companyRankingPage]);
+  }, [searchValue, dataType, companyRankingPage]);
 
   return useMemo(
     () => (
