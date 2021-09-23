@@ -43,7 +43,10 @@ export default function RequirementListItem({ data }) {
 
       <div className={classes.infos}>
         <div className={classes.infoItem}>
-          <Typography style={{ color: theme.text.secondary }} variant="caption">
+          <Typography
+            style={{ color: theme.text.secondary, fontSize: 11 }}
+            variant="caption"
+          >
             {t(`dashboard.infoPanel.list.item.process`)}
           </Typography>
           <Typography style={{ color: theme.text.primary }} variant="body1">
@@ -52,7 +55,10 @@ export default function RequirementListItem({ data }) {
         </div>
 
         <div className={classes.infoItem}>
-          <Typography style={{ color: theme.text.secondary }} variant="caption">
+          <Typography
+            style={{ color: theme.text.secondary, fontSize: 11 }}
+            variant="caption"
+          >
             {t(`dashboard.infoPanel.list.item.year`)}
           </Typography>
           <Typography style={{ color: theme.text.primary }} variant="body1">
@@ -61,7 +67,10 @@ export default function RequirementListItem({ data }) {
         </div>
 
         <div className={classes.infoItem}>
-          <Typography style={{ color: theme.text.secondary }} variant="caption">
+          <Typography
+            style={{ color: theme.text.secondary, fontSize: 11 }}
+            variant="caption"
+          >
             {t(`dashboard.infoPanel.list.item.area`)}
           </Typography>
           <Typography style={{ color: theme.text.primary }} variant="body1">
@@ -70,7 +79,10 @@ export default function RequirementListItem({ data }) {
         </div>
 
         <div className={classes.infoItem}>
-          <Typography style={{ color: theme.text.secondary }} variant="caption">
+          <Typography
+            style={{ color: theme.text.secondary, fontSize: 11 }}
+            variant="caption"
+          >
             {t(`dashboard.infoPanel.list.item.type`)}
           </Typography>
           <Typography style={{ color: theme.text.primary }} variant="body1">
@@ -79,7 +91,10 @@ export default function RequirementListItem({ data }) {
         </div>
 
         <div className={classes.infoItem}>
-          <Typography style={{ color: theme.text.secondary }} variant="caption">
+          <Typography
+            style={{ color: theme.text.secondary, fontSize: 11 }}
+            variant="caption"
+          >
             {t(`dashboard.infoPanel.list.item.state`)}
           </Typography>
           <Typography style={{ color: theme.text.primary }} variant="body1">
@@ -88,7 +103,10 @@ export default function RequirementListItem({ data }) {
         </div>
 
         <div className={classes.infoItem}>
-          <Typography style={{ color: theme.text.secondary }} variant="caption">
+          <Typography
+            style={{ color: theme.text.secondary, fontSize: 11 }}
+            variant="caption"
+          >
             {t(`dashboard.infoPanel.list.item.substance`)}
           </Typography>
           <Typography style={{ color: theme.text.primary }} variant="body1">
@@ -98,7 +116,10 @@ export default function RequirementListItem({ data }) {
       </div>
 
       <div style={{ marginBottom: 10 }}>
-        <Typography style={{ color: theme.text.secondary }} variant="caption">
+        <Typography
+          style={{ color: theme.text.secondary, fontSize: 11 }}
+          variant="caption"
+        >
           {t(`dashboard.infoPanel.list.item.territory`)}
         </Typography>
         <Typography style={{ color: theme.text.primary }} variant="body1">

@@ -35,7 +35,7 @@ export default function GeneralStatistics({ statistics }) {
               {item.data}
             </Typography>
             <Typography
-              style={{ color: theme.text.tertiary }}
+              style={{ color: theme.text.tertiary, fontSize: 11 }}
               variant="caption"
             >
               {item.title}

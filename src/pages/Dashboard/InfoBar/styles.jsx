@@ -33,7 +33,7 @@ const useStyles = createUseStyles((theme) => ({
   },
   wrapperStatistics: {
     '& > *:last-child': {
-      marginBottom: 10,
+      marginBottom: 20,
     },
   },
   listHeader: {
@@ -41,6 +41,11 @@ const useStyles = createUseStyles((theme) => ({
     flexFlow: 'row wrap',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  listFooter: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '5px 0px 5px 0px',
   },
   tab: {
     position: 'relative',

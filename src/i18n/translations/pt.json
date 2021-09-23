@@ -104,6 +104,9 @@
           "state": "Estado",
           "substance": "Substância",
           "territory": "Território"
+        },
+        "footer": {
+          "noMoreResults": "Não há mais requerimentos a serem exibidos"
         }
       }
     },
