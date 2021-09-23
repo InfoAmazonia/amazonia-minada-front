@@ -22,12 +22,11 @@ export function FilteringProvider({ children }) {
   const [tiVisibility, setTiVisibility] = useState(filterDefaults.tiVisibility);
   const [dataType, setDataType] = useState(filterDefaults.dataType);
   const [searchValue, setSearchValue] = useState(filterDefaults.searchValue);
-
+  console.log(Object.keys(searchValue));
   /**
    * This function handles the UC's visibility.
    */
   function handleUcVisibility(newValue) {
-    // Commented logic: If the TI's visibility is currently setted to off, it's not possible to set off the UC's visibility.
     setUcVisibility(newValue);
   }
 
@@ -35,7 +34,6 @@ export function FilteringProvider({ children }) {
    * This function handles the TI's visibility.
    */
   function handleTiVisibility(newValue) {
-    // Commented logic: If the UC's visibility is currently setted to off, it's not possible to set off the TI's visibility.
     setTiVisibility(newValue);
   }
 

@@ -27,7 +27,7 @@ export default function Share() {
   const [copied, setCopied] = useState(false);
 
   const {
-    values: { ucVisibility, itVisibility, dataType },
+    values: { ucVisibility, tiVisibility, dataType },
   } = useContext(FilteringContext);
 
   const url = useMemo(() => {
@@ -47,9 +47,9 @@ export default function Share() {
       query += `uc=${ucVisibility}`;
     }
 
-    if (itVisibility !== filterDefaults.itVisibility) {
+    if (tiVisibility !== filterDefaults.tiVisibility) {
       trySeparator();
-      query += `it=${itVisibility}`;
+      query += `ti=${tiVisibility}`;
     }
 
     if (dataType !== filterDefaults.dataType) {
@@ -57,8 +57,12 @@ export default function Share() {
       query += `dataType=${dataType}`;
     }
 
+    if (query.length === initialSize) {
+      return window.location.origin;
+    }
+
     return window.location.origin + query;
-  }, [ucVisibility, itVisibility, dataType]);
+  }, [ucVisibility, tiVisibility, dataType]);
 
   /**
    * This function handles the share dialog opening.

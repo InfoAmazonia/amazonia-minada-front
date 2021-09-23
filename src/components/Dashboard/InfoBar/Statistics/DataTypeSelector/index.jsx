@@ -7,6 +7,9 @@ import { dataTypes } from '../../../../../constants/options';
 import FilteringContext from '../../../../../contexts/filtering';
 import useStyles from './styles';
 
+/**
+ * This component create a selector that is able to select which data type the application will show.
+ */
 export default function DataTypeSelector() {
   const theme = useTheme();
   const classes = useStyles({ theme });
