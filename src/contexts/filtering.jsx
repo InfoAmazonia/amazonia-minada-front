@@ -17,12 +17,12 @@ export function FilteringProvider({ children }) {
     ]).isRequired,
   };
 
-  const query = useQuery();
   const [ucVisibility, setUcVisibility] = useState(filterDefaults.ucVisibility);
   const [tiVisibility, setTiVisibility] = useState(filterDefaults.tiVisibility);
   const [dataType, setDataType] = useState(filterDefaults.dataType);
   const [searchValue, setSearchValue] = useState(filterDefaults.searchValue);
   const [paramsLoaded, setParamsLoaded] = useState(false);
+  const query = useQuery();
 
   /**
    * This function handles the UC's visibility.
@@ -79,6 +79,49 @@ export function FilteringProvider({ children }) {
 
     setParamsLoaded(true);
   }, []);
+
+  useEffect(() => {
+    if (paramsLoaded) {
+      let newQuery = '/filter?';
+      const initialSize = newQuery.length;
+
+      /**
+       * This function verifies if there is a need to add a separator between the query params.
+       */
+      const trySeparator = () => {
+        if (newQuery.length > initialSize) {
+          newQuery += '&';
+        }
+      };
+
+      if (ucVisibility !== filterDefaults.ucVisibility) {
+        newQuery += `uc=${ucVisibility}`;
+      }
+
+      if (tiVisibility !== filterDefaults.tiVisibility) {
+        trySeparator();
+        newQuery += `ti=${tiVisibility}`;
+      }
+
+      if (dataType !== filterDefaults.dataType) {
+        trySeparator();
+        newQuery += `dataType=${dataType}`;
+      }
+
+      if (Object.keys(searchValue).length > 0) {
+        trySeparator();
+        const searchValueParams = JSON.stringify(searchValue);
+        const searchValueEncoded = encodeURI(searchValueParams);
+        newQuery += `search=${searchValueEncoded}`;
+      }
+
+      if (newQuery.length === initialSize) {
+        window.history.replaceState(null, '', '/');
+      } else {
+        window.history.replaceState(null, '', newQuery);
+      }
+    }
+  }, [ucVisibility, tiVisibility, dataType, searchValue]);
 
   return (
     <FilteringContext.Provider

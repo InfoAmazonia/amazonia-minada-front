@@ -44,10 +44,13 @@ export default function List({ tabPanelRef }) {
       }
     };
 
-    tabPanelRef.current.addEventListener('scroll', handleScroll);
+    const tabPanel = tabPanelRef.current;
 
-    return () =>
-      tabPanelRef.current.removeEventListener('scroll', handleScroll);
+    if (tabPanel) tabPanel.addEventListener('scroll', handleScroll);
+
+    return () => {
+      if (tabPanel) tabPanel.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   /**
