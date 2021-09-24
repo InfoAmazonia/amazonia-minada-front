@@ -94,7 +94,10 @@
         "title": "Listagem",
         "header": {
           "results": "resultados encontrados",
-          "downloadCSV": "Baixar CSV"
+          "downloadCSV": "Baixar CSV",
+          "noResults": "Nenhum requerimento foi encontrado para sua busca.",
+          "clearSearch": "Limpe sua pesquisa",
+          "clickingHere": "clicando aqui!"
         },
         "item": {
           "process": "Processo",

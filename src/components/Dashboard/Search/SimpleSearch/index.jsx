@@ -114,6 +114,16 @@ export default function SimpleSearch() {
     }
   }, [value]);
 
+  /**
+   * This useEffect clean the value when searchValue is empty.
+   */
+  useEffect(() => {
+    if (Object.keys(searchValue).length === 0) {
+      setInputValue('');
+      setValue(null);
+    }
+  }, [searchValue]);
+
   return (
     <div className={classes.container}>
       <Autocomplete
