@@ -8,6 +8,7 @@ import React, {
 } from 'react';
 
 import { mapDefaults } from '../constants/options';
+import api from '../services/api';
 import FilteringContext from './filtering';
 
 const MapContext = createContext({});
@@ -27,7 +28,7 @@ export function MapProvider({ children }) {
   const [viewport, setViewport] = useState({ ...mapDefaults.viewport });
   const [mapLoaded, setMapLoaded] = useState(false);
   const {
-    values: { ucVisibility, tiVisibility },
+    values: { ucVisibility, tiVisibility, searchValue },
   } = useContext(FilteringContext);
 
   /**
@@ -39,30 +40,28 @@ export function MapProvider({ children }) {
 
     if (visibility) {
       map.setPaintProperty(
-        'am-minada-requerimentos_UCs_fill',
-        'fill-opacity',
-        0.7
-      );
-      map.setPaintProperty(
-        'am-minada-requerimentos_UCs_line',
-        'line-opacity',
-        0.9
+        'ucs-integral-amzlegal-centroi-avgeyq',
+        'text-opacity',
+        1
       );
       map.setPaintProperty('amzminada_ucs', 'fill-opacity', 0.17);
       map.setPaintProperty('amzminada_ucs_line', 'line-opacity', 0.9);
+
+      if (map.getLayer('unity-requeriments-layer')) {
+        map.setPaintProperty('unity-requeriments-layer', 'fill-opacity', 0.7);
+      }
     } else {
       map.setPaintProperty(
-        'am-minada-requerimentos_UCs_fill',
-        'fill-opacity',
-        0
-      );
-      map.setPaintProperty(
-        'am-minada-requerimentos_UCs_line',
-        'line-opacity',
+        'ucs-integral-amzlegal-centroi-avgeyq',
+        'text-opacity',
         0
       );
       map.setPaintProperty('amzminada_ucs', 'fill-opacity', 0);
       map.setPaintProperty('amzminada_ucs_line', 'line-opacity', 0);
+
+      if (map.getLayer('unity-requeriments-layer')) {
+        map.setPaintProperty('unity-requeriments-layer', 'fill-opacity', 0);
+      }
     }
   }
 
@@ -75,14 +74,9 @@ export function MapProvider({ children }) {
 
     if (visibility) {
       map.setPaintProperty(
-        'am-minada-requerimentos-TI_fill',
-        'fill-opacity',
-        0.7
-      );
-      map.setPaintProperty(
-        'am-minada-requerimentos-TI_line',
-        'line-opacity',
-        0.9
+        'terras-indigenas-centroides-6hg7p6',
+        'text-opacity',
+        1
       );
       map.setPaintProperty('am-minada-terras-indigenas', 'fill-opacity', 0.17);
       map.setPaintProperty(
@@ -90,15 +84,14 @@ export function MapProvider({ children }) {
         'line-opacity',
         0.9
       );
+
+      if (map.getLayer('reserve-requeriments-layer')) {
+        map.setPaintProperty('reserve-requeriments-layer', 'fill-opacity', 0.7);
+      }
     } else {
       map.setPaintProperty(
-        'am-minada-requerimentos-TI_fill',
-        'fill-opacity',
-        0
-      );
-      map.setPaintProperty(
-        'am-minada-requerimentos-TI_line',
-        'line-opacity',
+        'terras-indigenas-centroides-6hg7p6',
+        'text-opacity',
         0
       );
       map.setPaintProperty('am-minada-terras-indigenas', 'fill-opacity', 0);
@@ -107,6 +100,10 @@ export function MapProvider({ children }) {
         'line-opacity',
         0
       );
+
+      if (map.getLayer('reserve-requeriments-layer')) {
+        map.setPaintProperty('reserve-requeriments-layer', 'fill-opacity', 0);
+      }
     }
   }
 
@@ -119,6 +116,77 @@ export function MapProvider({ children }) {
       handleTiVisibility(tiVisibility);
     }
   }, [ucVisibility, tiVisibility, mapLoaded]);
+
+  /**
+   * Update the map items visibility.
+   */
+  useEffect(() => {
+    let isSubscribed = true;
+
+    if (mapLoaded) {
+      api
+        .post('invasions/shape', {
+          filters: searchValue,
+          enableUnity: true,
+          enableReserve: true,
+        })
+        .then(({ data: { reserve, unity } }) => {
+          if (isSubscribed) {
+            const map = mapRef.current.getMap();
+
+            if (map.getLayer('reserve-requeriments-layer')) {
+              map.removeLayer('reserve-requeriments-layer');
+            }
+
+            if (map.getSource('reserve-requeriments-source')) {
+              map.removeSource('reserve-requeriments-source');
+            }
+
+            map.addSource('reserve-requeriments-source', {
+              type: 'geojson',
+              data: reserve,
+            });
+
+            map.addLayer({
+              id: 'reserve-requeriments-layer',
+              source: 'reserve-requeriments-source',
+              type: 'fill',
+              paint: {
+                'fill-color': 'red',
+                'fill-opacity': tiVisibility ? 0.7 : 0,
+              },
+            });
+
+            if (map.getLayer('unity-requeriments-layer')) {
+              map.removeLayer('unity-requeriments-layer');
+            }
+
+            if (map.getSource('unity-requeriments-source')) {
+              map.removeSource('unity-requeriments-source');
+            }
+
+            map.addSource('unity-requeriments-source', {
+              type: 'geojson',
+              data: unity,
+            });
+
+            map.addLayer({
+              id: 'unity-requeriments-layer',
+              source: 'unity-requeriments-source',
+              type: 'fill',
+              paint: {
+                'fill-color': 'blue',
+                'fill-opacity': ucVisibility ? 0.7 : 0,
+              },
+            });
+          }
+        });
+    }
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [searchValue, mapLoaded]);
 
   /**
    * Fired when the map style is loaded.
