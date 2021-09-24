@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
 import GetAppIcon from '@mui/icons-material/GetApp';
-import { Box, Button, CircularProgress, Typography } from '@mui/material';
+import { Button, CircularProgress, Typography } from '@mui/material';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
@@ -29,6 +28,7 @@ export default function List({ tabPanelRef }) {
   const [isLoadingPage, setIsLoadingPage] = useState(false);
   const [isLoadingFirst, setIsLoadingFirst] = useState(false);
   const [isDownloadingCSV, setIsDownloadingCSV] = useState(false);
+
   /**
    * This userEffect check if the bottom is reached by scroll bar.
    */
@@ -59,7 +59,7 @@ export default function List({ tabPanelRef }) {
   useEffect(() => {
     let isSubscribed = true;
     const nextPage = page + 1;
-    if (isBottom && nextPage <= maxPage) {
+    if (!isLoadingFirst && isBottom && nextPage <= maxPage) {
       setIsLoadingPage(true);
       api
         .post(
@@ -73,7 +73,7 @@ export default function List({ tabPanelRef }) {
         )
         .then(({ data }) => {
           if (isSubscribed) {
-            setContentList(contentList.concat(data.values));
+            setContentList((prev) => prev.concat(data.values));
             setIsLoadingPage(false);
             setPage(nextPage);
           }
@@ -90,7 +90,6 @@ export default function List({ tabPanelRef }) {
   useEffect(() => {
     let isSubscribed = true;
     setIsLoadingFirst(true);
-    setContentList([]);
     api
       .post(
         `/invasions`,
