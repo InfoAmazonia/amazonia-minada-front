@@ -28,6 +28,7 @@ export function MapProvider({ children }) {
   const mapRef = useRef();
   const [viewport, setViewport] = useState({ ...mapDefaults.viewport });
   const [mapLoaded, setMapLoaded] = useState(false);
+  const [shapesLoaded, setShapesLoaded] = useState(true);
   const {
     values: { ucVisibility, tiVisibility, searchValue },
   } = useContext(FilteringContext);
@@ -256,6 +257,8 @@ export function MapProvider({ children }) {
 
     if (mapLoaded) {
       if (Object.keys(searchValue).length > 0) {
+        setShapesLoaded(false);
+
         api
           .post('invasions/shape', {
             filters: searchValue,
@@ -263,6 +266,8 @@ export function MapProvider({ children }) {
             enableReserve: true,
           })
           .then(({ data: { reserve, unity } }) => {
+            setShapesLoaded(true);
+
             if (isSubscribed) {
               const map = mapRef.current.getMap();
 
@@ -441,10 +446,12 @@ export function MapProvider({ children }) {
           mapRef,
           viewport,
           mapLoaded,
+          shapesLoaded,
         },
         setters: {
           setViewport,
           setMapLoaded,
+          setShapesLoaded,
         },
         functions: {
           handleUcVisibility,

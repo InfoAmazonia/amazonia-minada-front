@@ -47,6 +47,9 @@ export const lightScheme = {
     whatsapp: '#128c7E',
     facebook: '#3B5998',
   },
+  loader: {
+    primary: '#00acee',
+  },
 };
 
 export const darkScheme = {
@@ -94,5 +97,8 @@ export const darkScheme = {
     twitter: '#00acee',
     whatsapp: '#128c7E',
     facebook: '#3B5998',
+  },
+  loader: {
+    primary: '#00acee',
   },
 };
