@@ -66,7 +66,7 @@ export default function MapView({
         width="100%"
         height="100%"
         dragRotate={false}
-        mapStyle="mapbox://styles/geodatin/ckt8ti9n20ovc17mmgyzves4l"
+        mapStyle="mapbox://styles/infoamazonia/ckhe037kt07on1aql47yvp2rn"
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       >
