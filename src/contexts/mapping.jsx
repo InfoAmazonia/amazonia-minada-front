@@ -390,6 +390,8 @@ export function MapProvider({ children }) {
             }
           });
       } else {
+        setShapesLoaded(true);
+
         const map = mapRef.current.getMap();
 
         if (map.getLayer('reserve-requeriments-layer-fill')) {
