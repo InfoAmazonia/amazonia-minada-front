@@ -1,3 +1,4 @@
+import bbox from '@turf/bbox';
 import PropTypes from 'prop-types';
 import React, {
   createContext,
@@ -7,6 +8,7 @@ import React, {
   useState,
 } from 'react';
 import { useTheme } from 'react-jss';
+import { WebMercatorViewport } from 'react-map-gl';
 
 import { mapDefaults } from '../constants/options';
 import api from '../services/api';
@@ -72,6 +74,15 @@ export function MapProvider({ children }) {
           0.1,
         ]);
       }
+
+      if (map.getLayer('unity-requeriments-layer-line')) {
+        map.setPaintProperty('unity-requeriments-layer-line', 'line-opacity', [
+          'case',
+          ['>=', ['get', 'year'], 2019],
+          0.9,
+          0.7,
+        ]);
+      }
     } else {
       map.setPaintProperty(
         'ucs-integral-amzlegal-centroi-avgeyq',
@@ -95,6 +106,14 @@ export function MapProvider({ children }) {
         map.setPaintProperty(
           'unity-requeriments-layer-fill',
           'fill-opacity',
+          0
+        );
+      }
+
+      if (map.getLayer('unity-requeriments-layer-line')) {
+        map.setPaintProperty(
+          'unity-requeriments-layer-line',
+          'line-opacity',
           0
         );
       }
@@ -142,6 +161,14 @@ export function MapProvider({ children }) {
           ['case', ['>=', ['get', 'year'], 2019], 0.7, 0.1]
         );
       }
+
+      if (map.getLayer('reserve-requeriments-layer-line')) {
+        map.setPaintProperty(
+          'reserve-requeriments-layer-line',
+          'line-opacity',
+          ['case', ['>=', ['get', 'year'], 2019], 0.9, 0.7]
+        );
+      }
     } else {
       map.setPaintProperty(
         'terras-indigenas-centroides-6hg7p6',
@@ -169,6 +196,14 @@ export function MapProvider({ children }) {
         map.setPaintProperty(
           'reserve-requeriments-layer-fill',
           'fill-opacity',
+          0
+        );
+      }
+
+      if (map.getLayer('reserve-requeriments-layer-line')) {
+        map.setPaintProperty(
+          'reserve-requeriments-layer-line',
+          'line-opacity',
           0
         );
       }
@@ -248,6 +283,27 @@ export function MapProvider({ children }) {
       handleTiVisibility(tiVisibility, Object.keys(searchValue).length === 0);
     }
   }, [ucVisibility, tiVisibility, mapLoaded, searchValue]);
+
+  /**
+   * This function resets the lng e lat values according to initial values.
+   */
+  function resetLngLat() {
+    const vp = new WebMercatorViewport(viewport);
+
+    const { longitude, latitude, zoom } = vp.fitBounds(
+      [mapDefaults.bounds.southwestern, mapDefaults.bounds.northeastern],
+      {
+        padding: 0,
+      }
+    );
+
+    setViewport((vw) => ({
+      ...vw,
+      longitude,
+      latitude,
+      zoom,
+    }));
+  }
 
   /**
    * Update the map items visibility.
@@ -387,10 +443,39 @@ export function MapProvider({ children }) {
               });
 
               paintLayers(theme);
+
+              // if (reserve.features.length > 0 && unity.features.length > 0)
+              try {
+                const [minLng, minLat, maxLng, maxLat] = bbox({
+                  type: 'FeatureCollection',
+                  features: [...reserve.features, ...unity.features],
+                });
+
+                const vp = new WebMercatorViewport(viewport);
+                const { longitude, latitude, zoom } = vp.fitBounds(
+                  [
+                    [minLng, minLat],
+                    [maxLng, maxLat],
+                  ],
+                  {
+                    padding: 200,
+                  }
+                );
+
+                setViewport((vw) => ({
+                  ...vw,
+                  longitude,
+                  latitude,
+                  zoom,
+                }));
+              } catch (err) {
+                resetLngLat();
+              }
             }
           });
       } else {
         setShapesLoaded(true);
+        resetLngLat();
 
         const map = mapRef.current.getMap();
 
