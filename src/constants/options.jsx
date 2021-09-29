@@ -37,3 +37,15 @@ export const filterDefaults = {
   tiVisibility: true,
   dataType: dataTypes.requiredArea.key,
 };
+
+export const propertyTypes = {
+  state: { key: 'state' },
+  company: { key: 'company' },
+  reserve: { key: 'reserve' },
+  unit: { key: 'unit' },
+  year: { key: 'year' },
+  substance: { key: 'substance' },
+  reservePhase: { key: 'reservePhase' },
+  reserveEthnicity: { key: 'reserveEthnicity' },
+  requirementPhase: { key: 'requirementPhase' },
+};
