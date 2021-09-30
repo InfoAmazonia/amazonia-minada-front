@@ -209,7 +209,12 @@ export default function Statistics() {
         {
           filters: searchValue,
         },
-        { params: { page: stateRankingPage } }
+        {
+          params: {
+            page: stateRankingPage,
+            sortOrder: stateRankingOrder ? 'DESC' : 'ASC',
+          },
+        }
       )
       .then(({ data }) => {
         if (isSubscribed) {
@@ -229,7 +234,7 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [searchValue, dataType, stateRankingPage]);
+  }, [searchValue, dataType, stateRankingPage, stateRankingOrder]);
 
   /**
    * This userEffect fetch indigenous land ranking data.
@@ -242,7 +247,12 @@ export default function Statistics() {
         {
           filters: searchValue,
         },
-        { params: { page: indigenousLandRankingPage } }
+        {
+          params: {
+            page: indigenousLandRankingPage,
+            sortOrder: indigenousLandRankingOrder ? 'DESC' : 'ASC',
+          },
+        }
       )
       .then(({ data }) => {
         if (isSubscribed) {
@@ -262,7 +272,12 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [searchValue, dataType, indigenousLandRankingPage]);
+  }, [
+    searchValue,
+    dataType,
+    indigenousLandRankingPage,
+    indigenousLandRankingOrder,
+  ]);
 
   /**
    * This userEffect fetch protected area ranking data.
@@ -275,7 +290,12 @@ export default function Statistics() {
         {
           filters: searchValue,
         },
-        { params: { page: protectedAreaRankingPage } }
+        {
+          params: {
+            page: protectedAreaRankingPage,
+            sortOrder: protectedAreaRankingOrder ? 'DESC' : 'ASC',
+          },
+        }
       )
       .then(({ data }) => {
         if (isSubscribed) {
@@ -295,7 +315,12 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [searchValue, dataType, protectedAreaRankingPage]);
+  }, [
+    searchValue,
+    dataType,
+    protectedAreaRankingPage,
+    protectedAreaRankingOrder,
+  ]);
 
   /**
    * This userEffect fetch company ranking data.
@@ -308,7 +333,12 @@ export default function Statistics() {
         {
           filters: searchValue,
         },
-        { params: { page: companyRankingPage } }
+        {
+          params: {
+            page: companyRankingPage,
+            sortOrder: companyRankingOrder ? 'DESC' : 'ASC',
+          },
+        }
       )
       .then(({ data }) => {
         if (isSubscribed) {
@@ -328,10 +358,10 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [searchValue, dataType, companyRankingPage]);
+  }, [searchValue, dataType, companyRankingPage, companyRankingOrder]);
 
   /**
-   * This userEffect fetch company ranking data.
+   * This userEffect fetch ethnicity ranking data.
    */
   useEffect(() => {
     let isSubscribed = true;
@@ -341,7 +371,12 @@ export default function Statistics() {
         {
           filters: searchValue,
         },
-        { params: { page: ethnicityRankingPage } }
+        {
+          params: {
+            page: ethnicityRankingPage,
+            sortOrder: ethnicityRankingOrder ? 'DESC' : 'ASC',
+          },
+        }
       )
       .then(({ data }) => {
         if (isSubscribed) {
@@ -361,7 +396,7 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [searchValue, dataType, ethnicityRankingPage]);
+  }, [searchValue, dataType, ethnicityRankingPage, ethnicityRankingOrder]);
 
   return useMemo(
     () => (
