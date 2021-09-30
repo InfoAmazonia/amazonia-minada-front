@@ -299,6 +299,7 @@ export function MapProvider({ children }) {
 
     setViewport((vw) => ({
       ...vw,
+      ...mapDefaults.transition,
       longitude,
       latitude,
       zoom,
@@ -464,6 +465,7 @@ export function MapProvider({ children }) {
 
                 setViewport((vw) => ({
                   ...vw,
+                  ...mapDefaults.transition,
                   longitude,
                   latitude,
                   zoom,
