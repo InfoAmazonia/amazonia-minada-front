@@ -54,6 +54,12 @@ const useStyles = createUseStyles(() => ({
     right: 15,
     zIndex: 10,
 
+    '& > *': {
+      marginBottom: 10,
+    },
+    '& div:last-child': {
+      marginBottom: 0,
+    },
     [breakpoints.max.md]: {
       display: 'none',
     },

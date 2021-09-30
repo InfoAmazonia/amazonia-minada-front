@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter, Redirect, Switch, Route } from 'react-router-dom';
 
 import Dashboard from './pages/Dashboard';
+import Embed from './pages/Embed';
 
 function FilteringRoute({ path, ...rest }) {
   FilteringRoute.propTypes = {
@@ -27,7 +28,7 @@ function Routes() {
       <Switch>
         <Route exact path="/" component={Dashboard} />
         <FilteringRoute exact path="/filter" component={Dashboard} />
-        <FilteringRoute exact path="/embed" component={Dashboard} />
+        <FilteringRoute exact path="/embed" component={Embed} />
         <Redirect from="*" to="/" />
       </Switch>
     </BrowserRouter>

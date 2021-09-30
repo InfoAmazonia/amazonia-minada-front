@@ -1,6 +1,7 @@
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { Button, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
@@ -9,11 +10,26 @@ import useStyles from './styles';
 /**
  * This component encapsulates the map's legend.
  */
-export default function Legend() {
+export default function Legend({ defaultOpen }) {
+  Legend.defaultProps = {
+    defaultOpen: false,
+  };
+
+  Legend.propTypes = {
+    defaultOpen: PropTypes.bool,
+  };
+
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(defaultOpen);
   const { t } = useTranslation();
   const theme = useTheme();
+
+  /**
+   * Sets the open state to defaultOpen;
+   */
+  useEffect(() => {
+    setOpen(defaultOpen);
+  }, [defaultOpen]);
 
   return (
     <div className={classes.container}>

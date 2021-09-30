@@ -109,7 +109,7 @@ export function FilteringProvider({ children }) {
    */
   useEffect(() => {
     if (paramsLoaded) {
-      let newQuery = '/filter?';
+      let newQuery = `${window.location.pathname}?`;
       const initialSize = newQuery.length;
 
       /**

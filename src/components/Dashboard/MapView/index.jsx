@@ -1,8 +1,11 @@
+import { useMediaQuery } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { useTheme } from 'react-jss';
 import MapGL from 'react-map-gl';
 
+import { breakpoints } from '../../../constants/constraints';
+import { embedDefaults } from '../../../constants/options';
 import MapContext from '../../../contexts/mapping';
 import Geodatin from './Geodatin';
 import Legend from './Legend';
@@ -18,19 +21,31 @@ import Zoom from './Zoom';
  */
 export default function MapView({
   northEnabled,
-  zoomButtonsEnabled,
+  zoomEnabled,
+  navigationEnabled,
   visibilityButtonsEnabled,
+  shareButtonEnabled,
+  legendOpenByDefault,
+  legendEnabled,
 }) {
   MapView.defaultProps = {
-    northEnabled: true,
-    zoomButtonsEnabled: true,
-    visibilityButtonsEnabled: true,
+    northEnabled: embedDefaults.northEnabled,
+    zoomEnabled: embedDefaults.zoomEnabled,
+    visibilityButtonsEnabled: embedDefaults.visibilityButtonsEnabled,
+    navigationEnabled: embedDefaults.navigationEnabled,
+    shareButtonEnabled: embedDefaults.shareButtonEnabled,
+    legendOpenByDefault: embedDefaults.legendOpenByDefault,
+    legendEnabled: embedDefaults.legendEnabled,
   };
 
   MapView.propTypes = {
     northEnabled: PropTypes.bool,
-    zoomButtonsEnabled: PropTypes.bool,
+    zoomEnabled: PropTypes.bool,
     visibilityButtonsEnabled: PropTypes.bool,
+    navigationEnabled: PropTypes.bool,
+    shareButtonEnabled: PropTypes.bool,
+    legendOpenByDefault: PropTypes.bool,
+    legendEnabled: PropTypes.bool,
   };
 
   const theme = useTheme();
@@ -40,23 +55,34 @@ export default function MapView({
     setters: { setViewport, setMapLoaded },
     functions: { onMapLoad },
   } = useContext(MapContext);
+  const isMd = useMediaQuery(breakpoints.max.md);
 
   return (
     <div className={classes.wrapper}>
       <Loader loading={!shapesLoaded} />
       <div className={classes.navigation}>
-        {northEnabled && <North />}
-        {zoomButtonsEnabled && <Zoom />}
+        {(legendEnabled || isMd) && (
+          <>
+            {northEnabled && <North />}
+            {zoomEnabled && <Zoom />}
+          </>
+        )}
         <div className={classes.legendContainerContained}>
-          <Legend />
+          {legendEnabled && <Legend defaultOpen={legendOpenByDefault} />}
         </div>
       </div>
       <div className={classes.options}>
         {visibilityButtonsEnabled && <Visibility />}
-        <Share />
+        {shareButtonEnabled && <Share />}
       </div>
       <div className={classes.legendContainerExpanded}>
-        <Legend />
+        {!legendEnabled && (
+          <>
+            {northEnabled && <North />}
+            {zoomEnabled && <Zoom />}
+          </>
+        )}
+        {legendEnabled && <Legend defaultOpen={legendOpenByDefault} />}
       </div>
       <MapGL
         {...viewport}
@@ -64,6 +90,10 @@ export default function MapView({
           onMapLoad();
           setMapLoaded(true);
         }}
+        doubleClickZoom={zoomEnabled}
+        touchZoom={zoomEnabled}
+        scrollZoom={zoomEnabled}
+        dragPan={navigationEnabled}
         ref={mapRef}
         width="100%"
         height="100%"

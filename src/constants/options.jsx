@@ -25,6 +25,18 @@ export const mapDefaults = {
   },
 };
 
+export const embedDefaults = {
+  northEnabled: true,
+  zoomEnabled: true,
+  visibilityButtonsEnabled: true,
+  navigationEnabled: true,
+  shareButtonEnabled: true,
+  legendOpenByDefault: false,
+  legendEnabled: true,
+  panelEnabled: true,
+  searchEnabled: true,
+};
+
 export const dataTypes = {
   requiredArea: {
     key: 'requiredArea',
