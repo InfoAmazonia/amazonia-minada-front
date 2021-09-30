@@ -25,6 +25,7 @@ export function FilteringProvider({ children }) {
   );
   const [searchValue, setSearchValue] = useState(filterDefaults.searchValue);
   const [isAdvancedSearch, setIsAdvancedSearch] = useState(false);
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [paramsLoaded, setParamsLoaded] = useState(false);
   const query = useQuery();
 
@@ -160,6 +161,7 @@ export function FilteringProvider({ children }) {
           searchDataType,
           searchValue,
           isAdvancedSearch,
+          isSearchExpanded,
         },
         setters: {
           setDataType,
@@ -168,6 +170,7 @@ export function FilteringProvider({ children }) {
           setUcVisibility,
           setTiVisibility,
           setIsAdvancedSearch,
+          setIsSearchExpanded,
         },
         functions: {
           handleUcVisibility,

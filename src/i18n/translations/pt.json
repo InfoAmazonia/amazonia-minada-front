@@ -19,7 +19,7 @@
         "reserve": "Terra Indígena",
         "unity": "Unidade de Conservação",
         "substance": "Substância",
-        "ethnicity": "Etnia"
+        "reserveEthnicity": "Etnia indígena"
       },
       "searchFor": "Procurar por",
       "noOptions": "Nenhum resultado encontrado",
@@ -27,7 +27,8 @@
       "doAdvancedSearch": "Realizar filtragem avançada",
       "doSimpleSearch": "Realizar filtragem simples",
       "clearSearch": "Limpar pesquisa",
-      "minimize": "Minimizar"
+      "minimize": "Minimizar",
+      "searchInfo": "Na filtragem simples é permitido realizar a busca por um filtro único. Na filtragem avançada, é permitido realizar a busca por filtros múltiplos."
     },
     "legend": {
       "territorialTitle": "Unidades territoriais",
@@ -114,7 +115,9 @@
           "type": "Tipo de área",
           "state": "Estado",
           "substance": "Substância",
-          "territory": "Território"
+          "territory": "Território",
+          "reserveEthnicity": "Etnia",
+          "reservePhase": "Fase de homologação"
         },
         "footer": {
           "noMoreResults": "Não há mais requerimentos a serem exibidos"

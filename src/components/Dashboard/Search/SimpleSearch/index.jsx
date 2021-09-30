@@ -27,8 +27,8 @@ import useStyles from './styles';
  */
 export default function SimpleSearch() {
   const {
-    values: { searchValue, isAdvancedSearch },
-    setters: { setSearchValue, setIsAdvancedSearch },
+    values: { searchValue, isAdvancedSearch, isSearchExpanded },
+    setters: { setSearchValue, setIsAdvancedSearch, setIsSearchExpanded },
     loaders: { paramsLoaded },
   } = useContext(FilteringContext);
 
@@ -40,7 +40,6 @@ export default function SimpleSearch() {
   const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
   const inputRef = useRef();
   const autocompleteRef = useRef();
 
@@ -103,7 +102,7 @@ export default function SimpleSearch() {
       setInputValue('');
       setValue(null);
     } else {
-      setIsExpanded(!isExpanded);
+      setIsSearchExpanded(!isSearchExpanded);
     }
   }
 
@@ -136,7 +135,7 @@ export default function SimpleSearch() {
 
   return (
     <div
-      style={isExpanded ? { height: 85 } : { height: 55 }}
+      style={isSearchExpanded ? { height: 85 } : { height: 55 }}
       className={classes.container}
     >
       <Autocomplete
@@ -158,6 +157,7 @@ export default function SimpleSearch() {
         onChange={(event, newValue) => {
           setOptions(newValue ? [newValue, ...options] : options);
           setValue(newValue);
+          setIsSearchExpanded(false);
         }}
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
@@ -207,9 +207,12 @@ export default function SimpleSearch() {
       />
       <div
         className={classes.filterSwitcherWrapper}
-        style={{ opacity: isExpanded ? 1 : 0 }}
+        style={{ opacity: isSearchExpanded ? 1 : 0 }}
       >
-        <CustomTooltip title="Teste" placement="bottom">
+        <CustomTooltip
+          title={t('dashboard.search.searchInfo')}
+          placement="bottom"
+        >
           <InfoOutlined
             style={{
               color: theme.text.tertiary,

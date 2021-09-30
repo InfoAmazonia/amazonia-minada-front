@@ -61,6 +61,10 @@ export const searchDataTypes = {
     key: 'reserve',
     translation: 'dashboard.search.grouping.reserve',
   },
+  reserveEthnicity: {
+    key: 'reserveEthnicity',
+    translation: 'dashboard.search.grouping.reserveEthnicity',
+  },
   unity: {
     key: 'unity',
     translation: 'dashboard.search.grouping.unity',

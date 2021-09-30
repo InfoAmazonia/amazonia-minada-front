@@ -41,7 +41,6 @@ export default function AdvancedSearch() {
   const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(false);
-  /*   const [isExpanded, setIsExpanded] = useState(true); */
   const inputRef = useRef();
   const autocompleteRef = useRef();
   const [activeFilters, setActiveFilters] = useState([]);
@@ -288,7 +287,10 @@ export default function AdvancedSearch() {
         )}
         <div className={classes.textButtonsWrapper}>
           <div style={{ display: 'flex', flexFlow: 'row nowrap' }}>
-            <CustomTooltip title="Teste" placement="bottom">
+            <CustomTooltip
+              title={t('dashboard.search.searchInfo')}
+              placement="bottom"
+            >
               <InfoOutlined
                 style={{
                   color: theme.text.tertiary,
