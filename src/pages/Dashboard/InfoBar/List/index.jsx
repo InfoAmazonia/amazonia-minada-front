@@ -19,7 +19,7 @@ export default function List({ tabPanelRef }) {
   const { t } = useTranslation();
   const {
     values: { searchValue, tiVisibility, ucVisibility },
-    setters: { setSearchValue },
+    setters: { setSearchValue, setTiVisibility, setUcVisibility },
   } = useContext(FilteringContext);
 
   const [contentList, setContentList] = useState([]);
@@ -150,7 +150,12 @@ export default function List({ tabPanelRef }) {
    * Handle when user clicks to clear search.
    */
   const handleClearSearch = () => {
-    setSearchValue(filterDefaults.searchValue);
+    if (window.location.pathname !== '/embed') {
+      setSearchValue(filterDefaults.searchValue);
+    }
+
+    setTiVisibility(true);
+    setUcVisibility(true);
   };
 
   return useMemo(
@@ -193,17 +198,24 @@ export default function List({ tabPanelRef }) {
                   style={{ color: theme.text.secondary }}
                 >
                   {t(`dashboard.infoPanel.list.header.noResults`)}
-                  <br />
-                  {t(`dashboard.infoPanel.list.header.clearSearch`)}{' '}
-                  <span
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => handleClearSearch()}
-                    onKeyDown={() => handleClearSearch()}
-                    style={{ textDecoration: 'underline', cursor: 'pointer' }}
-                  >
-                    {t(`dashboard.infoPanel.list.header.clickingHere`)}
-                  </span>
+                  {window.location.pathname !== '/embed' && (
+                    <>
+                      <br />
+                      {t(`dashboard.infoPanel.list.header.clearSearch`)}{' '}
+                      <span
+                        role="button"
+                        tabIndex={0}
+                        onClick={() => handleClearSearch()}
+                        onKeyDown={() => handleClearSearch()}
+                        style={{
+                          textDecoration: 'underline',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        {t(`dashboard.infoPanel.list.header.clickingHere`)}
+                      </span>
+                    </>
+                  )}
                 </Typography>
               )}
             </div>

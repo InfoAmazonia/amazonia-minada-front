@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import Map from '../../../components/Dashboard/MapView';
 import EmbeddingContext from '../../../contexts/embedding';
-import InfoBar from '../InfoBar';
+import InfoBar from '../../Dashboard/InfoBar';
 import useStyles from './styles';
 
 /**
