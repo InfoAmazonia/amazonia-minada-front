@@ -27,7 +27,8 @@
       "doAdvancedSearch": "Realizar filtragem avançada",
       "doSimpleSearch": "Realizar filtragem simples",
       "clearSearch": "Limpar pesquisa",
-      "minimize": "Minimizar"
+      "minimize": "Minimizar",
+      "searchInfo": "Na filtragem simples é permitido realizar a busca por um filtro único. Na filtragem avançada, é permitido realizar a busca por filtros múltiplos."
     },
     "legend": {
       "territorialTitle": "Unidades territoriais",
