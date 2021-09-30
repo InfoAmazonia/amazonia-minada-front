@@ -1,13 +1,15 @@
 import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import { Button, Tab, Tabs, Typography, useMediaQuery } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
 import TabPanel from '../../../components/Dashboard/InfoBar/TabPanel';
+import AdvancedSearch from '../../../components/Dashboard/Search/AdvancedSearch';
 import SimpleSearch from '../../../components/Dashboard/Search/SimpleSearch';
 import { breakpoints } from '../../../constants/constraints';
+import FilteringContext from '../../../contexts/filtering';
 import List from './List';
 import Statistics from './Statistics';
 import useStyles from './styles';
@@ -19,6 +21,11 @@ export default function InfoBar() {
   const classes = useStyles();
   const { t } = useTranslation();
   const [value, setValue] = useState(0);
+
+  const {
+    values: { isAdvancedSearch },
+  } = useContext(FilteringContext);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -76,7 +83,7 @@ export default function InfoBar() {
         }
       >
         <div className={classes.searchContainer}>
-          <SimpleSearch />
+          {isAdvancedSearch ? <AdvancedSearch /> : <SimpleSearch />}
         </div>
         <div className={classes.dropBar}>
           <Typography

@@ -20,7 +20,11 @@ export function FilteringProvider({ children }) {
   const [ucVisibility, setUcVisibility] = useState(filterDefaults.ucVisibility);
   const [tiVisibility, setTiVisibility] = useState(filterDefaults.tiVisibility);
   const [dataType, setDataType] = useState(filterDefaults.dataType);
+  const [searchDataType, setSearchDataType] = useState(
+    filterDefaults.searchDataType
+  );
   const [searchValue, setSearchValue] = useState(filterDefaults.searchValue);
+  const [isAdvancedSearch, setIsAdvancedSearch] = useState(false);
   const [paramsLoaded, setParamsLoaded] = useState(false);
   const query = useQuery();
 
@@ -133,13 +137,17 @@ export function FilteringProvider({ children }) {
           ucVisibility,
           tiVisibility,
           dataType,
+          searchDataType,
           searchValue,
+          isAdvancedSearch,
         },
         setters: {
           setDataType,
+          setSearchDataType,
           setSearchValue,
           setUcVisibility,
           setTiVisibility,
+          setIsAdvancedSearch,
         },
         functions: {
           handleUcVisibility,

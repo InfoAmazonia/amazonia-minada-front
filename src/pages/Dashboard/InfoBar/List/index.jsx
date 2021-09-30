@@ -35,10 +35,10 @@ export default function List({ tabPanelRef }) {
    * This userEffect check if the bottom is reached by scroll bar.
    */
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = (component) => {
       if (
-        tabPanelRef.current.scrollHeight - tabPanelRef.current.scrollTop ===
-        tabPanelRef.current.clientHeight
+        Math.round(component.scrollHeight - component.scrollTop) <=
+        component.clientHeight
       ) {
         setIsBottom(true);
       } else {
@@ -48,10 +48,12 @@ export default function List({ tabPanelRef }) {
 
     const tabPanel = tabPanelRef.current;
 
-    if (tabPanel) tabPanel.addEventListener('scroll', handleScroll);
+    if (tabPanel)
+      tabPanel.addEventListener('scroll', () => handleScroll(tabPanel));
 
     return () => {
-      if (tabPanel) tabPanel.removeEventListener('scroll', handleScroll);
+      if (tabPanel)
+        tabPanel.removeEventListener('scroll', () => handleScroll(tabPanel));
     };
   }, []);
 

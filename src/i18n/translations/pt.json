@@ -23,7 +23,11 @@
       },
       "searchFor": "Procurar por",
       "noOptions": "Nenhum resultado encontrado",
-      "searching": "Buscando..."
+      "searching": "Buscando...",
+      "doAdvancedSearch": "Realizar filtragem avançada",
+      "doSimpleSearch": "Realizar filtragem simples",
+      "clearSearch": "Limpar pesquisa",
+      "minimize": "Minimizar"
     },
     "legend": {
       "territorialTitle": "Unidades territoriais",

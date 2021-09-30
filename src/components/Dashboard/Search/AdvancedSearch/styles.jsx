@@ -10,6 +10,7 @@ const useStyles = createUseStyles((theme) => ({
     backgroundColor: theme.background.primary,
     transition: 'height 0.3s ease',
   },
+  dataTypeFilterSelector: { maxWidth: 120 },
   autocomplete: {
     '& .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"][class*="MuiOutlinedInput-marginDense"]':
       {
@@ -29,8 +30,7 @@ const useStyles = createUseStyles((theme) => ({
     },
     '& .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child':
       {
-        paddingLeft: 15,
-        paddingRight: 95,
+        paddingRight: 40,
         width: '100%',
       },
   },
@@ -87,6 +87,7 @@ const useStyles = createUseStyles((theme) => ({
     justifyContent: 'center',
   },
   iconButton: {
+    fontSize: 5,
     '&.MuiIconButton-root': {
       color: theme.text.primary,
     },
@@ -94,7 +95,7 @@ const useStyles = createUseStyles((theme) => ({
   separator: {
     width: 1,
     height: 30,
-    margin: '0px 10px',
+    margin: '0px 0px 0px 10px',
     backgroundColor: theme.separator,
   },
   searchIcon: {
@@ -104,13 +105,43 @@ const useStyles = createUseStyles((theme) => ({
       color: theme.text.primary,
     },
   },
-  filterSwitcherWrapper: {
+  searchFooterWrapper: {
+    padding: '10px 14px 0px 20px',
+  },
+  activeFilters: {
+    display: 'flex',
+    flexFlow: 'row wrap',
+    justifyContent: 'flex-start',
+    marginBottom: 20,
+  },
+  filterIconWrapper: {
+    maxWidth: 120,
+    marginRight: 10,
+    marginTop: 10,
+    border: '0.5px solid gray',
+    borderRadius: '20px',
+  },
+  filterIcon: {
+    display: 'flex',
+    flexFlow: 'row nowrap',
+    margin: '0px 5px 0px 10px',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textButtonsWrapper: {
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
-    padding: '10px 14px 0px 20px',
+    alignItems: 'center',
   },
-  filterSwitcherButton: {
+  textButton: {
+    cursor: 'pointer',
+  },
+  minimizeButton: {
+    display: 'flex',
+    flexFlow: 'row nowrap',
+    alignItems: 'center',
+    justifyContent: 'center',
     cursor: 'pointer',
   },
 }));

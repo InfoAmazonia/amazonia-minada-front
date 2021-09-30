@@ -47,6 +47,14 @@ export const lightScheme = {
     whatsapp: '#128c7E',
     facebook: '#3B5998',
   },
+  grouping: {
+    company: '#C4B204',
+    state: '#047FC4',
+    reserve: '#C40460',
+    unity: '#00AA58',
+    substance: '#128c7E',
+    ethnicity: '#FF6846',
+  },
 };
 
 export const darkScheme = {
@@ -94,5 +102,13 @@ export const darkScheme = {
     twitter: '#00acee',
     whatsapp: '#128c7E',
     facebook: '#3B5998',
+  },
+  grouping: {
+    company: '#C4B204',
+    state: '#047FC4',
+    reserve: '#C40460',
+    unity: '#00AA58',
+    substance: '#128c7E',
+    ethnicity: '#FF6846',
   },
 };

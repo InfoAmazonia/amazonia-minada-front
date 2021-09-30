@@ -1,3 +1,4 @@
+import { InfoOutlined } from '@mui/icons-material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
@@ -6,6 +7,7 @@ import {
   ListSubheader,
   Popper,
   TextField,
+  Typography,
   useMediaQuery,
 } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -17,6 +19,7 @@ import { breakpoints } from '../../../../constants/constraints';
 import { filterDefaults } from '../../../../constants/options';
 import FilteringContext from '../../../../contexts/filtering';
 import api from '../../../../services/api';
+import CustomTooltip from '../../../CustomTooltip';
 import useStyles from './styles';
 
 /**
@@ -24,8 +27,8 @@ import useStyles from './styles';
  */
 export default function SimpleSearch() {
   const {
-    values: { searchValue },
-    setters: { setSearchValue },
+    values: { searchValue, isAdvancedSearch },
+    setters: { setSearchValue, setIsAdvancedSearch },
     loaders: { paramsLoaded },
   } = useContext(FilteringContext);
 
@@ -37,6 +40,7 @@ export default function SimpleSearch() {
   const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const inputRef = useRef();
   const autocompleteRef = useRef();
 
@@ -98,6 +102,8 @@ export default function SimpleSearch() {
       inputRef.current.blur();
       setInputValue('');
       setValue(null);
+    } else {
+      setIsExpanded(!isExpanded);
     }
   }
 
@@ -124,8 +130,15 @@ export default function SimpleSearch() {
     }
   }, [searchValue]);
 
+  const handleFilterSwitcher = () => {
+    setIsAdvancedSearch(!isAdvancedSearch);
+  };
+
   return (
-    <div className={classes.container}>
+    <div
+      style={isExpanded ? { height: 85 } : { height: 55 }}
+      className={classes.container}
+    >
       <Autocomplete
         id="search-box"
         autoHighlight
@@ -192,6 +205,35 @@ export default function SimpleSearch() {
         ]}
         groupBy={(option) => option.type}
       />
+      <div
+        className={classes.filterSwitcherWrapper}
+        style={
+          isExpanded
+            ? { opacity: 1, transition: 'opacity 0.3s ease-in' }
+            : { opacity: 0, transition: 'opacity 0.1s ease-out' }
+        }
+      >
+        <CustomTooltip title="Teste" placement="bottom">
+          <InfoOutlined
+            style={{
+              color: theme.text.tertiary,
+              fontSize: '15px',
+              cursor: 'pointer',
+            }}
+          />
+        </CustomTooltip>
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={() => handleFilterSwitcher()}
+          onKeyDown={() => handleFilterSwitcher()}
+          className={classes.filterSwitcherButton}
+        >
+          <Typography style={{ color: theme.text.tertiary }} variant="body2">
+            {t(`dashboard.search.doAdvancedSearch`)}
+          </Typography>
+        </div>
+      </div>
     </div>
   );
 }
