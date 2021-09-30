@@ -8,7 +8,6 @@ const useStyles = createUseStyles((theme) => ({
     padding: '10px 0px',
     borderRadius: 5,
     backgroundColor: theme.background.primary,
-    transition: 'height 0.3s ease',
   },
   autocomplete: {
     '& .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"][class*="MuiOutlinedInput-marginDense"]':

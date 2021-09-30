@@ -207,11 +207,7 @@ export default function SimpleSearch() {
       />
       <div
         className={classes.filterSwitcherWrapper}
-        style={
-          isExpanded
-            ? { opacity: 1, transition: 'opacity 0.3s ease-in' }
-            : { opacity: 0, transition: 'opacity 0.1s ease-out' }
-        }
+        style={{ opacity: isExpanded ? 1 : 0 }}
       >
         <CustomTooltip title="Teste" placement="bottom">
           <InfoOutlined

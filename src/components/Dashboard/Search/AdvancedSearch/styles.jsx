@@ -8,7 +8,6 @@ const useStyles = createUseStyles((theme) => ({
     padding: '10px 0px',
     borderRadius: 5,
     backgroundColor: theme.background.primary,
-    transition: 'height 0.3s ease',
   },
   dataTypeFilterSelector: { maxWidth: 120 },
   autocomplete: {
@@ -107,6 +106,9 @@ const useStyles = createUseStyles((theme) => ({
   },
   searchFooterWrapper: {
     padding: '10px 14px 0px 20px',
+  },
+  searchFooterWrapperActive: {
+    padding: '0px 14px 0px 20px',
   },
   activeFilters: {
     display: 'flex',

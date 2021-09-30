@@ -88,7 +88,14 @@ export function FilteringProvider({ children }) {
         }
       }
 
-      if (isParamsValid) setSearchValue(queryObject);
+      if (isParamsValid) {
+        console.log(paramsKeys.length);
+        if (paramsKeys.length > 1) {
+          setIsAdvancedSearch(true);
+        }
+
+        setSearchValue(queryObject);
+      }
     }
 
     setParamsLoaded(true);
