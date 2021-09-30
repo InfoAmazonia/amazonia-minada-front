@@ -27,6 +27,7 @@ function Routes() {
       <Switch>
         <Route exact path="/" component={Dashboard} />
         <FilteringRoute exact path="/filter" component={Dashboard} />
+        <FilteringRoute exact path="/embed" component={Dashboard} />
         <Redirect from="*" to="/" />
       </Switch>
     </BrowserRouter>

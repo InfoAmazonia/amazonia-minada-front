@@ -18,6 +18,11 @@ export const mapDefaults = {
     southwestern: [-80.384363, -16.207272],
     northeastern: [-36.616675, 3.978085],
   },
+  transition: {
+    transitionDuration: 1000,
+    transitionInterpolator: new FlyToInterpolator(),
+    transitionEasing: easeCubic,
+  },
 };
 
 export const dataTypes = {

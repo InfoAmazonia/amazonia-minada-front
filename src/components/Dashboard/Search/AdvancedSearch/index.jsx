@@ -192,6 +192,7 @@ export default function AdvancedSearch() {
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             color: theme.grouping[filter.type],
+            lineHeight: 'initial',
           }}
         >
           {filter.value}
@@ -273,7 +274,13 @@ export default function AdvancedSearch() {
           groupBy={(option) => option.type}
         />
       </div>
-      <div className={classes.searchFooterWrapper}>
+      <div
+        className={
+          activeFilters.length > 0
+            ? classes.searchFooterWrapperActive
+            : classes.searchFooterWrapper
+        }
+      >
         {activeFilters.length > 0 && (
           <div className={classes.activeFilters}>
             {activeFilters.map((filter) => getFilterIcon(filter))}
