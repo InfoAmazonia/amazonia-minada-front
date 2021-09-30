@@ -1,3 +1,4 @@
+import { CircularProgress, Typography } from '@mui/material';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
@@ -7,6 +8,7 @@ import Ranking from '../../../../components/Dashboard/InfoBar/Statistics/Charts/
 import SemiCircle from '../../../../components/Dashboard/InfoBar/Statistics/Charts/SemiCircle';
 import DataTypeSelector from '../../../../components/Dashboard/InfoBar/Statistics/DataTypeSelector';
 import GeneralStatistics from '../../../../components/Dashboard/InfoBar/Statistics/GeneralStatistics';
+import { filterDefaults } from '../../../../constants/options';
 import FilteringContext from '../../../../contexts/filtering';
 import api from '../../../../services/api';
 import useStyles from '../styles';
@@ -20,6 +22,7 @@ export default function Statistics() {
   const theme = useTheme();
   const {
     values: { searchValue, ucVisibility, tiVisibility, dataType },
+    setters: { setSearchValue },
   } = useContext(FilteringContext);
 
   /**
@@ -220,15 +223,17 @@ export default function Statistics() {
       )
       .then(({ data }) => {
         if (isSubscribed) {
-          setStateRankingTotalPages(data.pageAmount);
-          data.series = data.series.map((obj) => {
-            obj.color = theme.territorialUnits[obj.id];
-            obj.visible = getVisibility(obj.id);
-            obj.name = t(
-              `dashboard.dataType.territorialUnits.${obj.id}.singular`
-            );
-            return obj;
-          });
+          if (data) {
+            setStateRankingTotalPages(data.pageAmount);
+            data.series = data.series.map((obj) => {
+              obj.color = theme.territorialUnits[obj.id];
+              obj.visible = getVisibility(obj.id);
+              obj.name = t(
+                `dashboard.dataType.territorialUnits.${obj.id}.singular`
+              );
+              return obj;
+            });
+          }
           setStateRankingData(data);
         }
       });
@@ -258,15 +263,17 @@ export default function Statistics() {
       )
       .then(({ data }) => {
         if (isSubscribed) {
-          setIndigenousLandRankingTotalPages(data.pageAmount);
-          data.series = data.series.map((obj) => {
-            obj.color = theme.territorialUnits[obj.id];
-            obj.visible = getVisibility(obj.id);
-            obj.name = t(
-              `dashboard.dataType.territorialUnits.${obj.id}.singular`
-            );
-            return obj;
-          });
+          if (data) {
+            setIndigenousLandRankingTotalPages(data.pageAmount);
+            data.series = data.series.map((obj) => {
+              obj.color = theme.territorialUnits[obj.id];
+              obj.visible = getVisibility(obj.id);
+              obj.name = t(
+                `dashboard.dataType.territorialUnits.${obj.id}.singular`
+              );
+              return obj;
+            });
+          }
           setIndigenousLandRankingData(data);
         }
       });
@@ -301,15 +308,17 @@ export default function Statistics() {
       )
       .then(({ data }) => {
         if (isSubscribed) {
-          setProtectedAreaRankingTotalPages(data.pageAmount);
-          data.series = data.series.map((obj) => {
-            obj.color = theme.territorialUnits[obj.id];
-            obj.visible = getVisibility(obj.id);
-            obj.name = t(
-              `dashboard.dataType.territorialUnits.${obj.id}.singular`
-            );
-            return obj;
-          });
+          if (data) {
+            setProtectedAreaRankingTotalPages(data.pageAmount);
+            data.series = data.series.map((obj) => {
+              obj.color = theme.territorialUnits[obj.id];
+              obj.visible = getVisibility(obj.id);
+              obj.name = t(
+                `dashboard.dataType.territorialUnits.${obj.id}.singular`
+              );
+              return obj;
+            });
+          }
           setProtectedAreaRankingData(data);
         }
       });
@@ -344,15 +353,17 @@ export default function Statistics() {
       )
       .then(({ data }) => {
         if (isSubscribed) {
-          setCompanyRankingTotalPages(data.pageAmount);
-          data.series = data.series.map((obj) => {
-            obj.color = theme.territorialUnits[obj.id];
-            obj.visible = getVisibility(obj.id);
-            obj.name = t(
-              `dashboard.dataType.territorialUnits.${obj.id}.singular`
-            );
-            return obj;
-          });
+          if (data) {
+            setCompanyRankingTotalPages(data.pageAmount);
+            data.series = data.series.map((obj) => {
+              obj.color = theme.territorialUnits[obj.id];
+              obj.visible = getVisibility(obj.id);
+              obj.name = t(
+                `dashboard.dataType.territorialUnits.${obj.id}.singular`
+              );
+              return obj;
+            });
+          }
           setCompanyRankingData(data);
         }
       });
@@ -382,15 +393,17 @@ export default function Statistics() {
       )
       .then(({ data }) => {
         if (isSubscribed) {
-          setEthnicityRankingTotalPages(data.pageAmount);
-          data.series = data.series.map((obj) => {
-            obj.color = theme.territorialUnits[obj.id];
-            obj.visible = getVisibility(obj.id);
-            obj.name = t(
-              `dashboard.dataType.territorialUnits.${obj.id}.singular`
-            );
-            return obj;
-          });
+          if (data) {
+            setEthnicityRankingTotalPages(data.pageAmount);
+            data.series = data.series.map((obj) => {
+              obj.color = theme.territorialUnits[obj.id];
+              obj.visible = getVisibility(obj.id);
+              obj.name = t(
+                `dashboard.dataType.territorialUnits.${obj.id}.singular`
+              );
+              return obj;
+            });
+          }
           setEthnicityRankingData(data);
         }
       });
@@ -400,109 +413,150 @@ export default function Statistics() {
     };
   }, [searchValue, dataType, ethnicityRankingPage, ethnicityRankingOrder]);
 
+  /**
+   * Handle when user clicks to clear search.
+   */
+  const handleClearSearch = () => {
+    setSearchValue(filterDefaults.searchValue);
+  };
+
   return useMemo(
-    () => (
-      <div className={classes.wrapperStatistics}>
-        {semiCircleData && (
-          <>
-            <DataTypeSelector />
-            <GeneralStatistics statistics={generalStatisticsData} />
-            <SemiCircle
-              data={semiCircleData}
-              title={t(
-                `dashboard.infoPanel.statistics.charts.semiCircle.title`
+    () =>
+      statisticsData ? (
+        <div className={classes.wrapperStatistics}>
+          {statisticsData.requirementsIncidence.total > 0 ? (
+            <>
+              {generalStatisticsData && (
+                <>
+                  <DataTypeSelector />
+                  <GeneralStatistics statistics={generalStatisticsData} />
+                </>
               )}
-              info={t(`dashboard.infoPanel.statistics.charts.semiCircle.info`)}
-            />
-            <Legend data={semiCircleData} />
-          </>
-        )}
-
-        {stateRankingData && (
-          <Ranking
-            title={t(
-              `dashboard.infoPanel.statistics.charts.ranking.state.title`
-            )}
-            info={t(`dashboard.infoPanel.statistics.charts.ranking.state.info`)}
-            data={stateRankingData}
-            page={stateRankingPage}
-            totalPages={stateRankingTotalPages}
-            setRankingPage={setStateRankingPage}
-            rankingOrder={stateRankingOrder}
-            setRankingOrder={setStateRankingOrder}
-          />
-        )}
-
-        {tiVisibility && indigenousLandRankingData && (
-          <Ranking
-            title={t(
-              `dashboard.infoPanel.statistics.charts.ranking.indigenousLand.title`
-            )}
-            info={t(
-              `dashboard.infoPanel.statistics.charts.ranking.indigenousLand.info`
-            )}
-            data={indigenousLandRankingData}
-            page={indigenousLandRankingPage}
-            totalPages={indigenousLandRankingTotalPages}
-            setRankingPage={setIndigenousLandRankingPage}
-            rankingOrder={indigenousLandRankingOrder}
-            setRankingOrder={setIndigenousLandRankingOrder}
-          />
-        )}
-
-        {tiVisibility && !ucVisibility && ethnicityRankingData && (
-          <Ranking
-            title={t(
-              `dashboard.infoPanel.statistics.charts.ranking.ethnicity.title`
-            )}
-            info={t(
-              `dashboard.infoPanel.statistics.charts.ranking.ethnicity.info`
-            )}
-            data={ethnicityRankingData}
-            page={ethnicityRankingPage}
-            totalPages={ethnicityRankingTotalPages}
-            setRankingPage={setEthnicityRankingPage}
-            rankingOrder={ethnicityRankingOrder}
-            setRankingOrder={setEthnicityRankingOrder}
-          />
-        )}
-
-        {ucVisibility && protectedAreaRankingData && (
-          <Ranking
-            title={t(
-              `dashboard.infoPanel.statistics.charts.ranking.protectedArea.title`
-            )}
-            info={t(
-              `dashboard.infoPanel.statistics.charts.ranking.protectedArea.info`
-            )}
-            data={protectedAreaRankingData}
-            page={protectedAreaRankingPage}
-            totalPages={protectedAreaRankingTotalPages}
-            setRankingPage={setProtectedAreaRankingPage}
-            rankingOrder={protectedAreaRankingOrder}
-            setRankingOrder={setProtectedAreaRankingOrder}
-          />
-        )}
-
-        {companyRankingData && (
-          <Ranking
-            title={t(
-              `dashboard.infoPanel.statistics.charts.ranking.company.title`
-            )}
-            info={t(
-              `dashboard.infoPanel.statistics.charts.ranking.company.info`
-            )}
-            data={companyRankingData}
-            page={companyRankingPage}
-            totalPages={companyRankingTotalPages}
-            setRankingPage={setCompanyRankingPage}
-            rankingOrder={companyRankingOrder}
-            setRankingOrder={setCompanyRankingOrder}
-          />
-        )}
-      </div>
-    ),
+              {(tiVisibility || ucVisibility) && ( // show only if one of these is activated
+                <>
+                  {semiCircleData && (
+                    <>
+                      <SemiCircle
+                        data={semiCircleData}
+                        title={t(
+                          `dashboard.infoPanel.statistics.charts.semiCircle.title`
+                        )}
+                        info={t(
+                          `dashboard.infoPanel.statistics.charts.semiCircle.info`
+                        )}
+                      />
+                      <Legend data={semiCircleData} />
+                    </>
+                  )}
+                  {stateRankingData && (
+                    <Ranking
+                      title={t(
+                        `dashboard.infoPanel.statistics.charts.ranking.state.title`
+                      )}
+                      info={t(
+                        `dashboard.infoPanel.statistics.charts.ranking.state.info`
+                      )}
+                      data={stateRankingData}
+                      page={stateRankingPage}
+                      totalPages={stateRankingTotalPages}
+                      setRankingPage={setStateRankingPage}
+                      rankingOrder={stateRankingOrder}
+                      setRankingOrder={setStateRankingOrder}
+                    />
+                  )}
+                  {tiVisibility && indigenousLandRankingData && (
+                    <Ranking
+                      title={t(
+                        `dashboard.infoPanel.statistics.charts.ranking.indigenousLand.title`
+                      )}
+                      info={t(
+                        `dashboard.infoPanel.statistics.charts.ranking.indigenousLand.info`
+                      )}
+                      data={indigenousLandRankingData}
+                      page={indigenousLandRankingPage}
+                      totalPages={indigenousLandRankingTotalPages}
+                      setRankingPage={setIndigenousLandRankingPage}
+                      rankingOrder={indigenousLandRankingOrder}
+                      setRankingOrder={setIndigenousLandRankingOrder}
+                    />
+                  )}
+                  {ethnicityRankingData && (
+                    <Ranking
+                      title={t(
+                        `dashboard.infoPanel.statistics.charts.ranking.ethnicity.title`
+                      )}
+                      info={t(
+                        `dashboard.infoPanel.statistics.charts.ranking.ethnicity.info`
+                      )}
+                      data={ethnicityRankingData}
+                      page={ethnicityRankingPage}
+                      totalPages={ethnicityRankingTotalPages}
+                      setRankingPage={setEthnicityRankingPage}
+                      rankingOrder={ethnicityRankingOrder}
+                      setRankingOrder={setEthnicityRankingOrder}
+                    />
+                  )}
+                  {ucVisibility && protectedAreaRankingData && (
+                    <Ranking
+                      title={t(
+                        `dashboard.infoPanel.statistics.charts.ranking.protectedArea.title`
+                      )}
+                      info={t(
+                        `dashboard.infoPanel.statistics.charts.ranking.protectedArea.info`
+                      )}
+                      data={protectedAreaRankingData}
+                      page={protectedAreaRankingPage}
+                      totalPages={protectedAreaRankingTotalPages}
+                      setRankingPage={setProtectedAreaRankingPage}
+                      rankingOrder={protectedAreaRankingOrder}
+                      setRankingOrder={setProtectedAreaRankingOrder}
+                    />
+                  )}
+                  {companyRankingData && (
+                    <Ranking
+                      title={t(
+                        `dashboard.infoPanel.statistics.charts.ranking.company.title`
+                      )}
+                      info={t(
+                        `dashboard.infoPanel.statistics.charts.ranking.company.info`
+                      )}
+                      data={companyRankingData}
+                      page={companyRankingPage}
+                      totalPages={companyRankingTotalPages}
+                      setRankingPage={setCompanyRankingPage}
+                      rankingOrder={companyRankingOrder}
+                      setRankingOrder={setCompanyRankingOrder}
+                    />
+                  )}
+                </>
+              )}
+            </>
+          ) : (
+            // when there is no sufficient data to show statistics
+            <Typography variant="body2" style={{ color: theme.text.secondary }}>
+              {t(`dashboard.infoPanel.list.header.noResults`)}
+              <br />
+              {t(`dashboard.infoPanel.list.header.clearSearch`)}{' '}
+              <span
+                role="button"
+                tabIndex={0}
+                onClick={() => handleClearSearch()}
+                onKeyDown={() => handleClearSearch()}
+                style={{ textDecoration: 'underline', cursor: 'pointer' }}
+              >
+                {t(`dashboard.infoPanel.list.header.clickingHere`)}
+              </span>
+            </Typography>
+          )}
+        </div>
+      ) : (
+        // while loading statistic data
+        <div className={classes.statisticsLoading}>
+          <CircularProgress size={20} />
+        </div>
+      ),
     [
+      statisticsData,
       generalStatisticsData,
       semiCircleData,
       indigenousLandRankingData,

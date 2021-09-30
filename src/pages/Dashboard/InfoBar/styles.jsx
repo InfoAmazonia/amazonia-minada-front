@@ -132,6 +132,12 @@ const useStyles = createUseStyles((theme) => ({
     top: '50%',
     transform: 'translateY(-50%)',
   },
+  statisticsLoading: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    paddingTop: 10,
+  },
 }));
 
 export default useStyles;
