@@ -113,6 +113,34 @@ export default function RequirementListItem({ data }) {
             {data.substance}
           </Typography>
         </div>
+
+        {data.type === 'indigenousLand' && (
+          <>
+            <div className={classes.infoItem}>
+              <Typography
+                style={{ color: theme.text.secondary, fontSize: 11 }}
+                variant="caption"
+              >
+                {t(`dashboard.infoPanel.list.item.reserveEthnicity`)}
+              </Typography>
+              <Typography style={{ color: theme.text.primary }} variant="body1">
+                {data.reserveEthnicity}
+              </Typography>
+            </div>
+
+            <div className={classes.infoItem}>
+              <Typography
+                style={{ color: theme.text.secondary, fontSize: 11 }}
+                variant="caption"
+              >
+                {t(`dashboard.infoPanel.list.item.reservePhase`)}
+              </Typography>
+              <Typography style={{ color: theme.text.primary }} variant="body1">
+                {data.reservePhase}
+              </Typography>
+            </div>
+          </>
+        )}
       </div>
 
       <div style={{ marginBottom: 10 }}>
