@@ -192,6 +192,7 @@ export default function AdvancedSearch() {
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             color: theme.grouping[filter.type],
+            lineHeight: 'initial',
           }}
         >
           {filter.value}
