@@ -74,6 +74,15 @@ export default function Statistics() {
   const [companyRankingOrder, setCompanyRankingOrder] = useState(true);
 
   /**
+   * Ethnicity ranking states
+   */
+  const [ethnicityRankingData, setEthnicityRankingData] = useState();
+  const [ethnicityRankingTotalPages, setEthnicityRankingTotalPages] =
+    useState(1);
+  const [ethnicityRankingPage, setEthnicityRankingPage] = useState(1);
+  const [ethnicityRankingOrder, setEthnicityRankingOrder] = useState(true);
+
+  /**
    * This function returns current visibility of a territorial unit.
    * @param {string} territorialUnit
    */
@@ -321,6 +330,39 @@ export default function Statistics() {
     };
   }, [searchValue, dataType, companyRankingPage]);
 
+  /**
+   * This userEffect fetch company ranking data.
+   */
+  useEffect(() => {
+    let isSubscribed = true;
+    api
+      .post(
+        `/invasions/ranking/ethnicity/${dataType}`,
+        {
+          filters: searchValue,
+        },
+        { params: { page: ethnicityRankingPage } }
+      )
+      .then(({ data }) => {
+        if (isSubscribed) {
+          setEthnicityRankingTotalPages(data.pageAmount);
+          data.series = data.series.map((obj) => {
+            obj.color = theme.territorialUnits[obj.id];
+            obj.visible = getVisibility(obj.id);
+            obj.name = t(
+              `dashboard.dataType.territorialUnits.${obj.id}.singular`
+            );
+            return obj;
+          });
+          setEthnicityRankingData(data);
+        }
+      });
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [searchValue, dataType, ethnicityRankingPage]);
+
   return useMemo(
     () => (
       <div className={classes.wrapperStatistics}>
@@ -371,6 +413,23 @@ export default function Statistics() {
           />
         )}
 
+        {tiVisibility && !ucVisibility && ethnicityRankingData && (
+          <Ranking
+            title={t(
+              `dashboard.infoPanel.statistics.charts.ranking.ethnicity.title`
+            )}
+            info={t(
+              `dashboard.infoPanel.statistics.charts.ranking.ethnicity.info`
+            )}
+            data={ethnicityRankingData}
+            page={ethnicityRankingPage}
+            totalPages={ethnicityRankingTotalPages}
+            setRankingPage={setEthnicityRankingPage}
+            rankingOrder={ethnicityRankingOrder}
+            setRankingOrder={setEthnicityRankingOrder}
+          />
+        )}
+
         {ucVisibility && protectedAreaRankingData && (
           <Ranking
             title={t(
@@ -410,6 +469,7 @@ export default function Statistics() {
       generalStatisticsData,
       semiCircleData,
       indigenousLandRankingData,
+      ethnicityRankingData,
       protectedAreaRankingData,
       stateRankingData,
       companyRankingData,

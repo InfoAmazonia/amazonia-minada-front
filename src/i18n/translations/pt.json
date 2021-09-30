@@ -90,6 +90,10 @@
             "company": {
               "title": "Ranking de empresas por",
               "info": "Este gráfico apresenta o ranking de empresas por"
+            },
+            "ethnicity": {
+              "title": "Ranking de etnias por",
+              "info": "Este gráfico apresenta o ranking de etnias por"
             }
           }
         }
