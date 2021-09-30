@@ -121,7 +121,8 @@
       "visibility": {
         "ti": "Terras Indígenas",
         "uc": "Unidades de Conservação"
-      }
+      },
+      "loadingShapes": "Carregando os requerimentos..."
     },
     "share": {
       "title": "Compartilhar página",

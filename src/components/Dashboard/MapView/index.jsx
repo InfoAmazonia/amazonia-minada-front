@@ -6,6 +6,7 @@ import MapGL from 'react-map-gl';
 import MapContext from '../../../contexts/mapping';
 import Geodatin from './Geodatin';
 import Legend from './Legend';
+import Loader from './Loader';
 import North from './North';
 import Share from './Share';
 import useStyles from './styles';
@@ -35,13 +36,14 @@ export default function MapView({
   const theme = useTheme();
   const classes = useStyles({ theme });
   const {
-    values: { mapRef, viewport },
+    values: { mapRef, viewport, shapesLoaded },
     setters: { setViewport, setMapLoaded },
     functions: { onMapLoad },
   } = useContext(MapContext);
 
   return (
     <div className={classes.wrapper}>
+      <Loader loading={!shapesLoaded} />
       <div className={classes.navigation}>
         {northEnabled && <North />}
         {zoomButtonsEnabled && <Zoom />}
@@ -66,7 +68,7 @@ export default function MapView({
         width="100%"
         height="100%"
         dragRotate={false}
-        mapStyle="mapbox://styles/geodatin/ckt8ti9n20ovc17mmgyzves4l"
+        mapStyle="mapbox://styles/infoamazonia/ckhe037kt07on1aql47yvp2rn"
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       >

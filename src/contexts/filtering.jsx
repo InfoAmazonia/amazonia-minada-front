@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { createContext, useEffect, useState } from 'react';
 
-import { dataTypes, filterDefaults } from '../constants/options';
+import { dataTypes, filterDefaults, propertyTypes } from '../constants/options';
 import { useQuery } from '../hooks/useQuery';
 
 const FilteringContext = createContext({});
@@ -78,7 +78,17 @@ export function FilteringProvider({ children }) {
     if (searchParam) {
       const decodedURI = decodeURI(searchParam);
       const queryObject = JSON.parse(decodedURI);
-      setSearchValue(queryObject);
+      const paramsKeys = Object.keys(queryObject);
+      let isParamsValid = true;
+
+      for (let i = 0; i < paramsKeys.length; i += 1) {
+        if (!propertyTypes[paramsKeys[i]]) {
+          isParamsValid = false;
+          break;
+        }
+      }
+
+      if (isParamsValid) setSearchValue(queryObject);
     }
 
     setParamsLoaded(true);

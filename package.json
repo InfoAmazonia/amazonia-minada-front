@@ -11,8 +11,10 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@turf/bbox": "^6.5.0",
     "add": "^2.0.6",
     "axios": "^0.21.1",
+    "d3-ease": "^3.0.1",
     "eslint-plugin-import-helpers": "^1.1.0",
     "fontsource-roboto": "^4.0.0",
     "highcharts": "^9.2.2",
@@ -32,6 +34,7 @@
     "react-router-dom": "^5.2.1",
     "react-scripts": "4.0.3",
     "react-share": "^4.4.0",
+    "react-spinners": "^0.11.0",
     "react-swipeable": "^6.2.0",
     "web-vitals": "^1.0.1",
     "yarn": "^1.22.11"
