@@ -147,7 +147,9 @@ export default function Statistics() {
               title: t(
                 'dashboard.infoPanel.statistics.generalStatistics.illegalRequirements'
               ),
-              data: data.requirementsIncidence.total,
+              data: t('general.number', {
+                value: data.requirementsIncidence.total,
+              }),
             },
             {
               title: t(
