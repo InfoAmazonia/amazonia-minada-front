@@ -89,9 +89,12 @@ export function FilteringProvider({ children }) {
       }
 
       if (isParamsValid) {
-        console.log(paramsKeys.length);
         if (paramsKeys.length > 1) {
           setIsAdvancedSearch(true);
+        } else if (paramsKeys.length === 1) {
+          if (queryObject[paramsKeys[0]].length > 1) {
+            setIsAdvancedSearch(true);
+          }
         }
 
         setSearchValue(queryObject);
