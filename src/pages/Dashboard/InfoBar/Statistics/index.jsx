@@ -424,7 +424,8 @@ export default function Statistics() {
     () =>
       statisticsData ? (
         <div className={classes.wrapperStatistics}>
-          {statisticsData.requirementsIncidence.total > 0 ? (
+          {statisticsData.requirementsIncidence.total > 0 &&
+          (tiVisibility || ucVisibility) ? ( // show only if one of these is activated
             <>
               {generalStatisticsData && (
                 <>
@@ -432,103 +433,99 @@ export default function Statistics() {
                   <GeneralStatistics statistics={generalStatisticsData} />
                 </>
               )}
-              {(tiVisibility || ucVisibility) && ( // show only if one of these is activated
+              {semiCircleData && (
                 <>
-                  {semiCircleData && (
-                    <>
-                      <SemiCircle
-                        data={semiCircleData}
-                        title={t(
-                          `dashboard.infoPanel.statistics.charts.semiCircle.title`
-                        )}
-                        info={t(
-                          `dashboard.infoPanel.statistics.charts.semiCircle.info`
-                        )}
-                      />
-                      <Legend data={semiCircleData} />
-                    </>
-                  )}
-                  {stateRankingData && (
-                    <Ranking
-                      title={t(
-                        `dashboard.infoPanel.statistics.charts.ranking.state.title`
-                      )}
-                      info={t(
-                        `dashboard.infoPanel.statistics.charts.ranking.state.info`
-                      )}
-                      data={stateRankingData}
-                      page={stateRankingPage}
-                      totalPages={stateRankingTotalPages}
-                      setRankingPage={setStateRankingPage}
-                      rankingOrder={stateRankingOrder}
-                      setRankingOrder={setStateRankingOrder}
-                    />
-                  )}
-                  {tiVisibility && indigenousLandRankingData && (
-                    <Ranking
-                      title={t(
-                        `dashboard.infoPanel.statistics.charts.ranking.indigenousLand.title`
-                      )}
-                      info={t(
-                        `dashboard.infoPanel.statistics.charts.ranking.indigenousLand.info`
-                      )}
-                      data={indigenousLandRankingData}
-                      page={indigenousLandRankingPage}
-                      totalPages={indigenousLandRankingTotalPages}
-                      setRankingPage={setIndigenousLandRankingPage}
-                      rankingOrder={indigenousLandRankingOrder}
-                      setRankingOrder={setIndigenousLandRankingOrder}
-                    />
-                  )}
-                  {ethnicityRankingData && (
-                    <Ranking
-                      title={t(
-                        `dashboard.infoPanel.statistics.charts.ranking.ethnicity.title`
-                      )}
-                      info={t(
-                        `dashboard.infoPanel.statistics.charts.ranking.ethnicity.info`
-                      )}
-                      data={ethnicityRankingData}
-                      page={ethnicityRankingPage}
-                      totalPages={ethnicityRankingTotalPages}
-                      setRankingPage={setEthnicityRankingPage}
-                      rankingOrder={ethnicityRankingOrder}
-                      setRankingOrder={setEthnicityRankingOrder}
-                    />
-                  )}
-                  {ucVisibility && protectedAreaRankingData && (
-                    <Ranking
-                      title={t(
-                        `dashboard.infoPanel.statistics.charts.ranking.protectedArea.title`
-                      )}
-                      info={t(
-                        `dashboard.infoPanel.statistics.charts.ranking.protectedArea.info`
-                      )}
-                      data={protectedAreaRankingData}
-                      page={protectedAreaRankingPage}
-                      totalPages={protectedAreaRankingTotalPages}
-                      setRankingPage={setProtectedAreaRankingPage}
-                      rankingOrder={protectedAreaRankingOrder}
-                      setRankingOrder={setProtectedAreaRankingOrder}
-                    />
-                  )}
-                  {companyRankingData && (
-                    <Ranking
-                      title={t(
-                        `dashboard.infoPanel.statistics.charts.ranking.company.title`
-                      )}
-                      info={t(
-                        `dashboard.infoPanel.statistics.charts.ranking.company.info`
-                      )}
-                      data={companyRankingData}
-                      page={companyRankingPage}
-                      totalPages={companyRankingTotalPages}
-                      setRankingPage={setCompanyRankingPage}
-                      rankingOrder={companyRankingOrder}
-                      setRankingOrder={setCompanyRankingOrder}
-                    />
-                  )}
+                  <SemiCircle
+                    data={semiCircleData}
+                    title={t(
+                      `dashboard.infoPanel.statistics.charts.semiCircle.title`
+                    )}
+                    info={t(
+                      `dashboard.infoPanel.statistics.charts.semiCircle.info`
+                    )}
+                  />
+                  <Legend data={semiCircleData} />
                 </>
+              )}
+              {stateRankingData && (
+                <Ranking
+                  title={t(
+                    `dashboard.infoPanel.statistics.charts.ranking.state.title`
+                  )}
+                  info={t(
+                    `dashboard.infoPanel.statistics.charts.ranking.state.info`
+                  )}
+                  data={stateRankingData}
+                  page={stateRankingPage}
+                  totalPages={stateRankingTotalPages}
+                  setRankingPage={setStateRankingPage}
+                  rankingOrder={stateRankingOrder}
+                  setRankingOrder={setStateRankingOrder}
+                />
+              )}
+              {tiVisibility && indigenousLandRankingData && (
+                <Ranking
+                  title={t(
+                    `dashboard.infoPanel.statistics.charts.ranking.indigenousLand.title`
+                  )}
+                  info={t(
+                    `dashboard.infoPanel.statistics.charts.ranking.indigenousLand.info`
+                  )}
+                  data={indigenousLandRankingData}
+                  page={indigenousLandRankingPage}
+                  totalPages={indigenousLandRankingTotalPages}
+                  setRankingPage={setIndigenousLandRankingPage}
+                  rankingOrder={indigenousLandRankingOrder}
+                  setRankingOrder={setIndigenousLandRankingOrder}
+                />
+              )}
+              {tiVisibility && ethnicityRankingData && (
+                <Ranking
+                  title={t(
+                    `dashboard.infoPanel.statistics.charts.ranking.ethnicity.title`
+                  )}
+                  info={t(
+                    `dashboard.infoPanel.statistics.charts.ranking.ethnicity.info`
+                  )}
+                  data={ethnicityRankingData}
+                  page={ethnicityRankingPage}
+                  totalPages={ethnicityRankingTotalPages}
+                  setRankingPage={setEthnicityRankingPage}
+                  rankingOrder={ethnicityRankingOrder}
+                  setRankingOrder={setEthnicityRankingOrder}
+                />
+              )}
+              {ucVisibility && protectedAreaRankingData && (
+                <Ranking
+                  title={t(
+                    `dashboard.infoPanel.statistics.charts.ranking.protectedArea.title`
+                  )}
+                  info={t(
+                    `dashboard.infoPanel.statistics.charts.ranking.protectedArea.info`
+                  )}
+                  data={protectedAreaRankingData}
+                  page={protectedAreaRankingPage}
+                  totalPages={protectedAreaRankingTotalPages}
+                  setRankingPage={setProtectedAreaRankingPage}
+                  rankingOrder={protectedAreaRankingOrder}
+                  setRankingOrder={setProtectedAreaRankingOrder}
+                />
+              )}
+              {companyRankingData && (
+                <Ranking
+                  title={t(
+                    `dashboard.infoPanel.statistics.charts.ranking.company.title`
+                  )}
+                  info={t(
+                    `dashboard.infoPanel.statistics.charts.ranking.company.info`
+                  )}
+                  data={companyRankingData}
+                  page={companyRankingPage}
+                  totalPages={companyRankingTotalPages}
+                  setRankingPage={setCompanyRankingPage}
+                  rankingOrder={companyRankingOrder}
+                  setRankingOrder={setCompanyRankingOrder}
+                />
               )}
             </>
           ) : (
