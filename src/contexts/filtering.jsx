@@ -46,14 +46,14 @@ export function FilteringProvider({ children }) {
   /**
    * Handle when user clicks to clear search.
    */
-  const handleClearSearch = () => {
+  function handleClearSearch() {
     if (window.location.pathname !== '/embed') {
       setSearchValue(filterDefaults.searchValue);
     }
 
     setTiVisibility(true);
     setUcVisibility(true);
-  };
+  }
 
   /**
    * This useEffect loads the filtering provider with the query search params.

@@ -42,16 +42,21 @@ export default function SimpleSearch() {
   const [loading, setLoading] = useState(false);
   const inputRef = useRef();
   const autocompleteRef = useRef();
+  const [firstLoad, setFirstLoad] = useState(true);
 
   /**
    * This useEffect loads the search value with the route params.
    */
   useEffect(() => {
-    const searchValueKeys = Object.keys(searchValue);
+    if (paramsLoaded) {
+      const searchValueKeys = Object.keys(searchValue);
 
-    if (Object.keys(searchValue).length > 0) {
-      const firstKey = searchValueKeys[0];
-      setValue({ type: firstKey, value: searchValue[firstKey][0] });
+      if (Object.keys(searchValue).length > 0) {
+        const firstKey = searchValueKeys[0];
+        setValue({ type: firstKey, value: searchValue[firstKey][0] });
+      }
+
+      setFirstLoad(false);
     }
   }, [paramsLoaded]);
 
@@ -114,7 +119,7 @@ export default function SimpleSearch() {
       setSearchValue(() => ({
         [value.type]: [value.value],
       }));
-    } else {
+    } else if (!firstLoad) {
       setSearchValue(filterDefaults.searchValue);
     }
   }, [value]);
