@@ -203,6 +203,7 @@ export default function AdvancedSearch() {
           {filter.value}
         </Typography>
         <IconButton
+          style={{ visibility: isSearchExpanded ? 'visible' : 'hidden' }}
           className={classes.iconButton}
           size="small"
           onClick={() => handleRemoveFilter(filter)}
@@ -217,7 +218,7 @@ export default function AdvancedSearch() {
 
   return (
     <div className={classes.container}>
-      <div style={{ display: 'flex', flexFlow: 'row nowrap', paddingLeft: 20 }}>
+      <div className={classes.searchHeaderWrapper}>
         <div
           style={{ display: isSearchExpanded ? 'block' : 'none' }}
           className={classes.dataTypeFilterSelector}
@@ -282,6 +283,7 @@ export default function AdvancedSearch() {
                 variant="outlined"
                 classes={{ root: classes.textfield }}
                 fullWidth
+                onClick={() => setIsSearchExpanded(true)}
               />
             </>
           )}
@@ -306,15 +308,23 @@ export default function AdvancedSearch() {
       </div>
       <div className={classes.searchFooterWrapper}>
         {isActiveFilters() && (
-          <div
-            className={
-              isSearchExpanded
-                ? classes.activeFilters
-                : classes.activeFiltersMinimized
-            }
-          >
-            {activeFilters.map((filter) => getFilterIcon(filter))}
-          </div>
+          <>
+            {isSearchExpanded ? (
+              <div className={classes.activeFilters}>
+                {activeFilters.map((filter) => getFilterIcon(filter))}
+              </div>
+            ) : (
+              <div
+                role="button"
+                tabIndex={0}
+                onKeyDown={() => handleSearchMinimize()}
+                onClick={() => handleSearchMinimize()}
+                className={classes.activeFiltersMinimized}
+              >
+                {activeFilters.map((filter) => getFilterIcon(filter))}
+              </div>
+            )}
+          </>
         )}
         <div
           style={{ display: isSearchExpanded ? 'flex' : 'none' }}

@@ -107,6 +107,11 @@ const useStyles = createUseStyles((theme) => ({
   searchFooterWrapper: {
     padding: '0px 14px 0px 20px',
   },
+  searchHeaderWrapper: {
+    display: 'flex',
+    flexFlow: 'row nowrap',
+    paddingLeft: 20,
+  },
   activeFilters: {
     display: 'flex',
     flexFlow: 'row wrap',
@@ -121,7 +126,6 @@ const useStyles = createUseStyles((theme) => ({
     flexFlow: 'row nowrap',
     overflow: 'hidden',
     margin: '5px 0px 5px 0px',
-    paddingRight: '40px',
 
     '&::after': {
       content: '""',
@@ -133,13 +137,14 @@ const useStyles = createUseStyles((theme) => ({
     },
   },
   filterIconWrapper: {
-    maxWidth: 120,
+    maxWidth: 140,
     marginRight: 10,
     marginTop: 10,
     border: '0.5px solid gray',
     borderRadius: '20px',
   },
   filterIconWrapperMinimized: {
+    maxWidth: 200,
     marginRight: 10,
     border: '0.5px solid gray',
     borderRadius: '20px',
