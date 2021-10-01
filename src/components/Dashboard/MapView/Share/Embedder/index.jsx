@@ -121,7 +121,7 @@ export default function Embedder({ open, onClose, onComeBack }) {
     trySeparator();
     embedQuery += `legendOpen=${legendOpenByDefault}`;
 
-    return `<iframe src="${window.location.origin}${embedQuery}" width="900" height="600"></iframe>`;
+    return `<iframe src="${window.location.origin}${embedQuery}" width="900" height="700"></iframe>`;
   }, [
     ucVisibility,
     tiVisibility,
