@@ -459,7 +459,7 @@ export function MapProvider({ children }) {
                     [maxLng, maxLat],
                   ],
                   {
-                    padding: 200,
+                    padding: 100,
                   }
                 );
 
