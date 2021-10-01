@@ -25,18 +25,24 @@ export default function RequirementListItem({ data }) {
   return (
     <div className={classes.wrapper}>
       <div className={classes.company}>
-        <div
-          className={classes.circle}
-          style={{ backgroundColor: 'white', display: 'none' }}
-        />
         <Typography
           style={{
             color: theme.text.primary,
             fontSize: 14,
             margin: '10px 0px 10px 0px',
+            display: 'flex',
+            flexFlow: 'row nowrap',
+            justifyContent: 'center',
+            alignItems: 'flex-start',
           }}
           variant="h5"
         >
+          <div
+            className={classes.circle}
+            style={{
+              backgroundColor: theme.miningProcesses[data.miningProcessType],
+            }}
+          />
           {data.company.toUpperCase()}
         </Typography>
       </div>

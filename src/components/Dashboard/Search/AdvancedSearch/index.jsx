@@ -1,5 +1,7 @@
+/* eslint-disable no-nested-ternary */
 import { InfoOutlined } from '@mui/icons-material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import {
@@ -28,8 +30,8 @@ import useStyles from './styles';
  */
 export default function AdvancedSearch() {
   const {
-    values: { searchValue, searchDataType, isAdvancedSearch },
-    setters: { setSearchValue, setIsAdvancedSearch },
+    values: { searchValue, searchDataType, isAdvancedSearch, isSearchExpanded },
+    setters: { setSearchValue, setIsAdvancedSearch, setIsSearchExpanded },
     loaders: { paramsLoaded },
   } = useContext(FilteringContext);
 
@@ -144,7 +146,7 @@ export default function AdvancedSearch() {
    * This function handles when user minimizes the search.
    */
   const handleSearchMinimize = () => {
-    // logic to minimize here
+    setIsSearchExpanded(!isSearchExpanded);
   };
 
   /**
@@ -178,7 +180,11 @@ export default function AdvancedSearch() {
     <div
       key={filter.type + filter.value}
       style={{ borderColor: theme.grouping[filter.type] }}
-      className={classes.filterIconWrapper}
+      className={
+        isSearchExpanded
+          ? classes.filterIconWrapper
+          : classes.filterIconWrapperMinimized
+      }
     >
       <div className={classes.filterIcon}>
         <Typography
@@ -197,6 +203,7 @@ export default function AdvancedSearch() {
           {filter.value}
         </Typography>
         <IconButton
+          style={{ visibility: isSearchExpanded ? 'visible' : 'hidden' }}
           className={classes.iconButton}
           size="small"
           onClick={() => handleRemoveFilter(filter)}
@@ -207,13 +214,21 @@ export default function AdvancedSearch() {
     </div>
   );
 
+  const isActiveFilters = () => activeFilters.length > 0;
+
   return (
     <div className={classes.container}>
-      <div style={{ display: 'flex', flexFlow: 'row nowrap', paddingLeft: 20 }}>
-        <div className={classes.dataTypeFilterSelector}>
+      <div className={classes.searchHeaderWrapper}>
+        <div
+          style={{ display: isSearchExpanded ? 'block' : 'none' }}
+          className={classes.dataTypeFilterSelector}
+        >
           <SearchDataTypeSelector />
         </div>
-        <span className={classes.separator} />
+        <span
+          style={{ display: isSearchExpanded ? 'flex' : 'none' }}
+          className={classes.separator}
+        />
         <Autocomplete
           id="search-box"
           autoHighlight
@@ -240,9 +255,26 @@ export default function AdvancedSearch() {
           renderInput={(params) => (
             <>
               <div className={classes.buttons}>
-                <SearchRoundedIcon className={classes.searchIcon} />
+                {isSearchExpanded ? (
+                  <SearchRoundedIcon className={classes.searchIcon} />
+                ) : (
+                  <IconButton
+                    className={classes.iconButton}
+                    size="small"
+                    onClick={() => handleSearchMinimize()}
+                  >
+                    <KeyboardArrowDownRoundedIcon />
+                  </IconButton>
+                )}
               </div>
               <TextField
+                style={{
+                  display: isSearchExpanded
+                    ? 'flex'
+                    : isActiveFilters()
+                    ? 'none'
+                    : 'flex',
+                }}
                 {...params}
                 inputRef={inputRef}
                 margin="none"
@@ -251,6 +283,7 @@ export default function AdvancedSearch() {
                 variant="outlined"
                 classes={{ root: classes.textfield }}
                 fullWidth
+                onClick={() => setIsSearchExpanded(true)}
               />
             </>
           )}
@@ -273,19 +306,30 @@ export default function AdvancedSearch() {
           groupBy={(option) => option.type}
         />
       </div>
-      <div
-        className={
-          activeFilters.length > 0
-            ? classes.searchFooterWrapperActive
-            : classes.searchFooterWrapper
-        }
-      >
-        {activeFilters.length > 0 && (
-          <div className={classes.activeFilters}>
-            {activeFilters.map((filter) => getFilterIcon(filter))}
-          </div>
+      <div className={classes.searchFooterWrapper}>
+        {isActiveFilters() && (
+          <>
+            {isSearchExpanded ? (
+              <div className={classes.activeFilters}>
+                {activeFilters.map((filter) => getFilterIcon(filter))}
+              </div>
+            ) : (
+              <div
+                role="button"
+                tabIndex={0}
+                onKeyDown={() => handleSearchMinimize()}
+                onClick={() => handleSearchMinimize()}
+                className={classes.activeFiltersMinimized}
+              >
+                {activeFilters.map((filter) => getFilterIcon(filter))}
+              </div>
+            )}
+          </>
         )}
-        <div className={classes.textButtonsWrapper}>
+        <div
+          style={{ display: isSearchExpanded ? 'flex' : 'none' }}
+          className={classes.textButtonsWrapper}
+        >
           <div style={{ display: 'flex', flexFlow: 'row nowrap' }}>
             <CustomTooltip
               title={t('dashboard.search.searchInfo')}

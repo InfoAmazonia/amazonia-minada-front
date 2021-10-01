@@ -105,21 +105,47 @@ const useStyles = createUseStyles((theme) => ({
     },
   },
   searchFooterWrapper: {
-    padding: '10px 14px 0px 20px',
-  },
-  searchFooterWrapperActive: {
     padding: '0px 14px 0px 20px',
+  },
+  searchHeaderWrapper: {
+    display: 'flex',
+    flexFlow: 'row nowrap',
+    paddingLeft: 20,
   },
   activeFilters: {
     display: 'flex',
     flexFlow: 'row wrap',
     justifyContent: 'flex-start',
-    marginBottom: 20,
+    marginBottom: 10,
+  },
+  activeFiltersMinimized: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexFlow: 'row nowrap',
+    overflow: 'hidden',
+    margin: '5px 0px 5px 0px',
+
+    '&::after': {
+      content: '""',
+      background: `linear-gradient(to right, transparent 5%, ${theme.background.primary} 40%, ${theme.background.primary}  100%)`,
+      width: '80px',
+      height: '100%',
+      position: 'absolute',
+      right: 0,
+    },
   },
   filterIconWrapper: {
-    maxWidth: 120,
+    maxWidth: 140,
     marginRight: 10,
     marginTop: 10,
+    border: '0.5px solid gray',
+    borderRadius: '20px',
+  },
+  filterIconWrapperMinimized: {
+    maxWidth: 200,
+    marginRight: 10,
     border: '0.5px solid gray',
     borderRadius: '20px',
   },
@@ -135,6 +161,7 @@ const useStyles = createUseStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: 10,
   },
   textButton: {
     cursor: 'pointer',
