@@ -4,6 +4,7 @@ import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
 import ShareRoundedIcon from '@mui/icons-material/ShareRounded';
 import { Button, Typography, IconButton, TextField } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
+import copy from 'copy-to-clipboard';
 import React, { useContext, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
@@ -89,28 +90,11 @@ export default function Share() {
   }
 
   /**
-   * Copies the text to the clipboard.
-   */
-  function updateClipboard(newClip) {
-    navigator.clipboard.writeText(newClip).then(
-      () => {
-        setCopied(true);
-      },
-      () => {
-        setCopied(false);
-      }
-    );
-  }
-
-  /**
    * This function handles the text copy click.
    */
   function copyLink() {
-    navigator.permissions.query({ name: 'clipboard-write' }).then((result) => {
-      if (result.state === 'granted' || result.state === 'prompt') {
-        updateClipboard(url);
-      }
-    });
+    copy(url);
+    setCopied(true);
   }
 
   /**

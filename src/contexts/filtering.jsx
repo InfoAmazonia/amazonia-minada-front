@@ -123,6 +123,11 @@ export function FilteringProvider({ children }) {
   useEffect(() => {
     if (paramsLoaded) {
       let newQuery = `${window.location.pathname}?`;
+
+      if (window.location.pathname === '/') {
+        newQuery = `/filter?`;
+      }
+
       const initialSize = newQuery.length;
 
       /**
