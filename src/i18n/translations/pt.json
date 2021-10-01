@@ -138,8 +138,24 @@
       "textfieldLabel": "Link de compartilhamento",
       "copyButton": "Copiar",
       "copiedButton": "Link Copiado!",
-      "incorporeText": "Incorporar o vídeo em outra página",
-      "message": "Acompanhe os requerimentos minerários em Terras Indígenas e Unidades de Conservação na Amazônia 🌳"
+      "incorporeText": "Incorporar o painel em outra página",
+      "message": "Acompanhe os requerimentos minerários em Terras Indígenas e Unidades de Conservação na Amazônia 🌳",
+      "embed": "Incorporar o painel em outra página",
+      "embedder": {
+        "title": "Incorporar página",
+        "configureText": "Configure a incorporação",
+        "code": "Código",
+        "comeBack": "Voltar para o compartilhamento de links",
+        "isZoomEnabled": "Permitir zoom",
+        "isNavigationEnabled": "Permitir navegação",
+        "isNorthEnabled": "Exibir norte",
+        "isPanelEnabled": "Exibir painel lateral",
+        "isShapeActivationEnabled": "Permitir ocultar territórios",
+        "isShareButtonEnabled": "Permitir compartilhamento",
+        "isLegendEnabled": "Exibir legenda",
+        "legendOpenByDefault": "Iniciar com legenda aberta",
+        "isSearchEnabled": "Permitir busca"
+      }
     }
   }
 }

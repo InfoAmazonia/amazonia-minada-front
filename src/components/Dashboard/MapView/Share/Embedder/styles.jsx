@@ -1,18 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles((theme) => ({
-  buttonContainer: {
-    backgroundColor: theme.background.primary,
-    boxShadow: theme.defaultShadow,
-    borderRadius: 5,
-    width: 40,
-    height: 40,
-    position: 'relative',
-    display: 'flex',
-    userSelect: 'none',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   button: {
     '&.MuiButtonBase-root': {
       borderRadius: 5,
@@ -66,28 +54,12 @@ const useStyles = createUseStyles((theme) => ({
       display: 'flex',
     },
   },
-  iconsWrapper: {
-    display: 'flex',
-    justifyContent: 'center',
-    margin: '10px 0px',
-  },
-  whatsappIcon: {
-    '& path': {
-      fill: theme.share.whatsapp,
-    },
-  },
-  facebookIcon: {
-    '& path': {
-      fill: theme.share.facebook,
-    },
-  },
-  twitterIcon: {
-    '& path': {
-      fill: theme.share.twitter,
-    },
-  },
   copyWrapper: {
     margin: '15px 0px 0px 0px',
+    display: 'flex',
+  },
+  optionsWrapper: {
+    margin: '15px 0px 15px 0px',
     display: 'flex',
   },
   textfieldRoot: {
@@ -147,7 +119,7 @@ const useStyles = createUseStyles((theme) => ({
     justifyContent: 'flex-end',
     width: '100%',
   },
-  embedButton: {
+  comeBackButton: {
     '&.MuiButtonBase-root': {
       borderRadius: 5,
       minWidth: 0,
@@ -162,6 +134,15 @@ const useStyles = createUseStyles((theme) => ({
       marginTop: 10,
       padding: '0px 0px 0px 10px',
     },
+  },
+  formGroup: {
+    width: '50%',
+  },
+  formLabelChecked: {
+    color: theme.text.primary,
+  },
+  formLabelDisabled: {
+    color: theme.text.secondary,
   },
 }));
 

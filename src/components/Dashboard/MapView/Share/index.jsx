@@ -1,5 +1,6 @@
 import { Facebook, Twitter, WhatsApp } from '@mui/icons-material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
 import ShareRoundedIcon from '@mui/icons-material/ShareRounded';
 import { Button, Typography, IconButton, TextField } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
@@ -14,8 +15,8 @@ import {
 
 import { filterDefaults } from '../../../../constants/options';
 import FilteringContext from '../../../../contexts/filtering';
+import Embedder from './Embedder';
 import useStyles from './styles';
-
 /**
  * This component encapsulates the share button.
  */
@@ -23,6 +24,7 @@ export default function Share() {
   const classes = useStyles();
   const theme = useTheme();
   const [openShare, setOpenShare] = useState(false);
+  const [openEmbed, setOpenEmbed] = useState(false);
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
 
@@ -109,6 +111,30 @@ export default function Share() {
         updateClipboard(url);
       }
     });
+  }
+
+  /**
+   * This function handles the embedder dialog opening.
+   */
+  function handleEmbedderOpen() {
+    setOpenShare(false);
+    setOpenEmbed(true);
+  }
+
+  /**
+   * This function handles the embedder dialog closing.
+   */
+  function handleEmbedderClose() {
+    setOpenShare(false);
+    setOpenEmbed(false);
+  }
+
+  /**
+   * This function handles the embedder's come back button.
+   */
+  function handleEmbedderBack() {
+    setOpenShare(true);
+    setOpenEmbed(false);
   }
 
   return (
@@ -211,8 +237,36 @@ export default function Share() {
                 : t('dashboard.share.copyButton')}
             </Button>
           </div>
+          {window.location.pathname !== '/embed' && (
+            <div className={classes.bottomContainer}>
+              <Button
+                className={classes.embedButton}
+                onClick={() => {
+                  handleEmbedderOpen();
+                }}
+              >
+                <Typography
+                  style={{
+                    color: theme.text.secondary,
+                  }}
+                >
+                  {t('dashboard.share.embed')}
+                </Typography>
+                <NavigateNextRoundedIcon
+                  style={{
+                    color: theme.text.secondary,
+                  }}
+                />
+              </Button>
+            </div>
+          )}
         </div>
       </Dialog>
+      <Embedder
+        open={openEmbed}
+        onClose={() => handleEmbedderClose()}
+        onComeBack={() => handleEmbedderBack()}
+      />
     </>
   );
 }
