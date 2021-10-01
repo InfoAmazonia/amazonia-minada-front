@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
 import RequirementListItem from '../../../../components/Dashboard/InfoBar/List/RequirementListItem';
-import { filterDefaults } from '../../../../constants/options';
 import FilteringContext from '../../../../contexts/filtering';
 import api from '../../../../services/api';
 import useStyles from '../styles';
@@ -19,7 +18,7 @@ export default function List({ tabPanelRef }) {
   const { t } = useTranslation();
   const {
     values: { searchValue, tiVisibility, ucVisibility },
-    setters: { setSearchValue, setTiVisibility, setUcVisibility },
+    functions: { handleClearSearch },
   } = useContext(FilteringContext);
 
   const [contentList, setContentList] = useState([]);
@@ -144,18 +143,6 @@ export default function List({ tabPanelRef }) {
         linkCSV.click();
         setIsDownloadingCSV(false);
       });
-  };
-
-  /**
-   * Handle when user clicks to clear search.
-   */
-  const handleClearSearch = () => {
-    if (window.location.pathname !== '/embed') {
-      setSearchValue(filterDefaults.searchValue);
-    }
-
-    setTiVisibility(true);
-    setUcVisibility(true);
   };
 
   return useMemo(

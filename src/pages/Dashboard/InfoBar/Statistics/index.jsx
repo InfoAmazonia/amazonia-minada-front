@@ -8,7 +8,6 @@ import Ranking from '../../../../components/Dashboard/InfoBar/Statistics/Charts/
 import SemiCircle from '../../../../components/Dashboard/InfoBar/Statistics/Charts/SemiCircle';
 import DataTypeSelector from '../../../../components/Dashboard/InfoBar/Statistics/DataTypeSelector';
 import GeneralStatistics from '../../../../components/Dashboard/InfoBar/Statistics/GeneralStatistics';
-import { filterDefaults } from '../../../../constants/options';
 import FilteringContext from '../../../../contexts/filtering';
 import api from '../../../../services/api';
 import useStyles from '../styles';
@@ -22,7 +21,7 @@ export default function Statistics() {
   const theme = useTheme();
   const {
     values: { searchValue, ucVisibility, tiVisibility, dataType },
-    setters: { setSearchValue },
+    functions: { handleClearSearch },
   } = useContext(FilteringContext);
 
   /**
@@ -413,18 +412,11 @@ export default function Statistics() {
     };
   }, [searchValue, dataType, ethnicityRankingPage, ethnicityRankingOrder]);
 
-  /**
-   * Handle when user clicks to clear search.
-   */
-  const handleClearSearch = () => {
-    setSearchValue(filterDefaults.searchValue);
-  };
-
   return useMemo(
     () =>
       statisticsData ? (
         <div className={classes.wrapperStatistics}>
-          {statisticsData.requirementsIncidence.total > 0 &&
+          {statisticsData.requirementsIncidence.total > 0 && // check if there are requirements
           (tiVisibility || ucVisibility) ? ( // show only if one of these is activated
             <>
               {generalStatisticsData && (
