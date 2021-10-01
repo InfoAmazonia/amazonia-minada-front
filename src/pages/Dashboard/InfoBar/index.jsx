@@ -1,6 +1,7 @@
 import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import { Button, Tab, Tabs, Typography, useMediaQuery } from '@mui/material';
+import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
@@ -17,7 +18,15 @@ import useStyles from './styles';
 /**
  *  This component provides the container for statistics and list.
  */
-export default function InfoBar() {
+export default function InfoBar({ searchEnabled }) {
+  InfoBar.defaultProps = {
+    searchEnabled: true,
+  };
+
+  InfoBar.propTypes = {
+    searchEnabled: PropTypes.bool,
+  };
+
   const classes = useStyles();
   const { t } = useTranslation();
   const [value, setValue] = useState(0);
@@ -82,9 +91,11 @@ export default function InfoBar() {
             : {}
         }
       >
-        <div className={classes.searchContainer}>
-          {isAdvancedSearch ? <AdvancedSearch /> : <SimpleSearch />}
-        </div>
+        {searchEnabled && (
+          <div className={classes.searchContainer}>
+            {isAdvancedSearch ? <AdvancedSearch /> : <SimpleSearch />}
+          </div>
+        )}
         <div className={classes.dropBar}>
           <Typography
             style={{

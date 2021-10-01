@@ -299,9 +299,6 @@ export default function Embedder({ open, onClose, onComeBack }) {
               value={code}
               multiline
               maxRows={6}
-              onFocus={(event) => {
-                event.target.select();
-              }}
             />
           </div>
           <div className={classes.bottomContainer}>
