@@ -25,9 +25,10 @@ const useStyles = createUseStyles((theme) => ({
     marginRight: 10,
   },
   circle: {
-    width: '10px',
+    minWidth: '10px',
     height: '10px',
-    marginRight: '5px',
+    marginRight: '8px',
+    marginTop: '3px',
     borderRadius: '100%',
   },
 }));
