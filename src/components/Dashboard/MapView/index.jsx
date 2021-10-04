@@ -1,10 +1,8 @@
-import { useMediaQuery } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { useTheme } from 'react-jss';
 import MapGL from 'react-map-gl';
 
-import { breakpoints } from '../../../constants/constraints';
 import { embedDefaults, mapDefaults } from '../../../constants/options';
 import MapContext from '../../../contexts/mapping';
 import Geodatin from './Geodatin';
@@ -51,11 +49,10 @@ export default function MapView({
   const theme = useTheme();
   const classes = useStyles({ theme });
   const {
-    values: { mapRef, viewport, shapesLoaded },
-    setters: { setViewport, setMapLoaded },
-    functions: { onMapLoad },
+    values: { mapRef, viewport, shapesLoaded, cursor, popup },
+    setters: { setViewport, setMapLoaded, setDrag },
+    functions: { onMapLoad, onHandleHover },
   } = useContext(MapContext);
-  const isMd = useMediaQuery(breakpoints.max.md);
 
   /**
    * This function handles the viewport change according to the max bounds values.
@@ -101,36 +98,17 @@ export default function MapView({
   return (
     <div className={classes.wrapper}>
       <Loader loading={!shapesLoaded} />
-      <div className={classes.navigation}>
-        {(legendEnabled || isMd) && (
-          <>
-            {northEnabled && <North />}
-            {zoomEnabled && <Zoom />}
-          </>
-        )}
-        <div className={classes.legendContainerContained}>
-          {legendEnabled && <Legend defaultOpen={legendOpenByDefault} />}
-        </div>
+      <div className={classes.legendContainerExpanded}>
+        {northEnabled && <North />}
+        {zoomEnabled && <Zoom />}
+        {legendEnabled && <Legend defaultOpen={legendOpenByDefault} />}
       </div>
       <div className={classes.options}>
         {visibilityButtonsEnabled && <Visibility />}
         {shareButtonEnabled && <Share />}
       </div>
-      <div className={classes.legendContainerExpanded}>
-        {!legendEnabled && (
-          <>
-            {northEnabled && <North />}
-            {zoomEnabled && <Zoom />}
-          </>
-        )}
-        {legendEnabled && <Legend defaultOpen={legendOpenByDefault} />}
-      </div>
       <MapGL
         {...viewport}
-        onLoad={() => {
-          onMapLoad();
-          setMapLoaded(true);
-        }}
         doubleClickZoom={zoomEnabled}
         touchZoom={zoomEnabled}
         scrollZoom={zoomEnabled}
@@ -142,7 +120,18 @@ export default function MapView({
         mapStyle="mapbox://styles/infoamazonia/ckhe037kt07on1aql47yvp2rn"
         onViewportChange={(newViewport) => onViewportChange(newViewport)}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        getCursor={() => cursor}
+        onMouseDown={() => setDrag(true)}
+        onMouseUp={() => setDrag(false)}
+        onHover={(e) => {
+          onHandleHover(e);
+        }}
+        onLoad={() => {
+          onMapLoad();
+          setMapLoaded(true);
+        }}
       >
+        {popup}
         <Geodatin />
       </MapGL>
     </div>

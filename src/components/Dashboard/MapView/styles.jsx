@@ -12,20 +12,6 @@ const useStyles = createUseStyles(() => ({
       height: `calc(100% - ${61 + sizes.infoBarHeaderHeight}px)`,
     },
   },
-  navigation: {
-    position: 'absolute',
-    zIndex: 10,
-    top: '50%',
-    right: 15,
-    transform: 'translateY(-50%)',
-
-    '& > *': {
-      marginBottom: 10,
-    },
-    '& div:last-child': {
-      marginBottom: 0,
-    },
-  },
   options: {
     position: 'absolute',
     zIndex: 10,
@@ -61,12 +47,11 @@ const useStyles = createUseStyles(() => ({
       marginBottom: 0,
     },
     [breakpoints.max.md]: {
-      display: 'none',
-    },
-  },
-  legendContainerContained: {
-    [breakpoints.min.md]: {
-      display: 'none',
+      position: 'absolute',
+      zIndex: 10,
+      top: '50%',
+      right: 15,
+      transform: 'translateY(-50%)',
     },
   },
 }));
