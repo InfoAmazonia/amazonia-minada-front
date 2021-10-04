@@ -21,6 +21,7 @@ import { breakpoints } from '../../../../constants/constraints';
 import { filterDefaults } from '../../../../constants/options';
 import FilteringContext from '../../../../contexts/filtering';
 import api from '../../../../services/api';
+import CustomButton from '../../../CustomButton';
 import CustomTooltip from '../../../CustomTooltip';
 import SearchDataTypeSelector from './SearchDataTypeSelector';
 import useStyles from './styles';
@@ -48,6 +49,41 @@ export default function AdvancedSearch() {
   const [activeFilters, setActiveFilters] = useState([]);
 
   /**
+   * This function returns if there is active filters.
+   */
+  const isActiveFilters = () => activeFilters.length > 0;
+
+  /**
+   * This function returns if the search datatype 'year' is selected.
+   */
+  const isYearSelection = () => searchDataType === 'year';
+
+  /**
+   * This function clear the autocomplete selection.
+   */
+  const clearAutocomplete = () => {
+    setInputValue('');
+    setValue(null);
+  };
+
+  /**
+   * This useEffect change to year options.
+   */
+  useEffect(() => {
+    if (isYearSelection()) {
+      setOptions([
+        { type: 'year', value: 2015 },
+        { type: 'year', value: 2016 },
+        { type: 'year', value: 2017 },
+        { type: 'year', value: 2018 },
+        { type: 'year', value: 2019 },
+        { type: 'year', value: 2020 },
+      ]);
+    }
+    clearAutocomplete();
+  }, [searchDataType]);
+
+  /**
    * This useEffect loads the search value with the route params.
    */
   useEffect(() => {
@@ -68,8 +104,12 @@ export default function AdvancedSearch() {
   useEffect(() => {
     let subscribed = true;
 
-    // The search will work only if the input value has a length bigger than 0 characters.
-    if (inputValue.length > 0 && inputValue.trim().length > 0) {
+    // The search will work only if the input value has a length bigger than 0 characters and when not is year selection.
+    if (
+      inputValue.length > 0 &&
+      inputValue.trim().length > 0 &&
+      !isYearSelection()
+    ) {
       setLoading(true);
 
       api.get(`search/${inputValue}`).then(({ data }) => {
@@ -118,9 +158,7 @@ export default function AdvancedSearch() {
           ? prev
           : [...prev, value]
       );
-
-      setInputValue('');
-      setValue(null);
+      clearAutocomplete();
     }
   }, [value]);
 
@@ -129,8 +167,7 @@ export default function AdvancedSearch() {
    */
   useEffect(() => {
     if (Object.keys(searchValue).length === 0) {
-      setInputValue('');
-      setValue(null);
+      clearAutocomplete();
       setActiveFilters([]);
     }
   }, [searchValue]);
@@ -176,6 +213,9 @@ export default function AdvancedSearch() {
     });
   };
 
+  /**
+   * This function returns a filter icon.
+   */
   const getFilterIcon = (filter) => (
     <div
       key={filter.type + filter.value}
@@ -214,8 +254,6 @@ export default function AdvancedSearch() {
     </div>
   );
 
-  const isActiveFilters = () => activeFilters.length > 0;
-
   return (
     <div className={classes.container}>
       <div className={classes.searchHeaderWrapper}>
@@ -234,19 +272,21 @@ export default function AdvancedSearch() {
           autoHighlight
           selectOnFocus
           disableClearable
-          loading={loading}
+          loading={!isYearSelection() ? loading : false}
           loadingText={t('dashboard.search.searching')}
           forcePopupIcon={false}
           options={options}
-          getOptionLabel={(option) => option.value}
           value={value}
           noOptionsText={t('dashboard.search.noOptions')}
           className={classes.autocomplete}
+          getOptionLabel={(option) => String(option.value)}
           getOptionSelected={(option) =>
             option.type === value.type && option.value === value.value
           }
           onChange={(event, newValue) => {
-            setOptions(newValue ? [newValue, ...options] : options);
+            if (!isYearSelection()) {
+              setOptions(newValue ? [newValue, ...options] : options);
+            }
             setValue(newValue);
           }}
           onInputChange={(event, newInputValue) => {
@@ -279,7 +319,11 @@ export default function AdvancedSearch() {
                 inputRef={inputRef}
                 margin="none"
                 size="small"
-                placeholder={t('dashboard.search.smallPlaceholder')}
+                placeholder={
+                  !isYearSelection()
+                    ? t('dashboard.search.smallPlaceholder')
+                    : t('dashboard.search.selectPlaceholder')
+                }
                 variant="outlined"
                 classes={{ root: classes.textfield }}
                 fullWidth
@@ -288,14 +332,14 @@ export default function AdvancedSearch() {
             </>
           )}
           PopperComponent={(props) =>
-            inputValue !== '' ? (
+            inputValue === '' && !isYearSelection() ? null : (
               <Popper
                 ref={autocompleteRef}
                 disablePortal={sm}
                 {...props}
                 className={classes.popper}
               />
-            ) : null
+            )
           }
           renderGroup={(params, index) => [
             <ListSubheader key={`${params.group}_${index}`} component="div">
@@ -314,15 +358,12 @@ export default function AdvancedSearch() {
                 {activeFilters.map((filter) => getFilterIcon(filter))}
               </div>
             ) : (
-              <div
-                role="button"
-                tabIndex={0}
-                onKeyDown={() => handleSearchMinimize()}
-                onClick={() => handleSearchMinimize()}
+              <CustomButton
                 className={classes.activeFiltersMinimized}
+                handleOnClick={handleSearchMinimize}
               >
                 {activeFilters.map((filter) => getFilterIcon(filter))}
-              </div>
+              </CustomButton>
             )}
           </>
         )}
@@ -344,44 +385,25 @@ export default function AdvancedSearch() {
                 }}
               />
             </CustomTooltip>
-            {activeFilters.length >= 1 ? (
-              <div
-                role="button"
-                tabIndex={0}
-                onClick={() => handleClearSearch()}
-                onKeyDown={() => handleClearSearch()}
-                className={classes.textButton}
+
+            <CustomButton
+              handleOnClick={
+                isActiveFilters() ? handleClearSearch : handleFilterSwitcher
+              }
+            >
+              <Typography
+                style={{ color: theme.text.tertiary }}
+                variant="body2"
               >
-                <Typography
-                  style={{ color: theme.text.tertiary }}
-                  variant="body2"
-                >
-                  {t(`dashboard.search.clearSearch`)}
-                </Typography>
-              </div>
-            ) : (
-              <div
-                role="button"
-                tabIndex={0}
-                onClick={() => handleFilterSwitcher()}
-                onKeyDown={() => handleFilterSwitcher()}
-                className={classes.textButton}
-              >
-                <Typography
-                  style={{ color: theme.text.tertiary }}
-                  variant="body2"
-                >
-                  {t(`dashboard.search.doSimpleSearch`)}
-                </Typography>
-              </div>
-            )}
+                {isActiveFilters()
+                  ? t(`dashboard.search.clearSearch`)
+                  : t(`dashboard.search.doSimpleSearch`)}
+              </Typography>
+            </CustomButton>
           </div>
-          <div
-            role="button"
-            tabIndex={0}
-            onClick={() => handleSearchMinimize()}
-            onKeyDown={() => handleSearchMinimize()}
+          <CustomButton
             className={classes.minimizeButton}
+            handleOnClick={handleSearchMinimize}
           >
             <Typography
               style={{ color: theme.text.tertiary, marginRight: 3 }}
@@ -390,7 +412,7 @@ export default function AdvancedSearch() {
               {t(`dashboard.search.minimize`)}
             </Typography>
             <KeyboardArrowUpRoundedIcon style={{ fontSize: 14 }} />
-          </div>
+          </CustomButton>
         </div>
       </div>
     </div>

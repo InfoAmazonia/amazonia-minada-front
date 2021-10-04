@@ -13,13 +13,15 @@
     "search": {
       "bigPlaceholder": "Pesquise no Amazônia Minada",
       "smallPlaceholder": "Pesquisar",
+      "selectPlaceholder": "Selecionar",
       "grouping": {
         "company": "Solicitante",
         "state": "Estado",
         "reserve": "Terra Indígena",
         "unity": "Unidade de Conservação",
         "substance": "Substância",
-        "reserveEthnicity": "Etnia indígena"
+        "reserveEthnicity": "Etnia indígena",
+        "year": "Ano de abertura"
       },
       "searchFor": "Procurar por",
       "noOptions": "Nenhum resultado encontrado",
