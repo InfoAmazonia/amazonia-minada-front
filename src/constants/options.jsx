@@ -84,6 +84,10 @@ export const searchDataTypes = {
     key: 'year',
     translation: 'dashboard.search.grouping.year',
   },
+  requirementPhase: {
+    key: 'requirementPhase',
+    translation: 'dashboard.search.grouping.requirementPhase',
+  },
 };
 
 export const filterDefaults = {

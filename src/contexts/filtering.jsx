@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { createContext, useEffect, useState } from 'react';
 
 import { dataTypes, filterDefaults, propertyTypes } from '../constants/options';
+import useFetch from '../hooks/fetch';
 import { useQuery } from '../hooks/useQuery';
 
 const FilteringContext = createContext({});
@@ -24,6 +25,7 @@ export function FilteringProvider({ children }) {
     filterDefaults.searchDataType
   );
   const [searchValue, setSearchValue] = useState(filterDefaults.searchValue);
+  const { data: requirementPhases } = useFetch('/invasions/phase');
   const [isAdvancedSearch, setIsAdvancedSearch] = useState(false);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [paramsLoaded, setParamsLoaded] = useState(false);
@@ -179,6 +181,7 @@ export function FilteringProvider({ children }) {
           searchValue,
           isAdvancedSearch,
           isSearchExpanded,
+          requirementPhases,
         },
         setters: {
           setDataType,

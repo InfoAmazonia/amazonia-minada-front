@@ -21,7 +21,8 @@
         "unity": "Unidade de Conservação",
         "substance": "Substância",
         "reserveEthnicity": "Etnia indígena",
-        "year": "Ano de abertura"
+        "year": "Ano de abertura",
+        "requirementPhase": "Fase de requerimento"
       },
       "searchFor": "Procurar por",
       "noOptions": "Nenhum resultado encontrado",

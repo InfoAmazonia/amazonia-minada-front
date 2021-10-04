@@ -115,6 +115,7 @@ export const darkScheme = {
     substance: '#128c7E',
     reserveEthnicity: '#FF6846',
     year: '#FF0021',
+    requirementPhase: '#3B5998',
   },
   loader: {
     primary: '#00acee',
