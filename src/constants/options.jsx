@@ -9,10 +9,11 @@ export const mapDefaults = {
   viewport: {
     latitude: -6.536764,
     longitude: -58.837697,
-    zoom: 3.5, // 4.4,
+    zoom: 3.5,
     transitionDuration: 1000,
     transitionInterpolator: new FlyToInterpolator(),
     transitionEasing: easeCubic,
+    minZoom: 3,
   },
   bounds: {
     southwestern: [-80.384363, -16.207272],
@@ -22,6 +23,12 @@ export const mapDefaults = {
     transitionDuration: 1000,
     transitionInterpolator: new FlyToInterpolator(),
     transitionEasing: easeCubic,
+  },
+  maxBounds: {
+    minLatitude: -17.483177,
+    maxLatitude: 5.511898,
+    minLongitude: -74.582582,
+    maxLongitude: -43.591429,
   },
 };
 
