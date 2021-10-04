@@ -1,20 +1,13 @@
-/* eslint-disable no-alert */
-/* eslint-disable camelcase */
-/* eslint-disable no-unused-vars */
-import { useMediaQuery } from '@mui/material';
 import Highcharts from 'highcharts';
 import dataExporting from 'highcharts/modules/export-data';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
-
-import { breakpoints } from '../constants/constraints';
 
 dataExporting(Highcharts);
 
 export default function useOptions() {
   const theme = useTheme();
   const { t } = useTranslation();
-  const isSmd = useMediaQuery(breakpoints.max.smd);
 
   Highcharts.SVGRenderer.prototype.symbols.download = (x, y, w, h) => {
     const path = [
@@ -147,7 +140,7 @@ export default function useOptions() {
         itemDelimiter: ',',
         lineDelimiter: '\n',
         decimalPoint: '.',
-        columnHeaderFormatter(item, key) {
+        columnHeaderFormatter(item /* key */) {
           if (item.name) {
             return item.name;
           }

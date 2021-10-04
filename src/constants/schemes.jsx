@@ -54,6 +54,7 @@ export const lightScheme = {
     unity: '#00AA58',
     substance: '#128c7E',
     reserveEthnicity: '#FF6846',
+    year: '#FF0021',
   },
   loader: {
     primary: '#00acee',
@@ -113,6 +114,7 @@ export const darkScheme = {
     unity: '#00AA58',
     substance: '#128c7E',
     reserveEthnicity: '#FF6846',
+    year: '#FF0021',
   },
   loader: {
     primary: '#00acee',

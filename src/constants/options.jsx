@@ -73,6 +73,10 @@ export const searchDataTypes = {
     key: 'substance',
     translation: 'dashboard.search.grouping.substance',
   },
+  year: {
+    key: 'year',
+    translation: 'dashboard.search.grouping.year',
+  },
 };
 
 export const filterDefaults = {
