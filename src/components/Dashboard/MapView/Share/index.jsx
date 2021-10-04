@@ -1,3 +1,4 @@
+/* eslint import/no-unresolved: off */
 import { Facebook, Twitter, WhatsApp } from '@mui/icons-material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
