@@ -51,7 +51,7 @@ export default function MapView({
   const {
     values: { mapRef, viewport, shapesLoaded, cursor, popup },
     setters: { setViewport, setMapLoaded, setDrag },
-    functions: { onMapLoad, onHandleHover },
+    functions: { onMapLoad, onHandleHover, onClick },
   } = useContext(MapContext);
 
   /**
@@ -129,6 +129,9 @@ export default function MapView({
         onLoad={() => {
           onMapLoad();
           setMapLoaded(true);
+        }}
+        onClick={(e) => {
+          onClick(e);
         }}
       >
         {popup}

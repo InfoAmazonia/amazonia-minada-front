@@ -13,6 +13,7 @@ import { WebMercatorViewport } from 'react-map-gl';
 import RequirementPopup from '../components/Dashboard/MapView/RequirementPopup';
 import { mapDefaults } from '../constants/options';
 import api from '../services/api';
+import { isTouchDevice } from '../services/istouch';
 import FilteringContext from './filtering';
 
 const MapContext = createContext({});
@@ -533,7 +534,7 @@ export function MapProvider({ children }) {
   }
 
   /**
-   * This function handles the event
+   * This function handles the hover event.
    */
   function onHandleHover(event) {
     const { features } = event;
@@ -550,18 +551,51 @@ export function MapProvider({ children }) {
     if (drag) {
       setCursor('grabbing');
     } else if (feature && feature.layer.paint['fill-opacity'] > 0) {
-      setPopup(
-        <RequirementPopup
-          feature={feature}
-          lng={event.lngLat[0]}
-          lat={event.lngLat[1]}
-          closePopup={() => setPopup(null)}
-        />
-      );
+      if (!isTouchDevice()) {
+        setPopup(
+          <RequirementPopup
+            feature={feature}
+            lng={event.lngLat[0]}
+            lat={event.lngLat[1]}
+            closePopup={() => setPopup(null)}
+          />
+        );
+      }
       setCursor('pointer');
     } else {
       setCursor('grab');
-      setPopup(null);
+      if (!isTouchDevice()) setPopup(null);
+    }
+  }
+
+  /**
+   * This function handles the click event.
+   */
+  function onClick(event) {
+    const { features } = event;
+    const feature =
+      features &&
+      features.find(
+        (f) =>
+          f.layer.id === 'unity-requeriments-layer-fill' ||
+          f.layer.id === 'am-minada-requerimentos_UCs_fill' ||
+          f.layer.id === 'reserve-requeriments-layer-fill' ||
+          f.layer.id === 'am-minada-requerimentos-TI_fill'
+      );
+
+    if (isTouchDevice()) {
+      if (feature) {
+        setPopup(
+          <RequirementPopup
+            feature={feature}
+            lng={event.lngLat[0]}
+            lat={event.lngLat[1]}
+            closePopup={() => setPopup(null)}
+          />
+        );
+      } else {
+        setPopup(null);
+      }
     }
   }
 
@@ -587,6 +621,7 @@ export function MapProvider({ children }) {
           handleTiVisibility,
           onMapLoad,
           onHandleHover,
+          onClick,
         },
       }}
     >
