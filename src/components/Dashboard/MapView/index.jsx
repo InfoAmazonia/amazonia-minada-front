@@ -5,7 +5,7 @@ import { useTheme } from 'react-jss';
 import MapGL from 'react-map-gl';
 
 import { breakpoints } from '../../../constants/constraints';
-import { embedDefaults } from '../../../constants/options';
+import { embedDefaults, mapDefaults } from '../../../constants/options';
 import MapContext from '../../../contexts/mapping';
 import Geodatin from './Geodatin';
 import Legend from './Legend';
@@ -57,6 +57,47 @@ export default function MapView({
   } = useContext(MapContext);
   const isMd = useMediaQuery(breakpoints.max.md);
 
+  /**
+   * This function handles the viewport change according to the max bounds values.
+   */
+  function onViewportChange(newViewport) {
+    if (
+      newViewport.longitude < mapDefaults.maxBounds.minLongitude &&
+      newViewport.latitude < mapDefaults.maxBounds.minLatitude
+    ) {
+      newViewport.longitude = mapDefaults.maxBounds.minLongitude;
+      newViewport.latitude = mapDefaults.maxBounds.minLatitude;
+    } else if (
+      newViewport.longitude > mapDefaults.maxBounds.maxLongitude &&
+      newViewport.latitude > mapDefaults.maxBounds.maxLatitude
+    ) {
+      newViewport.longitude = mapDefaults.maxBounds.maxLongitude;
+      newViewport.latitude = mapDefaults.maxBounds.maxLatitude;
+    } else if (
+      newViewport.longitude < mapDefaults.maxBounds.minLongitude &&
+      newViewport.latitude > mapDefaults.maxBounds.maxLatitude
+    ) {
+      newViewport.longitude = mapDefaults.maxBounds.minLongitude;
+      newViewport.latitude = mapDefaults.maxBounds.maxLatitude;
+    } else if (
+      newViewport.longitude > mapDefaults.maxBounds.maxLongitude &&
+      newViewport.latitude < mapDefaults.maxBounds.minLatitude
+    ) {
+      newViewport.longitude = mapDefaults.maxBounds.maxLongitude;
+      newViewport.latitude = mapDefaults.maxBounds.minLatitude;
+    } else if (newViewport.longitude < mapDefaults.maxBounds.minLongitude) {
+      newViewport.longitude = mapDefaults.maxBounds.minLongitude;
+    } else if (newViewport.longitude > mapDefaults.maxBounds.maxLongitude) {
+      newViewport.longitude = mapDefaults.maxBounds.maxLongitude;
+    } else if (newViewport.latitude < mapDefaults.maxBounds.minLatitude) {
+      newViewport.latitude = mapDefaults.maxBounds.minLatitude;
+    } else if (newViewport.latitude > mapDefaults.maxBounds.maxLatitude) {
+      newViewport.latitude = mapDefaults.maxBounds.maxLatitude;
+    }
+
+    setViewport(newViewport);
+  }
+
   return (
     <div className={classes.wrapper}>
       <Loader loading={!shapesLoaded} />
@@ -99,7 +140,7 @@ export default function MapView({
         height="100%"
         dragRotate={false}
         mapStyle="mapbox://styles/infoamazonia/ckhe037kt07on1aql47yvp2rn"
-        onViewportChange={(nextViewport) => setViewport(nextViewport)}
+        onViewportChange={(newViewport) => onViewportChange(newViewport)}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       >
         <Geodatin />
