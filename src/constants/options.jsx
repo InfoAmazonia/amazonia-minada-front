@@ -25,10 +25,10 @@ export const mapDefaults = {
     transitionEasing: easeCubic,
   },
   maxBounds: {
-    minLatitude: -12.483177,
-    maxLatitude: 0.811898,
-    minLongitude: -70.582582,
-    maxLongitude: -45.591429,
+    minLatitude: -17.483177,
+    maxLatitude: 5.511898,
+    minLongitude: -74.582582,
+    maxLongitude: -43.591429,
   },
 };
 
