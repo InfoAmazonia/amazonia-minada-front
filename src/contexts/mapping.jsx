@@ -10,8 +10,10 @@ import React, {
 import { useTheme } from 'react-jss';
 import { WebMercatorViewport } from 'react-map-gl';
 
+import RequirementPopup from '../components/Dashboard/MapView/RequirementPopup';
 import { mapDefaults } from '../constants/options';
 import api from '../services/api';
+import { isTouchDevice } from '../services/istouch';
 import FilteringContext from './filtering';
 
 const MapContext = createContext({});
@@ -35,6 +37,9 @@ export function MapProvider({ children }) {
     values: { ucVisibility, tiVisibility, searchValue },
   } = useContext(FilteringContext);
   const theme = useTheme();
+  const [cursor, setCursor] = useState('pointer');
+  const [drag, setDrag] = useState(false);
+  const [popup, setPopup] = useState(null);
 
   /**
    * Handles the UC's visibility and opacity.
@@ -528,6 +533,72 @@ export function MapProvider({ children }) {
     handleTiVisibility(tiVisibility, true);
   }
 
+  /**
+   * This function handles the hover event.
+   */
+  function onHandleHover(event) {
+    const { features } = event;
+    const feature =
+      features &&
+      features.find(
+        (f) =>
+          f.layer.id === 'unity-requeriments-layer-fill' ||
+          f.layer.id === 'am-minada-requerimentos_UCs_fill' ||
+          f.layer.id === 'reserve-requeriments-layer-fill' ||
+          f.layer.id === 'am-minada-requerimentos-TI_fill'
+      );
+
+    if (drag) {
+      setCursor('grabbing');
+    } else if (feature && feature.layer.paint['fill-opacity'] > 0) {
+      if (!isTouchDevice()) {
+        setPopup(
+          <RequirementPopup
+            feature={feature}
+            lng={event.lngLat[0]}
+            lat={event.lngLat[1]}
+            closePopup={() => setPopup(null)}
+          />
+        );
+      }
+      setCursor('pointer');
+    } else {
+      setCursor('grab');
+      if (!isTouchDevice()) setPopup(null);
+    }
+  }
+
+  /**
+   * This function handles the click event.
+   */
+  function onClick(event) {
+    const { features } = event;
+    const feature =
+      features &&
+      features.find(
+        (f) =>
+          f.layer.id === 'unity-requeriments-layer-fill' ||
+          f.layer.id === 'am-minada-requerimentos_UCs_fill' ||
+          f.layer.id === 'reserve-requeriments-layer-fill' ||
+          f.layer.id === 'am-minada-requerimentos-TI_fill'
+      );
+
+    if (isTouchDevice()) {
+      if (feature) {
+        setPopup(
+          <RequirementPopup
+            feature={feature}
+            lng={event.lngLat[0]}
+            lat={event.lngLat[1]}
+            closePopup={() => setPopup(null)}
+          />
+        );
+      } else {
+        setPopup(null);
+      }
+    }
+  }
+
   return (
     <MapContext.Provider
       value={{
@@ -536,16 +607,21 @@ export function MapProvider({ children }) {
           viewport,
           mapLoaded,
           shapesLoaded,
+          cursor,
+          popup,
         },
         setters: {
           setViewport,
           setMapLoaded,
           setShapesLoaded,
+          setDrag,
         },
         functions: {
           handleUcVisibility,
           handleTiVisibility,
           onMapLoad,
+          onHandleHover,
+          onClick,
         },
       }}
     >
