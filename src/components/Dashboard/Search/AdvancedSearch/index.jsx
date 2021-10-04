@@ -21,6 +21,7 @@ import { breakpoints } from '../../../../constants/constraints';
 import { filterDefaults } from '../../../../constants/options';
 import FilteringContext from '../../../../contexts/filtering';
 import api from '../../../../services/api';
+import CustomButton from '../../../CustomButton';
 import CustomTooltip from '../../../CustomTooltip';
 import SearchDataTypeSelector from './SearchDataTypeSelector';
 import useStyles from './styles';
@@ -357,15 +358,12 @@ export default function AdvancedSearch() {
                 {activeFilters.map((filter) => getFilterIcon(filter))}
               </div>
             ) : (
-              <div
-                role="button"
-                tabIndex={0}
-                onKeyDown={() => handleSearchMinimize()}
-                onClick={() => handleSearchMinimize()}
+              <CustomButton
                 className={classes.activeFiltersMinimized}
+                handleOnClick={handleSearchMinimize}
               >
                 {activeFilters.map((filter) => getFilterIcon(filter))}
-              </div>
+              </CustomButton>
             )}
           </>
         )}
@@ -387,44 +385,25 @@ export default function AdvancedSearch() {
                 }}
               />
             </CustomTooltip>
-            {isActiveFilters() ? (
-              <div
-                role="button"
-                tabIndex={0}
-                onClick={() => handleClearSearch()}
-                onKeyDown={() => handleClearSearch()}
-                className={classes.textButton}
+
+            <CustomButton
+              handleOnClick={
+                isActiveFilters() ? handleClearSearch : handleFilterSwitcher
+              }
+            >
+              <Typography
+                style={{ color: theme.text.tertiary }}
+                variant="body2"
               >
-                <Typography
-                  style={{ color: theme.text.tertiary }}
-                  variant="body2"
-                >
-                  {t(`dashboard.search.clearSearch`)}
-                </Typography>
-              </div>
-            ) : (
-              <div
-                role="button"
-                tabIndex={0}
-                onClick={() => handleFilterSwitcher()}
-                onKeyDown={() => handleFilterSwitcher()}
-                className={classes.textButton}
-              >
-                <Typography
-                  style={{ color: theme.text.tertiary }}
-                  variant="body2"
-                >
-                  {t(`dashboard.search.doSimpleSearch`)}
-                </Typography>
-              </div>
-            )}
+                {isActiveFilters()
+                  ? t(`dashboard.search.clearSearch`)
+                  : t(`dashboard.search.doSimpleSearch`)}
+              </Typography>
+            </CustomButton>
           </div>
-          <div
-            role="button"
-            tabIndex={0}
-            onClick={() => handleSearchMinimize()}
-            onKeyDown={() => handleSearchMinimize()}
+          <CustomButton
             className={classes.minimizeButton}
+            handleOnClick={handleSearchMinimize}
           >
             <Typography
               style={{ color: theme.text.tertiary, marginRight: 3 }}
@@ -433,7 +412,7 @@ export default function AdvancedSearch() {
               {t(`dashboard.search.minimize`)}
             </Typography>
             <KeyboardArrowUpRoundedIcon style={{ fontSize: 14 }} />
-          </div>
+          </CustomButton>
         </div>
       </div>
     </div>
