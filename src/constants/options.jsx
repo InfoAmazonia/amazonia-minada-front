@@ -13,6 +13,7 @@ export const mapDefaults = {
     transitionDuration: 1000,
     transitionInterpolator: new FlyToInterpolator(),
     transitionEasing: easeCubic,
+    minZoom: 3,
   },
   bounds: {
     southwestern: [-80.384363, -16.207272],

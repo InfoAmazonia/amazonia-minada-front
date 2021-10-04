@@ -19,6 +19,7 @@ import { filterDefaults } from '../../../../constants/options';
 import FilteringContext from '../../../../contexts/filtering';
 import Embedder from './Embedder';
 import useStyles from './styles';
+
 /**
  * This component encapsulates the share button.
  */
