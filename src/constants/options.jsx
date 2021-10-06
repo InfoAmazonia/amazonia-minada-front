@@ -88,6 +88,10 @@ export const searchDataTypes = {
     key: 'requirementPhase',
     translation: 'dashboard.search.grouping.requirementPhase',
   },
+  reservePhase: {
+    key: 'reservePhase',
+    translation: 'dashboard.search.grouping.reservePhase',
+  },
 };
 
 export const filterDefaults = {
