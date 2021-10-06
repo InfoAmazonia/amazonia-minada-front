@@ -85,6 +85,17 @@ export default function Statistics() {
   const [ethnicityRankingOrder, setEthnicityRankingOrder] = useState(true);
 
   /**
+   * This useEffect set all rankings to page one when the search is modified.
+   */
+  useEffect(() => {
+    setStateRankingPage(1);
+    setIndigenousLandRankingPage(1);
+    setProtectedAreaRankingPage(1);
+    setCompanyRankingPage(1);
+    setEthnicityRankingTotalPages(1);
+  }, [searchValue]);
+
+  /**
    * This function returns current visibility of a territorial unit.
    * @param {string} territorialUnit
    */
