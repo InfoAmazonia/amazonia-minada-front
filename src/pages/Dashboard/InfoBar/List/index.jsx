@@ -1,5 +1,6 @@
 import GetAppIcon from '@mui/icons-material/GetApp';
 import { Button, CircularProgress, Typography } from '@mui/material';
+import useIntersectionObserver from '@react-hook/intersection-observer';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
@@ -25,36 +26,11 @@ export default function List({ tabPanelRef }) {
   const [resultsAmount, setResultsAmount] = useState();
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
-  const [isBottom, setIsBottom] = useState(false);
   const [isLoadingPage, setIsLoadingPage] = useState(false);
   const [isLoadingFirst, setIsLoadingFirst] = useState(false);
   const [isDownloadingCSV, setIsDownloadingCSV] = useState(false);
-
-  /**
-   * This userEffect check if the bottom is reached by scroll bar.
-   */
-  useEffect(() => {
-    const handleScroll = (component) => {
-      if (
-        Math.round(component.scrollHeight - component.scrollTop) <=
-        component.clientHeight
-      ) {
-        setIsBottom(true);
-      } else {
-        setIsBottom(false);
-      }
-    };
-
-    const tabPanel = tabPanelRef.current;
-
-    if (tabPanel)
-      tabPanel.addEventListener('scroll', () => handleScroll(tabPanel));
-
-    return () => {
-      if (tabPanel)
-        tabPanel.removeEventListener('scroll', () => handleScroll(tabPanel));
-    };
-  }, []);
+  const [endListRef, setEndListRef] = useState();
+  const { isIntersecting: isBottom } = useIntersectionObserver(endListRef);
 
   /**
    * This userEffect get nexts pages when bottom is reached to make infinite scroll.
@@ -206,12 +182,15 @@ export default function List({ tabPanelRef }) {
                 </Typography>
               )}
             </div>
-            {contentList.map((item) => (
-              <RequirementListItem
-                key={`${item.process}-${item.type}`}
-                data={item}
-              />
-            ))}
+            <div>
+              {contentList.map((item) => (
+                <RequirementListItem
+                  key={`${item.process}-${item.type}`}
+                  data={item}
+                />
+              ))}
+              <div ref={setEndListRef} />
+            </div>
           </>
         )}
         <div className={classes.listFooter}>
