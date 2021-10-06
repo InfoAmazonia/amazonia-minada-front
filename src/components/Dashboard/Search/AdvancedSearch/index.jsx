@@ -31,7 +31,13 @@ import useStyles from './styles';
  */
 export default function AdvancedSearch() {
   const {
-    values: { searchValue, searchDataType, isAdvancedSearch, isSearchExpanded },
+    values: {
+      searchValue,
+      searchDataType,
+      isAdvancedSearch,
+      isSearchExpanded,
+      requirementPhases,
+    },
     setters: { setSearchValue, setIsAdvancedSearch, setIsSearchExpanded },
     loaders: { paramsLoaded },
   } = useContext(FilteringContext);
@@ -56,7 +62,8 @@ export default function AdvancedSearch() {
   /**
    * This function returns if the search datatype 'year' is selected.
    */
-  const isYearSelection = () => searchDataType === 'year';
+  const isSelection = () =>
+    searchDataType === 'year' || searchDataType === 'requirementPhase';
 
   /**
    * This function clear the autocomplete selection.
@@ -70,7 +77,7 @@ export default function AdvancedSearch() {
    * This useEffect change to year options.
    */
   useEffect(() => {
-    if (isYearSelection()) {
+    if (searchDataType === 'year') {
       setOptions([
         { type: 'year', value: 2015 },
         { type: 'year', value: 2016 },
@@ -79,6 +86,8 @@ export default function AdvancedSearch() {
         { type: 'year', value: 2019 },
         { type: 'year', value: 2020 },
       ]);
+    } else if (searchDataType === 'requirementPhase') {
+      setOptions(requirementPhases);
     }
     clearAutocomplete();
   }, [searchDataType]);
@@ -108,7 +117,7 @@ export default function AdvancedSearch() {
     if (
       inputValue.length > 0 &&
       inputValue.trim().length > 0 &&
-      !isYearSelection()
+      !isSelection()
     ) {
       setLoading(true);
 
@@ -272,7 +281,7 @@ export default function AdvancedSearch() {
           autoHighlight
           selectOnFocus
           disableClearable
-          loading={!isYearSelection() ? loading : false}
+          loading={!isSelection() ? loading : false}
           loadingText={t('dashboard.search.searching')}
           forcePopupIcon={false}
           options={options}
@@ -284,7 +293,7 @@ export default function AdvancedSearch() {
             option.type === value.type && option.value === value.value
           }
           onChange={(event, newValue) => {
-            if (!isYearSelection()) {
+            if (!isSelection()) {
               setOptions(newValue ? [newValue, ...options] : options);
             }
             setValue(newValue);
@@ -320,7 +329,7 @@ export default function AdvancedSearch() {
                 margin="none"
                 size="small"
                 placeholder={
-                  !isYearSelection()
+                  !isSelection()
                     ? t('dashboard.search.smallPlaceholder')
                     : t('dashboard.search.selectPlaceholder')
                 }
@@ -332,7 +341,7 @@ export default function AdvancedSearch() {
             </>
           )}
           PopperComponent={(props) =>
-            inputValue === '' && !isYearSelection() ? null : (
+            inputValue === '' && !isSelection() ? null : (
               <Popper
                 ref={autocompleteRef}
                 disablePortal={sm}
