@@ -37,6 +37,7 @@ export default function AdvancedSearch() {
       isAdvancedSearch,
       isSearchExpanded,
       requirementPhases,
+      availableYears,
     },
     setters: { setSearchValue, setIsAdvancedSearch, setIsSearchExpanded },
     loaders: { paramsLoaded },
@@ -78,14 +79,7 @@ export default function AdvancedSearch() {
    */
   useEffect(() => {
     if (searchDataType === 'year') {
-      setOptions([
-        { type: 'year', value: 2015 },
-        { type: 'year', value: 2016 },
-        { type: 'year', value: 2017 },
-        { type: 'year', value: 2018 },
-        { type: 'year', value: 2019 },
-        { type: 'year', value: 2020 },
-      ]);
+      setOptions(availableYears);
     } else if (searchDataType === 'requirementPhase') {
       setOptions(requirementPhases);
     }
