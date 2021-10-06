@@ -226,7 +226,6 @@ export default function List({ tabPanelRef }) {
               display: page === maxPage && !isLoadingFirst ? 'inline' : 'none',
               color: theme.text.secondary,
             }}
-            variant="caption"
           >
             {t(`dashboard.infoPanel.list.footer.noMoreResults`)}
           </Typography>

@@ -37,7 +37,7 @@ export default function RequirementPopup({
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
-  console.log(feature);
+
   return (
     <Popup
       className={classes.popup}
