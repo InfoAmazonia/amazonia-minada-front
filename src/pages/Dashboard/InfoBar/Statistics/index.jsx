@@ -212,6 +212,8 @@ export default function Statistics() {
         `/invasions/ranking/state/${dataType}`,
         {
           filters: searchValue,
+          enableUnity: ucVisibility,
+          enableReserve: tiVisibility,
         },
         {
           params: {
@@ -240,7 +242,14 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [searchValue, dataType, stateRankingPage, stateRankingOrder]);
+  }, [
+    searchValue,
+    dataType,
+    stateRankingPage,
+    stateRankingOrder,
+    ucVisibility,
+    tiVisibility,
+  ]);
 
   /**
    * This userEffect fetch indigenous land ranking data.
@@ -252,6 +261,8 @@ export default function Statistics() {
         `/invasions/ranking/reserve/${dataType}`,
         {
           filters: searchValue,
+          enableUnity: ucVisibility,
+          enableReserve: tiVisibility,
         },
         {
           params: {
@@ -285,6 +296,8 @@ export default function Statistics() {
     dataType,
     indigenousLandRankingPage,
     indigenousLandRankingOrder,
+    ucVisibility,
+    tiVisibility,
   ]);
 
   /**
@@ -297,6 +310,8 @@ export default function Statistics() {
         `/invasions/ranking/unity/${dataType}`,
         {
           filters: searchValue,
+          enableUnity: ucVisibility,
+          enableReserve: tiVisibility,
         },
         {
           params: {
@@ -330,6 +345,8 @@ export default function Statistics() {
     dataType,
     protectedAreaRankingPage,
     protectedAreaRankingOrder,
+    ucVisibility,
+    tiVisibility,
   ]);
 
   /**
@@ -342,6 +359,8 @@ export default function Statistics() {
         `/invasions/ranking/company/${dataType}`,
         {
           filters: searchValue,
+          enableUnity: ucVisibility,
+          enableReserve: tiVisibility,
         },
         {
           params: {
@@ -370,7 +389,14 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [searchValue, dataType, companyRankingPage, companyRankingOrder]);
+  }, [
+    searchValue,
+    dataType,
+    companyRankingPage,
+    companyRankingOrder,
+    ucVisibility,
+    tiVisibility,
+  ]);
 
   /**
    * This userEffect fetch ethnicity ranking data.
@@ -382,6 +408,8 @@ export default function Statistics() {
         `/invasions/ranking/ethnicity/${dataType}`,
         {
           filters: searchValue,
+          enableUnity: ucVisibility,
+          enableReserve: tiVisibility,
         },
         {
           params: {
@@ -410,7 +438,14 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [searchValue, dataType, ethnicityRankingPage, ethnicityRankingOrder]);
+  }, [
+    searchValue,
+    dataType,
+    ethnicityRankingPage,
+    ethnicityRankingOrder,
+    ucVisibility,
+    tiVisibility,
+  ]);
 
   return useMemo(
     () =>
