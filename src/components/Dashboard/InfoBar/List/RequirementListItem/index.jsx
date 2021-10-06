@@ -30,7 +30,7 @@ export default function RequirementListItem({ data }) {
             color: theme.text.primary,
             fontSize: 14,
             margin: '10px 0px 10px 0px',
-            display: 'flex',
+            display: 'inline',
             flexFlow: 'row nowrap',
             justifyContent: 'center',
             alignItems: 'flex-start',

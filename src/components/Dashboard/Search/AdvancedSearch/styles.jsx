@@ -119,7 +119,6 @@ const useStyles = createUseStyles((theme) => ({
     marginBottom: 10,
   },
   activeFiltersMinimized: {
-    width: '100%',
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -144,7 +143,7 @@ const useStyles = createUseStyles((theme) => ({
     borderRadius: '20px',
   },
   filterIconWrapperMinimized: {
-    maxWidth: 200,
+    // maxWidth: 200,
     marginRight: 10,
     border: '0.5px solid gray',
     borderRadius: '20px',
