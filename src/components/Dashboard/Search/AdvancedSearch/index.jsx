@@ -36,7 +36,9 @@ export default function AdvancedSearch() {
       searchDataType,
       isAdvancedSearch,
       isSearchExpanded,
+      reservePhases,
       requirementPhases,
+      availableYears,
     },
     setters: { setSearchValue, setIsAdvancedSearch, setIsSearchExpanded },
     loaders: { paramsLoaded },
@@ -60,10 +62,12 @@ export default function AdvancedSearch() {
   const isActiveFilters = () => activeFilters.length > 0;
 
   /**
-   * This function returns if the search datatype 'year' is selected.
+   * This function returns if the search datatype is provided by a selection.
    */
   const isSelection = () =>
-    searchDataType === 'year' || searchDataType === 'requirementPhase';
+    searchDataType === 'year' ||
+    searchDataType === 'requirementPhase' ||
+    searchDataType === 'reservePhase';
 
   /**
    * This function clear the autocomplete selection.
@@ -74,20 +78,15 @@ export default function AdvancedSearch() {
   };
 
   /**
-   * This useEffect change to year options.
+   * This useEffect change options according by search data type.
    */
   useEffect(() => {
     if (searchDataType === 'year') {
-      setOptions([
-        { type: 'year', value: 2015 },
-        { type: 'year', value: 2016 },
-        { type: 'year', value: 2017 },
-        { type: 'year', value: 2018 },
-        { type: 'year', value: 2019 },
-        { type: 'year', value: 2020 },
-      ]);
+      setOptions(availableYears);
     } else if (searchDataType === 'requirementPhase') {
       setOptions(requirementPhases);
+    } else if (searchDataType === 'reservePhase') {
+      setOptions(reservePhases);
     }
     clearAutocomplete();
   }, [searchDataType]);

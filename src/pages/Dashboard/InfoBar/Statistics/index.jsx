@@ -85,6 +85,17 @@ export default function Statistics() {
   const [ethnicityRankingOrder, setEthnicityRankingOrder] = useState(true);
 
   /**
+   * This useEffect set all rankings to page one when the search is modified.
+   */
+  useEffect(() => {
+    setStateRankingPage(1);
+    setIndigenousLandRankingPage(1);
+    setProtectedAreaRankingPage(1);
+    setCompanyRankingPage(1);
+    setEthnicityRankingTotalPages(1);
+  }, [searchValue]);
+
+  /**
    * This function returns current visibility of a territorial unit.
    * @param {string} territorialUnit
    */
@@ -212,6 +223,8 @@ export default function Statistics() {
         `/invasions/ranking/state/${dataType}`,
         {
           filters: searchValue,
+          enableUnity: ucVisibility,
+          enableReserve: tiVisibility,
         },
         {
           params: {
@@ -240,7 +253,14 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [searchValue, dataType, stateRankingPage, stateRankingOrder]);
+  }, [
+    searchValue,
+    dataType,
+    stateRankingPage,
+    stateRankingOrder,
+    ucVisibility,
+    tiVisibility,
+  ]);
 
   /**
    * This userEffect fetch indigenous land ranking data.
@@ -252,6 +272,8 @@ export default function Statistics() {
         `/invasions/ranking/reserve/${dataType}`,
         {
           filters: searchValue,
+          enableUnity: ucVisibility,
+          enableReserve: tiVisibility,
         },
         {
           params: {
@@ -285,6 +307,8 @@ export default function Statistics() {
     dataType,
     indigenousLandRankingPage,
     indigenousLandRankingOrder,
+    ucVisibility,
+    tiVisibility,
   ]);
 
   /**
@@ -297,6 +321,8 @@ export default function Statistics() {
         `/invasions/ranking/unity/${dataType}`,
         {
           filters: searchValue,
+          enableUnity: ucVisibility,
+          enableReserve: tiVisibility,
         },
         {
           params: {
@@ -330,6 +356,8 @@ export default function Statistics() {
     dataType,
     protectedAreaRankingPage,
     protectedAreaRankingOrder,
+    ucVisibility,
+    tiVisibility,
   ]);
 
   /**
@@ -342,6 +370,8 @@ export default function Statistics() {
         `/invasions/ranking/company/${dataType}`,
         {
           filters: searchValue,
+          enableUnity: ucVisibility,
+          enableReserve: tiVisibility,
         },
         {
           params: {
@@ -370,7 +400,14 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [searchValue, dataType, companyRankingPage, companyRankingOrder]);
+  }, [
+    searchValue,
+    dataType,
+    companyRankingPage,
+    companyRankingOrder,
+    ucVisibility,
+    tiVisibility,
+  ]);
 
   /**
    * This userEffect fetch ethnicity ranking data.
@@ -382,6 +419,8 @@ export default function Statistics() {
         `/invasions/ranking/ethnicity/${dataType}`,
         {
           filters: searchValue,
+          enableUnity: ucVisibility,
+          enableReserve: tiVisibility,
         },
         {
           params: {
@@ -410,7 +449,14 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [searchValue, dataType, ethnicityRankingPage, ethnicityRankingOrder]);
+  }, [
+    searchValue,
+    dataType,
+    ethnicityRankingPage,
+    ethnicityRankingOrder,
+    ucVisibility,
+    tiVisibility,
+  ]);
 
   return useMemo(
     () =>

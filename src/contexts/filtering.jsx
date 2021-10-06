@@ -25,7 +25,9 @@ export function FilteringProvider({ children }) {
     filterDefaults.searchDataType
   );
   const [searchValue, setSearchValue] = useState(filterDefaults.searchValue);
+  const { data: reservePhases } = useFetch('/reserves/phase');
   const { data: requirementPhases } = useFetch('/invasions/phase');
+  const { data: availableYears } = useFetch('/invasions/years');
   const [isAdvancedSearch, setIsAdvancedSearch] = useState(false);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [paramsLoaded, setParamsLoaded] = useState(false);
@@ -181,7 +183,9 @@ export function FilteringProvider({ children }) {
           searchValue,
           isAdvancedSearch,
           isSearchExpanded,
+          reservePhases,
           requirementPhases,
+          availableYears,
         },
         setters: {
           setDataType,

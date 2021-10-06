@@ -22,7 +22,8 @@
         "substance": "Substância",
         "reserveEthnicity": "Etnia indígena",
         "year": "Ano de abertura",
-        "requirementPhase": "Fase de requerimento"
+        "requirementPhase": "Fase de requerimento",
+        "reservePhase": "Fase de homologação"
       },
       "searchFor": "Procurar por",
       "noOptions": "Nenhum resultado encontrado",
