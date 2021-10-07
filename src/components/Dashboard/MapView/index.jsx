@@ -60,7 +60,7 @@ export default function MapView({
     functions: { onMapLoad, onHandleHover, onClick },
   } = useContext(MapContext);
 
-  const isSm = useMediaQuery(breakpoints.max.sm);
+  const isSmd = useMediaQuery(breakpoints.max.smd);
   const {
     values: { mobileSearchHeight },
   } = useContext(FilteringContext);
@@ -118,7 +118,7 @@ export default function MapView({
       </div>
       <div
         style={
-          isSm
+          isSmd
             ? { top: mobileSearchHeight === 0 ? 15 : mobileSearchHeight + 30 }
             : {}
         }

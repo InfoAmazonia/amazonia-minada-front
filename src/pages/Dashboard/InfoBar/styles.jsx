@@ -19,7 +19,7 @@ const useStyles = createUseStyles((theme) => ({
     boxShadow: theme.defaultShadow,
     backgroundColor: theme.background.primary,
 
-    [breakpoints.max.sm]: {
+    [breakpoints.max.smd]: {
       width: '100%',
       minWidth: 'initial',
       maxWidth: 'initial',
@@ -74,7 +74,7 @@ const useStyles = createUseStyles((theme) => ({
     justifyContent: 'center',
     padding: 20,
 
-    [breakpoints.max.sm]: {
+    [breakpoints.max.smd]: {
       position: 'absolute',
       padding: 15,
       top: `calc(61px + ${sizes.infoBarHeaderHeight}px - 100vh)`,
@@ -126,7 +126,7 @@ const useStyles = createUseStyles((theme) => ({
     zIndex: 100,
     userSelect: 'none',
 
-    [breakpoints.min.sm]: {
+    [breakpoints.min.smd]: {
       display: 'none',
     },
   },

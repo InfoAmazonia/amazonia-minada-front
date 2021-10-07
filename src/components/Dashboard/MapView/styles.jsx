@@ -8,7 +8,7 @@ const useStyles = createUseStyles(() => ({
     height: '100%',
     position: 'relative',
 
-    [breakpoints.max.sm]: {
+    [breakpoints.max.smd]: {
       height: `calc(100% - ${61 + sizes.infoBarHeaderHeight}px)`,
     },
   },

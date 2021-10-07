@@ -52,7 +52,7 @@ export default function AdvancedSearch() {
   const theme = useTheme();
   const classes = useStyles({ theme });
   const { t } = useTranslation();
-  const sm = useMediaQuery(breakpoints.max.sm);
+  const smd = useMediaQuery(breakpoints.max.smd);
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState([]);
@@ -358,7 +358,7 @@ export default function AdvancedSearch() {
             inputValue === '' && !isSelection() ? null : (
               <Popper
                 ref={autocompleteRef}
-                disablePortal={sm}
+                disablePortal={smd}
                 {...props}
                 className={classes.popper}
               />

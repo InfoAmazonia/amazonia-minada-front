@@ -23,7 +23,7 @@ const useStyles = createUseStyles(() => ({
     flexFlow: 'row nowrap',
     alignItems: 'space-between',
 
-    [breakpoints.max.sm]: {
+    [breakpoints.max.smd]: {
       width: 170,
     },
   },

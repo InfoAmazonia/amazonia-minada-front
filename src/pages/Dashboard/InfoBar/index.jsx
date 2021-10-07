@@ -39,7 +39,7 @@ export default function InfoBar({ searchEnabled }) {
     setValue(newValue);
   };
   const [minimized, setMinimized] = useState(false);
-  const isSm = useMediaQuery(breakpoints.max.sm);
+  const isSmd = useMediaQuery(breakpoints.max.smd);
   const theme = useTheme();
 
   /* This function returns a11y properties */
@@ -54,14 +54,14 @@ export default function InfoBar({ searchEnabled }) {
    * Set minimized value to false when the SM size is setted.
    */
   useEffect(() => {
-    if (isSm) {
+    if (isSmd) {
       setMinimized(false);
     }
-  }, [isSm]);
+  }, [isSmd]);
 
   return (
     <div className={classes.container}>
-      {!isSm && (
+      {!isSmd && (
         <div className={classes.minimizeWrapper}>
           <Button
             className={classes.minimizeButton}
