@@ -11,7 +11,7 @@ const useStyles = createUseStyles(() => ({
     right: 0,
     left: 0,
 
-    [breakpoints.max.sm]: {
+    [breakpoints.max.smd]: {
       flexDirection: 'column-reverse',
       position: 'relative',
       flexWrap: 'nowrap',
@@ -23,7 +23,7 @@ const useStyles = createUseStyles(() => ({
     height: '100%',
     zIndex: 0,
 
-    [breakpoints.max.sm]: {
+    [breakpoints.max.smd]: {
       height: '100vh',
     },
   },

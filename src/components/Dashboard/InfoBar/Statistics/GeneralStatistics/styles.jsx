@@ -14,7 +14,7 @@ const useStyles = createUseStyles(() => ({
     flexFlow: 'row wrap',
     justifyContent: 'space-between',
 
-    [breakpoints.max.sm]: {
+    [breakpoints.max.smd]: {
       width: '100%',
       justifyContent: 'space-around',
     },

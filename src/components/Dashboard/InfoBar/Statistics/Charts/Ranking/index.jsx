@@ -53,7 +53,6 @@ export default function Ranking({
   const classes = useStyles({ theme });
   const { t } = useTranslation();
   const isSmd = useMediaQuery(breakpoints.max.smd);
-  const isSm = useMediaQuery(breakpoints.max.sm);
   const isXsm = useMediaQuery(breakpoints.max.xsm);
   const defaultOptions = useOptions();
 
@@ -122,7 +121,7 @@ export default function Ranking({
       width:
         data.dataType === 'requiredArea' && isXsm
           ? '50%'
-          : isSm
+          : isSmd
           ? '70%'
           : isSmd
           ? '80%'

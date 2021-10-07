@@ -40,7 +40,7 @@ export default function SimpleSearch() {
   const theme = useTheme();
   const classes = useStyles({ theme });
   const { t } = useTranslation();
-  const sm = useMediaQuery(breakpoints.max.sm);
+  const smd = useMediaQuery(breakpoints.max.smd);
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState([]);
@@ -211,7 +211,7 @@ export default function SimpleSearch() {
           inputValue !== '' ? (
             <Popper
               ref={autocompleteRef}
-              disablePortal={sm}
+              disablePortal={smd}
               {...props}
               className={classes.popper}
             />
