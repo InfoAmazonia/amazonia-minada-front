@@ -9,8 +9,8 @@ import useStyles from './styles';
 /**
  * This component represents a requirement list item.
  */
-export default function RequirementListItem({ data }) {
-  RequirementListItem.propTypes = {
+function RequirementListItemComponent({ data }) {
+  RequirementListItemComponent.propTypes = {
     data: PropTypes.PropTypes.shape().isRequired,
   };
 
@@ -163,3 +163,5 @@ export default function RequirementListItem({ data }) {
     </div>
   );
 }
+
+export const RequirementListItem = React.memo(RequirementListItemComponent);

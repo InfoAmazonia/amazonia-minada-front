@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
-import RequirementListItem from '../../../../components/Dashboard/InfoBar/List/RequirementListItem';
+import { RequirementListItem } from '../../../../components/Dashboard/InfoBar/List/RequirementListItem';
 import FilteringContext from '../../../../contexts/filtering';
 import api from '../../../../services/api';
 import useStyles from '../styles';
