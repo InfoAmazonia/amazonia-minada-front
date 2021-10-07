@@ -23,7 +23,7 @@ function RequirementListItemComponent({ data }) {
   }
 
   return (
-    <div className={classes.wrapper}>
+    <li className={classes.wrapper}>
       <div className={classes.company}>
         <Typography
           style={{
@@ -160,7 +160,7 @@ function RequirementListItemComponent({ data }) {
           {data.territory}
         </Typography>
       </div>
-    </div>
+    </li>
   );
 }
 

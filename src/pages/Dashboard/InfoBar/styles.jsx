@@ -42,6 +42,10 @@ const useStyles = createUseStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  listContent: {
+    padding: 0,
+    listStyleType: 'none',
+  },
   listFooter: {
     display: 'flex',
     justifyContent: 'center',

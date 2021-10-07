@@ -182,15 +182,15 @@ export default function List({ tabPanelRef }) {
                 </Typography>
               )}
             </div>
-            <div>
+            <ul className={classes.listContent}>
               {contentList.map((item) => (
                 <RequirementListItem
                   key={`${item.process}-${item.type}`}
                   data={item}
                 />
               ))}
-              <div ref={setEndListRef} />
-            </div>
+              <li ref={setEndListRef} />
+            </ul>
           </>
         )}
         <div className={classes.listFooter}>
