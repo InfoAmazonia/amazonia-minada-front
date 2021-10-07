@@ -5,6 +5,9 @@ import { useTheme } from 'react-jss';
 
 dataExporting(Highcharts);
 
+/**
+ * This hook provides the highcharts default options.
+ */
 export default function useOptions() {
   const theme = useTheme();
   const { t } = useTranslation();

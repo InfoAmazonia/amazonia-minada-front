@@ -112,7 +112,7 @@ export default function AdvancedSearch() {
   useEffect(() => {
     let subscribed = true;
 
-    // The search will work only if the input value has a length bigger than 0 characters and when not is year selection.
+    // The search will work only if the input value has a length bigger than 0 characters and when not is selection.
     if (
       inputValue.length > 0 &&
       inputValue.trim().length > 0 &&
@@ -195,7 +195,7 @@ export default function AdvancedSearch() {
   };
 
   /**
-   * This function handles when the user switches between search types.
+   * This function handles when the user clear the search.
    */
   const handleClearSearch = () => {
     setSearchValue(filterDefaults.searchValue);

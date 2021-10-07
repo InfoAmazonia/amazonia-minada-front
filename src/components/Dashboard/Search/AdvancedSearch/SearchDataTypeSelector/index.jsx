@@ -7,6 +7,9 @@ import { searchDataTypes } from '../../../../../constants/options';
 import FilteringContext from '../../../../../contexts/filtering';
 import useStyles from './styles';
 
+/**
+ * This component renders a search datatype selector.
+ */
 export default function SearchDataTypeSelector() {
   const theme = useTheme();
   const classes = useStyles({ theme });

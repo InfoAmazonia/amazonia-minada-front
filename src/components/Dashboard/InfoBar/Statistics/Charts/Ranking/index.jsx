@@ -6,7 +6,7 @@ import HighchartsReact from 'highcharts-react-official';
 import highchartsMore from 'highcharts/highcharts-more';
 import sankey from 'highcharts/modules/sankey';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
@@ -18,6 +18,9 @@ import useStyles from '../styles';
 highchartsMore(Highcharts);
 sankey(Highcharts);
 
+/**
+ * This function renders a Ranking component.
+ */
 export default function Ranking({
   title,
   data,
@@ -53,7 +56,6 @@ export default function Ranking({
   const isSm = useMediaQuery(breakpoints.max.sm);
   const isXsm = useMediaQuery(breakpoints.max.xsm);
   const defaultOptions = useOptions();
-  const [, /* chartObj */ setChartObj] = useState();
 
   const options = {
     chart: {
@@ -215,13 +217,7 @@ export default function Ranking({
 
   return (
     <div id="container" className={classes.wrapper}>
-      <HighchartsReact
-        highcharts={Highcharts}
-        options={options}
-        callback={(chart) => {
-          setChartObj(chart);
-        }}
-      />
+      <HighchartsReact highcharts={Highcharts} options={options} />
       <div className={classes.tooltip} style={{ right: 55, top: 7 }}>
         <CustomTooltip
           title={`${info} ${t(

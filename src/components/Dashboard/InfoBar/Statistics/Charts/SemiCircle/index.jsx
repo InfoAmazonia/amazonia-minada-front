@@ -1,11 +1,10 @@
-/* eslint-disable no-unused-vars */
 import { InfoOutlined } from '@mui/icons-material/';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import highchartsMore from 'highcharts/highcharts-more';
 import sankey from 'highcharts/modules/sankey';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import { useTheme } from 'react-jss';
 
 import useOptions from '../../../../../../hooks/useOptions';
@@ -15,6 +14,9 @@ import useStyles from '../styles';
 highchartsMore(Highcharts);
 sankey(Highcharts);
 
+/**
+ * This component provides a SemiCircle chart.
+ */
 export default function SemiCircle({ title, data, info }) {
   SemiCircle.propTypes = {
     title: PropTypes.string.isRequired,
@@ -32,7 +34,6 @@ export default function SemiCircle({ title, data, info }) {
   const theme = useTheme();
   const classes = useStyles({ theme });
   const defaultOptions = useOptions();
-  const [chartObj, setChartObj] = useState();
 
   const options = {
     chart: {
@@ -81,13 +82,7 @@ export default function SemiCircle({ title, data, info }) {
 
   return (
     <div id="container" className={classes.wrapper}>
-      <HighchartsReact
-        highcharts={Highcharts}
-        options={options}
-        callback={(chart) => {
-          setChartObj(chart);
-        }}
-      />
+      <HighchartsReact highcharts={Highcharts} options={options} />
       <div className={classes.tooltip}>
         <CustomTooltip title={info} placement="bottom">
           <InfoOutlined

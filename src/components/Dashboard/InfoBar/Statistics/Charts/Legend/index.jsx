@@ -9,6 +9,9 @@ import FilteringContext from '../../../../../../contexts/filtering';
 import useGeneralStyles from '../styles';
 import useStyles from './styles';
 
+/**
+ * This component renders a legend with the respective data.
+ */
 export default function Legend({ data }) {
   Legend.propTypes = {
     data: PropTypes.shape().isRequired,
