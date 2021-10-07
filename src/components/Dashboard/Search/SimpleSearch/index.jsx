@@ -149,6 +149,7 @@ export default function SimpleSearch() {
    */
   useEffect(() => {
     setMobileSearchHeight(simpleSearchRef.current.clientHeight);
+    return () => setMobileSearchHeight(0);
   }, [isSearchExpanded]);
 
   return (

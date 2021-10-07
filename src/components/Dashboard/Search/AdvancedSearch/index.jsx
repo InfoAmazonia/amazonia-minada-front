@@ -273,6 +273,8 @@ export default function AdvancedSearch() {
    */
   useEffect(() => {
     setMobileSearchHeight(advancedSearchRef.current.clientHeight);
+
+    return () => setMobileSearchHeight(0);
   }, [isSearchExpanded, activeFilters]);
 
   return (

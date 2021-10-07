@@ -112,7 +112,11 @@ export default function MapView({
         {legendEnabled && <Legend defaultOpen={legendOpenByDefault} />}
       </div>
       <div
-        style={isSm ? { top: mobileSearchHeight + 30 } : {}}
+        style={
+          isSm
+            ? { top: mobileSearchHeight === 0 ? 15 : mobileSearchHeight + 30 }
+            : {}
+        }
         className={classes.options}
       >
         {visibilityButtonsEnabled && <Visibility />}

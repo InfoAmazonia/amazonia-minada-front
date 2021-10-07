@@ -32,7 +32,7 @@ export function FilteringProvider({ children }) {
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [paramsLoaded, setParamsLoaded] = useState(false);
   const query = useQuery();
-  const [mobileSearchHeight, setMobileSearchHeight] = useState();
+  const [mobileSearchHeight, setMobileSearchHeight] = useState(0);
 
   /**
    * This function handles the UC's visibility.
