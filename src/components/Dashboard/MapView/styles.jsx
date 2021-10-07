@@ -12,6 +12,11 @@ const useStyles = createUseStyles(() => ({
       height: `calc(100% - ${61 + sizes.infoBarHeaderHeight}px)`,
     },
   },
+  wrapperWithoutSm: {
+    width: '100%',
+    height: '100%',
+    position: 'relative',
+  },
   options: {
     position: 'absolute',
     zIndex: 10,

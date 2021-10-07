@@ -28,6 +28,7 @@ export default function MapView({
   shareButtonEnabled,
   legendOpenByDefault,
   legendEnabled,
+  isPanelEnabled,
 }) {
   MapView.defaultProps = {
     northEnabled: embedDefaults.northEnabled,
@@ -37,6 +38,7 @@ export default function MapView({
     shareButtonEnabled: embedDefaults.shareButtonEnabled,
     legendOpenByDefault: embedDefaults.legendOpenByDefault,
     legendEnabled: embedDefaults.legendEnabled,
+    isPanelEnabled: embedDefaults.isPanelEnabled,
   };
 
   MapView.propTypes = {
@@ -47,6 +49,7 @@ export default function MapView({
     shareButtonEnabled: PropTypes.bool,
     legendOpenByDefault: PropTypes.bool,
     legendEnabled: PropTypes.bool,
+    isPanelEnabled: PropTypes.bool,
   };
 
   const theme = useTheme();
@@ -104,7 +107,9 @@ export default function MapView({
   }
 
   return (
-    <div className={classes.wrapper}>
+    <div
+      className={isPanelEnabled ? classes.wrapper : classes.wrapperWithoutSm}
+    >
       <Loader loading={!shapesLoaded} />
       <div className={classes.legendContainerExpanded}>
         {northEnabled && <North />}
