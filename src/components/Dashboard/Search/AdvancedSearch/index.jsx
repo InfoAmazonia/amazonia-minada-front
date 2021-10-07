@@ -40,7 +40,12 @@ export default function AdvancedSearch() {
       requirementPhases,
       availableYears,
     },
-    setters: { setSearchValue, setIsAdvancedSearch, setIsSearchExpanded },
+    setters: {
+      setSearchValue,
+      setIsAdvancedSearch,
+      setIsSearchExpanded,
+      setMobileSearchHeight,
+    },
     loaders: { paramsLoaded },
   } = useContext(FilteringContext);
 
@@ -55,6 +60,7 @@ export default function AdvancedSearch() {
   const inputRef = useRef();
   const autocompleteRef = useRef();
   const [activeFilters, setActiveFilters] = useState([]);
+  const advancedSearchRef = useRef();
 
   /**
    * This function returns if there is active filters.
@@ -262,8 +268,15 @@ export default function AdvancedSearch() {
     </div>
   );
 
+  /**
+   * This useEffect update search height when it is expanded.
+   */
+  useEffect(() => {
+    setMobileSearchHeight(advancedSearchRef.current.clientHeight);
+  }, [isSearchExpanded, activeFilters]);
+
   return (
-    <div className={classes.container}>
+    <div ref={advancedSearchRef} className={classes.container}>
       <div className={classes.searchHeaderWrapper}>
         <div
           style={{ display: isSearchExpanded ? 'block' : 'none' }}

@@ -32,6 +32,7 @@ export function FilteringProvider({ children }) {
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [paramsLoaded, setParamsLoaded] = useState(false);
   const query = useQuery();
+  const [mobileSearchHeight, setMobileSearchHeight] = useState();
 
   /**
    * This function handles the UC's visibility.
@@ -186,6 +187,7 @@ export function FilteringProvider({ children }) {
           reservePhases,
           requirementPhases,
           availableYears,
+          mobileSearchHeight,
         },
         setters: {
           setDataType,
@@ -195,6 +197,7 @@ export function FilteringProvider({ children }) {
           setTiVisibility,
           setIsAdvancedSearch,
           setIsSearchExpanded,
+          setMobileSearchHeight,
         },
         functions: {
           handleUcVisibility,

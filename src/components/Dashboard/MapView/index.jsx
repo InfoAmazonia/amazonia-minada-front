@@ -1,9 +1,12 @@
+import { useMediaQuery } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { useTheme } from 'react-jss';
 import MapGL from 'react-map-gl';
 
+import { breakpoints } from '../../../constants/constraints';
 import { embedDefaults, mapDefaults } from '../../../constants/options';
+import FilteringContext from '../../../contexts/filtering';
 import MapContext from '../../../contexts/mapping';
 import Geodatin from './Geodatin';
 import Legend from './Legend';
@@ -54,6 +57,11 @@ export default function MapView({
     functions: { onMapLoad, onHandleHover, onClick },
   } = useContext(MapContext);
 
+  const isSm = useMediaQuery(breakpoints.max.sm);
+  const {
+    values: { mobileSearchHeight },
+  } = useContext(FilteringContext);
+
   /**
    * This function handles the viewport change according to the max bounds values.
    */
@@ -103,7 +111,10 @@ export default function MapView({
         {zoomEnabled && <Zoom />}
         {legendEnabled && <Legend defaultOpen={legendOpenByDefault} />}
       </div>
-      <div className={classes.options}>
+      <div
+        style={isSm ? { top: mobileSearchHeight + 30 } : {}}
+        className={classes.options}
+      >
         {visibilityButtonsEnabled && <Visibility />}
         {shareButtonEnabled && <Share />}
       </div>

@@ -28,7 +28,12 @@ import useStyles from './styles';
 export default function SimpleSearch() {
   const {
     values: { searchValue, isAdvancedSearch, isSearchExpanded },
-    setters: { setSearchValue, setIsAdvancedSearch, setIsSearchExpanded },
+    setters: {
+      setSearchValue,
+      setIsAdvancedSearch,
+      setIsSearchExpanded,
+      setMobileSearchHeight,
+    },
     loaders: { paramsLoaded },
   } = useContext(FilteringContext);
 
@@ -43,6 +48,7 @@ export default function SimpleSearch() {
   const inputRef = useRef();
   const autocompleteRef = useRef();
   const [firstLoad, setFirstLoad] = useState(true);
+  const simpleSearchRef = useRef();
 
   /**
    * This useEffect loads the search value with the route params.
@@ -138,8 +144,16 @@ export default function SimpleSearch() {
     setIsAdvancedSearch(!isAdvancedSearch);
   };
 
+  /**
+   * This useEffect update search height when it is expanded.
+   */
+  useEffect(() => {
+    setMobileSearchHeight(simpleSearchRef.current.clientHeight);
+  }, [isSearchExpanded]);
+
   return (
     <div
+      ref={simpleSearchRef}
       style={isSearchExpanded ? { height: 85 } : { height: 55 }}
       className={classes.container}
     >

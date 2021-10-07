@@ -34,6 +34,7 @@ const useStyles = createUseStyles((theme) => ({
       },
   },
   popper: {
+    zIndex: 1000,
     '& .MuiPaper-root': {
       backgroundColor: theme.background.primary,
       color: theme.text.primary,
