@@ -31,9 +31,10 @@ const useStyles = createUseStyles(() => ({
     '& div:last-child': {
       marginRight: 0,
     },
-    [breakpoints.max.sm]: {
-      left: '50%',
-      transform: 'translateX(-50%)',
+    [breakpoints.max.smd]: {
+      left: 15,
+      right: 15,
+      transform: 'translateX(0px)',
     },
   },
   legendContainerExpanded: {

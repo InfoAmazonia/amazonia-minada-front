@@ -1,5 +1,7 @@
 import { createUseStyles } from 'react-jss';
 
+import { breakpoints } from '../../../../constants/constraints';
+
 const useStyles = createUseStyles((theme) => ({
   container: {
     backgroundColor: theme.background.primary,
@@ -11,6 +13,10 @@ const useStyles = createUseStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     whiteSpace: 'nowrap',
+
+    [breakpoints.max.smd]: {
+      width: '100%',
+    },
   },
   button: {
     '&.MuiButtonBase-root': {
@@ -30,6 +36,9 @@ const useStyles = createUseStyles((theme) => ({
       },
       '&:last-of-type': {
         borderRadius: '0px 5px 5px 0px',
+      },
+      [breakpoints.max.smd]: {
+        minWidth: 'calc(50% - 1px)',
       },
     },
   },

@@ -131,7 +131,9 @@
     "map": {
       "visibility": {
         "ti": "Terras Indígenas",
-        "uc": "Unidades de Conservação"
+        "uc": "Unidades de Conservação",
+        "ucAbbrv": "Un. Conservação",
+        "tiAbbrv": "T. Indígenas"
       },
       "loadingShapes": "Carregando os requerimentos..."
     },

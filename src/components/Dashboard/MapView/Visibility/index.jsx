@@ -1,4 +1,4 @@
-import { Button, Typography } from '@mui/material';
+import { Button, Typography, useMediaQuery } from '@mui/material';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
@@ -17,6 +17,8 @@ export default function Visibility() {
     values: { ucVisibility, tiVisibility },
     functions: { handleUcVisibility, handleTiVisibility },
   } = useContext(FilteringContext);
+  const isSmall = useMediaQuery('@media (max-width: 440px)');
+  const isVerySmall = useMediaQuery('@media (max-width: 350px)');
 
   return (
     <div className={classes.container}>
@@ -34,7 +36,9 @@ export default function Visibility() {
             fontWeight: 500,
           }}
         >
-          {t('dashboard.map.visibility.ti')}
+          {isVerySmall
+            ? t('dashboard.map.visibility.tiAbbrv')
+            : t('dashboard.map.visibility.ti')}
         </Typography>
       </Button>
       <span className={classes.separator} />
@@ -52,7 +56,9 @@ export default function Visibility() {
             fontWeight: 500,
           }}
         >
-          {t('dashboard.map.visibility.uc')}
+          {isSmall
+            ? t('dashboard.map.visibility.ucAbbrv')
+            : t('dashboard.map.visibility.uc')}
         </Typography>
       </Button>
     </div>
