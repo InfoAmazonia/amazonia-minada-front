@@ -18,7 +18,7 @@ export default function Visibility() {
     functions: { handleUcVisibility, handleTiVisibility },
   } = useContext(FilteringContext);
   const isSmall = useMediaQuery('@media (max-width: 440px)');
-  const isVerySmall = useMediaQuery('@media (max-width: 350px)');
+  const isVerySmall = useMediaQuery('@media (max-width: 360px)');
 
   return (
     <div className={classes.container}>

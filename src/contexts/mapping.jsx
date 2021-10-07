@@ -538,15 +538,25 @@ export function MapProvider({ children }) {
    */
   function onHandleHover(event) {
     const { features } = event;
-    const feature =
+    const filteredFeatures =
       features &&
-      features.find(
+      features.filter(
         (f) =>
           f.layer.id === 'unity-requeriments-layer-fill' ||
           f.layer.id === 'am-minada-requerimentos_UCs_fill' ||
           f.layer.id === 'reserve-requeriments-layer-fill' ||
           f.layer.id === 'am-minada-requerimentos-TI_fill'
       );
+
+    let feature;
+
+    if (filteredFeatures.length > 0) {
+      filteredFeatures.forEach((f) => {
+        if (!feature && f.layer.paint['fill-opacity'] > 0) {
+          feature = f;
+        }
+      });
+    }
 
     if (drag) {
       setCursor('grabbing');
