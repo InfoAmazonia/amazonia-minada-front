@@ -2,10 +2,11 @@ import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import { Button, Tab, Tabs, Typography, useMediaQuery } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
+import CustomButton from '../../../components/CustomButton';
 import TabPanel from '../../../components/Dashboard/InfoBar/TabPanel';
 import AdvancedSearch from '../../../components/Dashboard/Search/AdvancedSearch';
 import SimpleSearch from '../../../components/Dashboard/Search/SimpleSearch';
@@ -39,7 +40,9 @@ export default function InfoBar({ searchEnabled }) {
     setValue(newValue);
   };
   const [minimized, setMinimized] = useState(false);
+  const [offset, setOffset] = useState(0);
   const isSmd = useMediaQuery(breakpoints.max.smd);
+  const infoBarRef = useRef();
   const theme = useTheme();
 
   /* This function returns a11y properties */
@@ -59,8 +62,30 @@ export default function InfoBar({ searchEnabled }) {
     }
   }, [isSmd]);
 
+  /**
+   * This function handle when infobar is opened or closed.
+   */
+  const handleInfoBarExhibition = (opened) => {
+    if (opened) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 500, behavior: 'smooth' });
+    }
+  };
+
+  /**
+   * This useEffect set offset when page is scrolled.
+   */
+  useEffect(() => {
+    const setOpened = () => {
+      setOffset(window.scrollY);
+    };
+
+    window.addEventListener('scroll', setOpened);
+  }, []);
+
   return (
-    <div className={classes.container}>
+    <div ref={infoBarRef} className={classes.container}>
       {!isSmd && (
         <div className={classes.minimizeWrapper}>
           <Button
@@ -96,20 +121,32 @@ export default function InfoBar({ searchEnabled }) {
             {isAdvancedSearch ? <AdvancedSearch /> : <SimpleSearch />}
           </div>
         )}
-        <div className={classes.dropBar}>
+        <CustomButton
+          className={classes.dropBar}
+          handleOnClick={() => handleInfoBarExhibition(offset > 300)}
+        >
           <Typography
             style={{
               color: theme.text.secondary,
               fontWeight: 500,
             }}
           >
-            {t('dashboard.infoPanel.dropBar.viewStatistics')}
+            {offset > 300
+              ? t('dashboard.infoPanel.dropBar.viewMap')
+              : t('dashboard.infoPanel.dropBar.viewStatistics')}
           </Typography>
           <ExpandLessRoundedIcon
             className={classes.arrowIcon}
-            style={{ color: theme.text.secondary }}
+            style={{
+              color: theme.text.secondary,
+              transform:
+                offset > 300
+                  ? 'translateY(-50%) rotate(0deg)'
+                  : 'translateY(-50%) rotate(180deg)',
+            }}
           />
-        </div>
+        </CustomButton>
+
         <Tabs
           className={classes.tab}
           value={value}

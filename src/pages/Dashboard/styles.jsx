@@ -15,7 +15,7 @@ const useStyles = createUseStyles(() => ({
       flexDirection: 'column-reverse',
       position: 'relative',
       flexWrap: 'nowrap',
-      overflow: 'hidden',
+      /*       overflow: 'hidden', */
     },
   },
   mapWrapper: {
