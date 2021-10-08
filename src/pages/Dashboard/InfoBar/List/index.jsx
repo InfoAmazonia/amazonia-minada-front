@@ -1,3 +1,4 @@
+/* eslint import/no-unresolved: off */
 import GetAppIcon from '@mui/icons-material/GetApp';
 import { Button, CircularProgress, Typography } from '@mui/material';
 import useIntersectionObserver from '@react-hook/intersection-observer';
