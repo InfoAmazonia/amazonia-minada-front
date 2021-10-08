@@ -13,3 +13,16 @@ Logo após a configuração, você deve executar um comando para instalar as dep
 Agora, para executar em ambiente de desenvolvimento, use o seguinte comando:
 
     $ yarn install
+
+## **Diretórios do projeto**
+
+O código fonte em ReactJS se encontra dentro do diretório **_/src_** na raíz do projeto. Cada pasta que se localiza dentro do **/_src_** foi criada para dividir o projeto em seções de acordo com o tipo de função que os arquivos ali existentes realizam. A organização dos diretórios foi realizada da seguinte forma:
+
+1. `/assets` possui o conjunto de recursos estáticos da aplicação, como imagens e o **_.css_** padrão utilizado para configurar o nosso projeto.
+2. `/components`
+3. `/constants`
+4. `/contexts`
+5. `/hooks`
+6. `/i18n`
+7. `/pages`
+8. `/services`
