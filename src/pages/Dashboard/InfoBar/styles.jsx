@@ -115,7 +115,7 @@ const useStyles = createUseStyles((theme) => ({
   },
   dropBar: {
     width: '100%',
-    height: 54,
+    minHeight: 54,
     backgroundColor: theme.background.primary,
     borderBottom: `1px solid ${theme.separator}`,
     display: 'flex',

@@ -62,7 +62,8 @@
     },
     "infoPanel": {
       "dropBar": {
-        "viewStatistics": "Visualizar estatísticas"
+        "viewStatistics": "Visualizar estatísticas",
+        "viewMap": "Visualizar mapa"
       },
       "statistics": {
         "title": "Estatísticas",
