@@ -4,7 +4,7 @@ Esse repositório contém o código fonte do Front End do Amazônia Minada, proj
 
 ## **Como executar**
 
-Para executar o projeto, inicialmente é necessário criar um arquivo `.env` com as configurações que são exemplificadas no arquivo `.env.example`.
+Para executar o projeto, inicialmente é necessário criar um arquivo **_.env_** com as configurações que são exemplificadas no arquivo **_.env.example_**.
 
 Logo após a configuração, você deve executar um comando para instalar as dependências do projeto:
 
@@ -20,9 +20,9 @@ O código fonte em ReactJS se encontra dentro do diretório **_/src_** na raíz 
 
 1. `/assets` possui o conjunto de recursos estáticos da aplicação, como imagens e o **_.css_** padrão utilizado para configurar o nosso projeto.
 2. `/components`
-3. `/constants`
-4. `/contexts`
+3. `/constants` possui arquivos com constantes utilizadas por todo o projeto, como parâmetros iniciais da aplicação, tematização e regras de responsividade.
+4. `/contexts` possui os arquivos responsáveis por fornecer dados em comum para aplicação.
 5. `/hooks`
-6. `/i18n`
+6. `/i18n` contém a estrutura e a configuração necessária para disponibilizar recursos de tradução.
 7. `/pages`
-8. `/services`
+8. `/services` possui arquivos que recorrem recursos externos da aplicação, como por exemplo a API.
