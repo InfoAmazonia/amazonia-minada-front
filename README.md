@@ -4,7 +4,7 @@ Esse repositório contém o código fonte do Front End do Amazônia Minada, proj
 
 ## **Como executar**
 
-Para executar o projeto, inicialmente é necessário criar um arquivo **_.env_** com as configurações que são exemplificadas no arquivo **_.env.example_**.
+Para executar o projeto, inicialmente é necessário criar um arquivo `.env` com as configurações que são exemplificadas no arquivo `.env.example`.
 
 Logo após a configuração, você deve executar um comando para instalar as dependências do projeto:
 
