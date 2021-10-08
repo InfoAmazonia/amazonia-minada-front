@@ -12,7 +12,17 @@ Logo após a configuração, você deve executar um comando para instalar as dep
 
 Agora, para executar em ambiente de desenvolvimento, use o seguinte comando:
 
-    $ yarn install
+    $ yarn start
+
+### **Utilizando Docker**
+
+Uma vez já configurado o **_.env_**, caso prefira executar o projeto utilizando Docker, neste repositório é disponibilizado um shell script responsável por subir a aplicação em ambiente de desenvolvimento, para isso execute no terminal:
+
+    $ sudo bash ./run-app-deploy.sh --dev
+
+Ou ambiente de produção (--prod):
+
+    $ sudo bash ./run-app-deploy.sh --prod
 
 ## **Diretórios do projeto**
 
