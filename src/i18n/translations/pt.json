@@ -21,7 +21,7 @@
         "unity": "Unidade de Conservação",
         "substance": "Substância",
         "reserveEthnicity": "Etnia indígena",
-        "year": "Ano de abertura",
+        "year": "Ano de solicitação",
         "requirementPhase": "Fase de requerimento",
         "reservePhase": "Fase de homologação"
       },
@@ -58,7 +58,7 @@
         "availableMiningArea": "Disponibilidade"
       },
       "requiredArea": "Área requerida",
-      "requirementsIncidence": "Incidência de requerimentos"
+      "requirementsIncidence": "Total de requerimentos"
     },
     "infoPanel": {
       "dropBar": {

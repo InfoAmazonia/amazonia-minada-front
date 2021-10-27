@@ -135,7 +135,7 @@ export default function useOptions() {
         boxShadow: '0px 0px 2px 1px rgba(0, 0, 0, 0.2)',
       },
       menuItemStyle: { color: theme.text.primary },
-      menuItemHoverStyle: { background: theme.primary },
+      menuItemHoverStyle: { background: theme.separator },
     },
     exporting: {
       enabled: true,
@@ -144,10 +144,10 @@ export default function useOptions() {
         lineDelimiter: '\n',
         decimalPoint: '.',
         columnHeaderFormatter(item /* key */) {
-          if (item.name) {
-            return item.name;
+          if (item) {
+            return item.name ? item.name : '';
           }
-          return 'Data';
+          return 'Dado';
         },
       },
       chartOptions: {
