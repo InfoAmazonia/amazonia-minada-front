@@ -84,6 +84,10 @@ export const searchDataTypes = {
     key: 'year',
     translation: 'dashboard.search.grouping.year',
   },
+  use: {
+    key: 'use',
+    translation: 'dashboard.search.grouping.use',
+  },
   requirementPhase: {
     key: 'requirementPhase',
     translation: 'dashboard.search.grouping.requirementPhase',
@@ -108,6 +112,7 @@ export const propertyTypes = {
   reserve: { key: 'reserve' },
   unit: { key: 'unit' },
   year: { key: 'year' },
+  use: { key: 'use' },
   substance: { key: 'substance' },
   reservePhase: { key: 'reservePhase' },
   reserveEthnicity: { key: 'reserveEthnicity' },

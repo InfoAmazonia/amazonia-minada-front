@@ -22,7 +22,8 @@
         "substance": "Substância",
         "reserveEthnicity": "Etnia indígena",
         "year": "Ano de solicitação",
-        "requirementPhase": "Fase de requerimento",
+        "use": "Uso",
+        "requirementPhase": "Fase do processo minerário",
         "reservePhase": "Fase de homologação"
       },
       "searchFor": "Procurar por",

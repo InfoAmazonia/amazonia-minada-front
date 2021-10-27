@@ -39,6 +39,7 @@ export default function AdvancedSearch() {
       reservePhases,
       requirementPhases,
       availableYears,
+      uses,
     },
     setters: {
       setSearchValue,
@@ -73,7 +74,8 @@ export default function AdvancedSearch() {
   const isSelection = () =>
     searchDataType === 'year' ||
     searchDataType === 'requirementPhase' ||
-    searchDataType === 'reservePhase';
+    searchDataType === 'reservePhase' ||
+    searchDataType === 'use';
 
   /**
    * This function clear the autocomplete selection.
@@ -93,6 +95,8 @@ export default function AdvancedSearch() {
       setOptions(requirementPhases);
     } else if (searchDataType === 'reservePhase') {
       setOptions(reservePhases);
+    } else if (searchDataType === 'use') {
+      setOptions(uses);
     }
     clearAutocomplete();
   }, [searchDataType]);

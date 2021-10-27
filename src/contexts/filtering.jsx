@@ -28,6 +28,7 @@ export function FilteringProvider({ children }) {
   const { data: reservePhases } = useFetch('/reserves/phase');
   const { data: requirementPhases } = useFetch('/invasions/phase');
   const { data: availableYears } = useFetch('/invasions/years');
+  const { data: uses } = useFetch('/invasions/uses');
   const [isAdvancedSearch, setIsAdvancedSearch] = useState(false);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [paramsLoaded, setParamsLoaded] = useState(false);
@@ -188,6 +189,7 @@ export function FilteringProvider({ children }) {
           requirementPhases,
           availableYears,
           mobileSearchHeight,
+          uses,
         },
         setters: {
           setDataType,

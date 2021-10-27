@@ -55,6 +55,7 @@ export const lightScheme = {
     substance: '#128c7E',
     reserveEthnicity: '#FF6846',
     year: '#FF0021',
+    use: '#E8E6E3',
     requirementPhase: '#3B5998',
     reservePhase: '#DF374E',
   },
