@@ -49,7 +49,7 @@ const useStyles = createUseStyles((theme) => ({
   listFooter: {
     display: 'flex',
     justifyContent: 'center',
-    padding: '5px 0px 5px 0px',
+    padding: '5px 0px 20px 0px',
   },
   tab: {
     position: 'relative',

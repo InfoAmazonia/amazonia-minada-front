@@ -101,10 +101,10 @@ function RequirementListItemComponent({ data }) {
             style={{ color: theme.text.secondary, fontSize: 11 }}
             variant="caption"
           >
-            {t(`dashboard.infoPanel.list.item.state`)}
+            {t(`dashboard.infoPanel.list.item.territory`)}
           </Typography>
           <Typography style={{ color: theme.text.primary }} variant="body1">
-            {data.state}
+            {data.territory}
           </Typography>
         </div>
 
@@ -113,10 +113,10 @@ function RequirementListItemComponent({ data }) {
             style={{ color: theme.text.secondary, fontSize: 11 }}
             variant="caption"
           >
-            {t(`dashboard.infoPanel.list.item.substance`)}
+            {t(`dashboard.infoPanel.list.item.state`)}
           </Typography>
           <Typography style={{ color: theme.text.primary }} variant="body1">
-            {data.substance}
+            {data.state}
           </Typography>
         </div>
 
@@ -147,6 +147,42 @@ function RequirementListItemComponent({ data }) {
             </div>
           </>
         )}
+
+        <div className={classes.infoItem}>
+          <Typography
+            style={{ color: theme.text.secondary, fontSize: 11 }}
+            variant="caption"
+          >
+            {t(`dashboard.infoPanel.list.item.substance`)}
+          </Typography>
+          <Typography style={{ color: theme.text.primary }} variant="body1">
+            {data.substance}
+          </Typography>
+        </div>
+
+        <div className={classes.infoItem}>
+          <Typography
+            style={{ color: theme.text.secondary, fontSize: 11 }}
+            variant="caption"
+          >
+            {t(`dashboard.infoPanel.list.item.use`)}
+          </Typography>
+          <Typography style={{ color: theme.text.primary }} variant="body1">
+            {data.use}
+          </Typography>
+        </div>
+      </div>
+
+      <div>
+        <Typography
+          style={{ color: theme.text.secondary, fontSize: 11 }}
+          variant="caption"
+        >
+          {t(`dashboard.infoPanel.list.item.miningProcess`)}
+        </Typography>
+        <Typography style={{ color: theme.text.primary }} variant="body1">
+          {data.miningProcess}
+        </Typography>
       </div>
 
       <div style={{ marginBottom: 10 }}>
@@ -154,10 +190,10 @@ function RequirementListItemComponent({ data }) {
           style={{ color: theme.text.secondary, fontSize: 11 }}
           variant="caption"
         >
-          {t(`dashboard.infoPanel.list.item.territory`)}
+          {t(`dashboard.infoPanel.list.item.lastEvent`)}
         </Typography>
         <Typography style={{ color: theme.text.primary }} variant="body1">
-          {data.territory}
+          {data.lastEvent}
         </Typography>
       </div>
     </li>
