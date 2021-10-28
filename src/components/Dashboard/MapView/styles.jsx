@@ -57,6 +57,43 @@ const useStyles = createUseStyles(() => ({
       transform: 'translateY(-50%)',
     },
   },
+  refs: {
+    bottom: 7,
+    display: 'flex',
+    position: 'absolute',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    '& > *': {
+      marginRight: 20,
+    },
+    '& div:last-child': {
+      marginRight: 0,
+    },
+    '@media (max-width: 980px)': {
+      bottom: 25,
+    },
+    '@media (max-width: 640px)': {
+      bottom: 7,
+    },
+  },
+  refsLeft: {
+    bottom: 7,
+    display: 'flex',
+    position: 'absolute',
+    left: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    '& > *': {
+      marginRight: 20,
+    },
+    '& div:last-child': {
+      marginRight: 0,
+    },
+  },
 }));
 
 export default useStyles;

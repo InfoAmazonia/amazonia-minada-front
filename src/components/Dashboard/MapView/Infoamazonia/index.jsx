@@ -1,6 +1,6 @@
 import React from 'react';
 
-import InfoamazoniaLogo from '../../../../assets/images/geodatin_map.svg';
+import InfoamazoniaLogo from '../../../../assets/images/infoamazonia_map.svg';
 import useStyles from './styles';
 
 /**

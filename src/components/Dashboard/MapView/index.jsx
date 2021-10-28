@@ -156,8 +156,12 @@ export default function MapView({
         }}
       >
         {popup}
-        <Infoamazonia />
-        <Geodatin />
+        <div className={classes.refs}>
+          <Infoamazonia />
+        </div>
+        <div className={classes.refsLeft}>
+          <Geodatin />
+        </div>
       </MapGL>
     </div>
   );
