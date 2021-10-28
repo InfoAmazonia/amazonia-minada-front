@@ -38,7 +38,7 @@ export const embedDefaults = {
   visibilityButtonsEnabled: true,
   navigationEnabled: true,
   shareButtonEnabled: true,
-  legendOpenByDefault: false,
+  legendOpenByDefault: window.innerWidth > 800,
   legendEnabled: true,
   panelEnabled: true,
   searchEnabled: true,

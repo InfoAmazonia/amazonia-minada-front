@@ -37,7 +37,9 @@
     },
     "legend": {
       "territorialTitle": "Unidades territoriais",
-      "miningProcessesTitle": "Processos minerários"
+      "miningProcessesTitle": "Processos minerários",
+      "indigenousLand": "Terra indígena",
+      "protectedArea": "Unidade de conservação integral"
     },
     "dataType": {
       "territorialUnits": {
