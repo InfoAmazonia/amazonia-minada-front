@@ -9,6 +9,7 @@ import { embedDefaults, mapDefaults } from '../../../constants/options';
 import FilteringContext from '../../../contexts/filtering';
 import MapContext from '../../../contexts/mapping';
 import Geodatin from './Geodatin';
+import Infoamazonia from './Infoamazonia';
 import Legend from './Legend';
 import Loader from './Loader';
 import North from './North';
@@ -155,6 +156,7 @@ export default function MapView({
         }}
       >
         {popup}
+        <Infoamazonia />
         <Geodatin />
       </MapGL>
     </div>
