@@ -77,7 +77,33 @@ export default function SemiCircle({ title, data, info }) {
     },
     navigation: defaultOptions.navigation,
     lang: defaultOptions.lang,
-    exporting: defaultOptions.exporting,
+    exporting: {
+      ...defaultOptions.exporting,
+      chartOptions: {
+        chart: {
+          events: null,
+          style: {
+            backgroundColor: theme.background.primary,
+          },
+        },
+        plotOptions: {
+          pie: {
+            dataLabels: {
+              enabled: true,
+              verticalAlign: 'top',
+              useHTML: true,
+              formatter() {
+                return `<b>${
+                  this.point.name
+                }</b>:<br>${this.point.total.toLocaleString()} ${
+                  data.dataType === 'requiredArea' ? 'ha' : ''
+                } <br>(${this.percentage.toFixed(2)}%)`;
+              },
+            },
+          },
+        },
+      },
+    },
   };
 
   return (

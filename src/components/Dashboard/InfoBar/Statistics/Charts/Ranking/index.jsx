@@ -108,16 +108,21 @@ export default function Ranking({
       labels: {
         enabled: false,
       },
-      stackLabels: data.dataType === 'requirementsIncidence' && {
-        enabled: true,
-        style: {
-          color: theme.text.tertiary,
-          textOutline: false,
-          fontSize: '12px',
-          fontWeight: 800,
-          fontFamily: `"Manrope", "Roboto", "Helvetica", "Arial", sans-serif`,
-        },
-      },
+      stackLabels:
+        data.dataType === 'requiredArea'
+          ? {
+              enabled: false,
+            }
+          : {
+              enabled: true,
+              style: {
+                color: theme.text.tertiary,
+                textOutline: false,
+                fontSize: '12px',
+                fontWeight: 800,
+                fontFamily: `"Manrope", "Roboto", "Helvetica", "Arial", sans-serif`,
+              },
+            },
       width:
         data.dataType === 'requiredArea' && isXsm
           ? '50%'
@@ -153,22 +158,13 @@ export default function Ranking({
         pointStart: 0,
         stacking: 'normal',
         dataLabels: {
-          enabled: true,
-          style:
-            data.dataType === 'requiredArea'
-              ? {
-                  color: theme.text.tertiary,
-                  textOutline: false,
-                  fontSize: '12px',
-                  fontWeight: 500,
-                }
-              : {
-                  color: theme.text.primary,
-                  textOutline: false,
-                  fontSize: '12px',
-                  fontWeight: 800,
-                  fontFamily: `"Manrope", "Roboto", "Helvetica", "Arial", sans-serif`,
-                },
+          enabled: data.dataType === 'requiredArea',
+          style: {
+            color: theme.text.tertiary,
+            textOutline: false,
+            fontSize: '12px',
+            fontWeight: 500,
+          },
           formatter() {
             if (data.dataType === 'requiredArea') {
               return `${t('general.roundNumber', {
@@ -187,6 +183,54 @@ export default function Ranking({
     lang: defaultOptions.lang,
     exporting: {
       ...defaultOptions.exporting,
+      chartOptions: {
+        chart: {
+          events: null,
+          style: {
+            backgroundColor: theme.background.primary,
+          },
+        },
+        legend: {
+          enabled: true,
+        },
+        yAxis: {
+          ...defaultOptions.yAxis,
+          gridLineWidth: 0,
+          title: {
+            enabled: false,
+          },
+          labels: {
+            enabled: false,
+          },
+          stackLabels: {
+            enabled: true,
+            style: {
+              color: theme.text.tertiary,
+              textOutline: false,
+              fontSize: '12px',
+              fontWeight: 800,
+              fontFamily: `"Manrope", "Roboto", "Helvetica", "Arial", sans-serif`,
+            },
+            formatter() {
+              if (data.dataType === 'requiredArea') {
+                return `${t('general.roundNumber', {
+                  value: this.total,
+                })} ha`;
+              }
+              return `${t('general.roundNumber', {
+                value: this.total,
+              })}`;
+            },
+          },
+        },
+        plotOptions: {
+          series: {
+            dataLabels: {
+              enabled: false,
+            },
+          },
+        },
+      },
       buttons: {
         order: {
           symbol: rankingOrder ? 'triangle-down' : 'triangle',
