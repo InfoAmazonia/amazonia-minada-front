@@ -75,9 +75,7 @@ export default function Legend({ defaultOpen }) {
                 }}
               />
               <Typography style={{ color: theme.text.primary }}>
-                {t(
-                  'dashboard.dataType.territorialUnits.indigenousLand.singular'
-                )}
+                {t('dashboard.legend.indigenousLand')}
               </Typography>
             </div>
             <div className={classes.item}>
@@ -88,9 +86,7 @@ export default function Legend({ defaultOpen }) {
                 }}
               />
               <Typography style={{ color: theme.text.primary }}>
-                {t(
-                  'dashboard.dataType.territorialUnits.protectedArea.singular'
-                )}
+                {t('dashboard.legend.protectedArea')}
               </Typography>
             </div>
           </div>
