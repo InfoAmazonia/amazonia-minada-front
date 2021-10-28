@@ -33,7 +33,8 @@
       "doSimpleSearch": "Realizar filtragem simples",
       "clearSearch": "Limpar pesquisa",
       "minimize": "Minimizar",
-      "searchInfo": "Na filtragem simples é permitido realizar a busca por um filtro único. Na filtragem avançada, é permitido realizar a busca por filtros múltiplos."
+      "searchInfo1": "Na filtragem simples é permitido realizar a busca por um filtro único.\n",
+      "searchInfo2": "Na filtragem avançada você pode realizar diferentes combinações de filtros, selecionando tipos e buscando elementos. Na pesquisa, os filtros do mesmo tipo funcionam como uma soma, já os filtros de tipos diferentes funcionam como uma interseção. Por exemplo: Selecionando dois solicitantes e um estado, o resultado das buscas irá trazer a soma dos resultados dos solicitantes dentro do determinado estado."
     },
     "legend": {
       "territorialTitle": "Unidades territoriais",

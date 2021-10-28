@@ -230,7 +230,13 @@ export default function SimpleSearch() {
         style={{ opacity: isSearchExpanded ? 1 : 0 }}
       >
         <CustomTooltip
-          title={t('dashboard.search.searchInfo')}
+          title={
+            <span style={{ whiteSpace: 'pre-line' }}>
+              {t('dashboard.search.searchInfo1')}
+
+              {t('dashboard.search.searchInfo2')}
+            </span>
+          }
           placement="bottom"
         >
           <InfoOutlined

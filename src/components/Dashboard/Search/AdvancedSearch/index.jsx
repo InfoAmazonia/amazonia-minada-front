@@ -400,7 +400,13 @@ export default function AdvancedSearch() {
         >
           <div style={{ display: 'flex', flexFlow: 'row nowrap' }}>
             <CustomTooltip
-              title={t('dashboard.search.searchInfo')}
+              title={
+                <span style={{ whiteSpace: 'pre-line' }}>
+                  {t('dashboard.search.searchInfo1')}
+
+                  {t('dashboard.search.searchInfo2')}
+                </span>
+              }
               placement="bottom"
             >
               <InfoOutlined
