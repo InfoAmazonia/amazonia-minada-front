@@ -183,6 +183,21 @@ export default function Ranking({
     lang: defaultOptions.lang,
     exporting: {
       ...defaultOptions.exporting,
+      csv: {
+        itemDelimiter: ',',
+        lineDelimiter: '\n',
+        decimalPoint: '.',
+        columnHeaderFormatter(item /* key */) {
+          if (item) {
+            return item.name
+              ? data.dataType === 'requiredArea'
+                ? `Área requerida (ha) - ${item.name}`
+                : `Total de requerimentos - ${item.name}`
+              : 'Território';
+          }
+          return 'Dado';
+        },
+      },
       chartOptions: {
         chart: {
           events: null,
