@@ -104,6 +104,18 @@
             "ethnicity": {
               "title": "Ranking de etnias por",
               "info": "Este gráfico apresenta o ranking de etnias indígenas por"
+            },
+            "use": {
+              "title": "Ranking de usos por",
+              "info": "Este gráfico apresenta o ranking de usos por"
+            },
+            "substance": {
+              "title": "Ranking de substâncias por",
+              "info": "Este gráfico apresenta o ranking de substâncias por"
+            },
+            "requirementPhase": {
+              "title": "Ranking de fases de processo minerário por",
+              "info": "Este gráfico apresenta o ranking de fases de processo minerário por"
             }
           }
         }

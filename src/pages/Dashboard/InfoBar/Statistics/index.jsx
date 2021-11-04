@@ -85,6 +85,31 @@ export default function Statistics() {
   const [ethnicityRankingOrder, setEthnicityRankingOrder] = useState(true);
 
   /**
+   * Use ranking states
+   */
+  const [useRankingData, setUseRankingData] = useState();
+  const [useRankingTotalPages, setUseRankingTotalPages] = useState(1);
+  const [useRankingPage, setUseRankingPage] = useState(1);
+  const [useRankingOrder, setUseRankingOrder] = useState(true);
+
+  /**
+   * Substance ranking states
+   */
+  const [substanceRankingData, setSubstanceRankingData] = useState();
+  const [substanceRankingTotalPages, setSubstanceRankingTotalPages] =
+    useState(1);
+  const [substanceRankingPage, setSubstanceRankingPage] = useState(1);
+  const [substanceRankingOrder, setSubstanceRankingOrder] = useState(true);
+
+  /**
+   * Requirement phase ranking states
+   */
+  const [phaseRankingData, setPhaseRankingData] = useState();
+  const [phaseRankingTotalPages, setPhaseRankingTotalPages] = useState(1);
+  const [phaseRankingPage, setPhaseRankingPage] = useState(1);
+  const [phaseRankingOrder, setPhaseRankingOrder] = useState(true);
+
+  /**
    * This useEffect set all rankings to page one when the search is modified.
    */
   useEffect(() => {
@@ -93,6 +118,9 @@ export default function Statistics() {
     setProtectedAreaRankingPage(1);
     setCompanyRankingPage(1);
     setEthnicityRankingTotalPages(1);
+    setUseRankingTotalPages(1);
+    setSubstanceRankingTotalPages(1);
+    setPhaseRankingTotalPages(1);
   }, [searchValue]);
 
   /**
@@ -133,6 +161,33 @@ export default function Statistics() {
     }
     if (companyRankingData) {
       setCompanyRankingData((prev) => ({
+        ...prev,
+        series: prev.series.map((serie) => ({
+          ...serie,
+          visible: getVisibility(serie.id),
+        })),
+      }));
+    }
+    if (useRankingData) {
+      setUseRankingData((prev) => ({
+        ...prev,
+        series: prev.series.map((serie) => ({
+          ...serie,
+          visible: getVisibility(serie.id),
+        })),
+      }));
+    }
+    if (substanceRankingData) {
+      setSubstanceRankingData((prev) => ({
+        ...prev,
+        series: prev.series.map((serie) => ({
+          ...serie,
+          visible: getVisibility(serie.id),
+        })),
+      }));
+    }
+    if (phaseRankingData) {
+      setPhaseRankingData((prev) => ({
         ...prev,
         series: prev.series.map((serie) => ({
           ...serie,
@@ -458,6 +513,153 @@ export default function Statistics() {
     tiVisibility,
   ]);
 
+  /**
+   * This userEffect fetch use ranking data.
+   */
+  useEffect(() => {
+    let isSubscribed = true;
+    api
+      .post(
+        `/invasions/ranking/use/${dataType}`,
+        {
+          filters: searchValue,
+          enableUnity: ucVisibility,
+          enableReserve: tiVisibility,
+        },
+        {
+          params: {
+            page: useRankingPage,
+            sortOrder: useRankingOrder ? 'DESC' : 'ASC',
+          },
+        }
+      )
+      .then(({ data }) => {
+        if (isSubscribed) {
+          if (data) {
+            setUseRankingTotalPages(data.pageAmount);
+            data.series = data.series.map((obj) => {
+              obj.color = theme.territorialUnits[obj.id];
+              obj.visible = getVisibility(obj.id);
+              obj.name = t(
+                `dashboard.dataType.territorialUnits.${obj.id}.singular`
+              );
+              return obj;
+            });
+          }
+          setUseRankingData(data);
+        }
+      });
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [
+    searchValue,
+    dataType,
+    useRankingPage,
+    useRankingOrder,
+    ucVisibility,
+    tiVisibility,
+  ]);
+
+  /**
+   * This userEffect fetch substance ranking data.
+   */
+  useEffect(() => {
+    let isSubscribed = true;
+    api
+      .post(
+        `/invasions/ranking/substance/${dataType}`,
+        {
+          filters: searchValue,
+          enableUnity: ucVisibility,
+          enableReserve: tiVisibility,
+        },
+        {
+          params: {
+            page: substanceRankingPage,
+            sortOrder: substanceRankingOrder ? 'DESC' : 'ASC',
+          },
+        }
+      )
+      .then(({ data }) => {
+        if (isSubscribed) {
+          if (data) {
+            setSubstanceRankingTotalPages(data.pageAmount);
+            data.series = data.series.map((obj) => {
+              obj.color = theme.territorialUnits[obj.id];
+              obj.visible = getVisibility(obj.id);
+              obj.name = t(
+                `dashboard.dataType.territorialUnits.${obj.id}.singular`
+              );
+              return obj;
+            });
+          }
+          setSubstanceRankingData(data);
+        }
+      });
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [
+    searchValue,
+    dataType,
+    substanceRankingPage,
+    substanceRankingOrder,
+    ucVisibility,
+    tiVisibility,
+  ]);
+
+  /**
+   * This userEffect fetch phase ranking data.
+   */
+  useEffect(() => {
+    let isSubscribed = true;
+    api
+      .post(
+        `/invasions/ranking/requirementPhase/${dataType}`,
+        {
+          filters: searchValue,
+          enableUnity: ucVisibility,
+          enableReserve: tiVisibility,
+        },
+        {
+          params: {
+            page: phaseRankingPage,
+            sortOrder: phaseRankingOrder ? 'DESC' : 'ASC',
+          },
+        }
+      )
+      .then(({ data }) => {
+        if (isSubscribed) {
+          if (data) {
+            setPhaseRankingTotalPages(data.pageAmount);
+            data.series = data.series.map((obj) => {
+              obj.color = theme.territorialUnits[obj.id];
+              obj.visible = getVisibility(obj.id);
+              obj.name = t(
+                `dashboard.dataType.territorialUnits.${obj.id}.singular`
+              );
+              return obj;
+            });
+          }
+          setPhaseRankingData(data);
+        }
+      });
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [
+    searchValue,
+    dataType,
+    phaseRankingPage,
+    phaseRankingOrder,
+    ucVisibility,
+    tiVisibility,
+  ]);
+
   return useMemo(
     () =>
       statisticsData ? (
@@ -565,6 +767,54 @@ export default function Statistics() {
                   setRankingOrder={setCompanyRankingOrder}
                 />
               )}
+              {substanceRankingData && (
+                <Ranking
+                  title={t(
+                    `dashboard.infoPanel.statistics.charts.ranking.substance.title`
+                  )}
+                  info={t(
+                    `dashboard.infoPanel.statistics.charts.ranking.substance.info`
+                  )}
+                  data={substanceRankingData}
+                  page={substanceRankingPage}
+                  totalPages={substanceRankingTotalPages}
+                  setRankingPage={setSubstanceRankingPage}
+                  rankingOrder={substanceRankingOrder}
+                  setRankingOrder={setSubstanceRankingOrder}
+                />
+              )}
+              {phaseRankingData && (
+                <Ranking
+                  title={t(
+                    `dashboard.infoPanel.statistics.charts.ranking.requirementPhase.title`
+                  )}
+                  info={t(
+                    `dashboard.infoPanel.statistics.charts.ranking.requirementPhase.info`
+                  )}
+                  data={phaseRankingData}
+                  page={phaseRankingPage}
+                  totalPages={phaseRankingTotalPages}
+                  setRankingPage={setPhaseRankingPage}
+                  rankingOrder={phaseRankingOrder}
+                  setRankingOrder={setPhaseRankingOrder}
+                />
+              )}
+              {useRankingData && (
+                <Ranking
+                  title={t(
+                    `dashboard.infoPanel.statistics.charts.ranking.use.title`
+                  )}
+                  info={t(
+                    `dashboard.infoPanel.statistics.charts.ranking.use.info`
+                  )}
+                  data={useRankingData}
+                  page={useRankingPage}
+                  totalPages={useRankingTotalPages}
+                  setRankingPage={setUseRankingPage}
+                  rankingOrder={useRankingOrder}
+                  setRankingOrder={setUseRankingOrder}
+                />
+              )}
             </>
           ) : (
             // when there is no sufficient data to show statistics
@@ -599,6 +849,9 @@ export default function Statistics() {
       protectedAreaRankingData,
       stateRankingData,
       companyRankingData,
+      useRankingData,
+      substanceRankingData,
+      phaseRankingData,
       ucVisibility,
       tiVisibility,
     ]
