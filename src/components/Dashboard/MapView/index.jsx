@@ -7,6 +7,7 @@ import MapGL from 'react-map-gl';
 import { breakpoints } from '../../../constants/constraints';
 import { embedDefaults, mapDefaults } from '../../../constants/options';
 import MapContext from '../../../contexts/mapping';
+import AmazonWatch from './AmazonWatch';
 import Geodatin from './Geodatin';
 import Infoamazonia from './Infoamazonia';
 import Legend from './Legend';
@@ -147,6 +148,7 @@ export default function MapView({
         {popup}
         <div className={classes.refs}>
           <Infoamazonia />
+          <AmazonWatch />
         </div>
         <div className={classes.refsLeft}>
           <Geodatin />

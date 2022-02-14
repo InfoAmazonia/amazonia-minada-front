@@ -6,7 +6,7 @@ const useStyles = createUseStyles(() => ({
     height: 25,
     userSelect: 'none',
 
-    '@media (max-width: 576px)': {
+    '@media (max-width: 990px)': {
       width: 25,
     },
     '&::after': {

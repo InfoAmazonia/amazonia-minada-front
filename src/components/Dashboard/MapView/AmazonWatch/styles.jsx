@@ -2,12 +2,12 @@ import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles(() => ({
   container: {
-    width: 108,
+    width: 150,
     height: 22,
     userSelect: 'none',
 
-    '@media (max-width: 1100px)': {
-      width: 21,
+    '@media (max-width: 1050px)': {
+      width: 30,
     },
     '&::after': {
       content: '""',
