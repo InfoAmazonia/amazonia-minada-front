@@ -65,6 +65,35 @@ export default function RequirementPopup({
           ? feature.properties.process
           : feature.properties.PROCESSO}
       </Typography>
+
+      {feature.properties.FASE && (
+        <>
+          <Typography
+            style={{ color: theme.text.secondary, fontSize: 11 }}
+            variant="caption"
+          >
+            {t(`dashboard.infoPanel.list.item.miningProcess`)}
+          </Typography>
+          <Typography style={{ color: theme.text.primary }} variant="body1">
+            {feature.properties.FASE}
+          </Typography>
+        </>
+      )}
+
+      {(feature.properties.TI_NOME || feature.properties.UC_NOME) && (
+        <>
+          <Typography
+            style={{ color: theme.text.secondary, fontSize: 11 }}
+            variant="caption"
+          >
+            {t(`dashboard.infoPanel.list.item.territory`)}
+          </Typography>
+          <Typography style={{ color: theme.text.primary }} variant="body1">
+            {feature.properties.TI_NOME || feature.properties.UC_NOME}
+          </Typography>
+        </>
+      )}
+
       <Typography
         style={{ color: theme.text.secondary, fontSize: 11 }}
         variant="caption"
@@ -99,6 +128,20 @@ export default function RequirementPopup({
           ? feature.properties.substance
           : feature.properties.SUBS}
       </Typography>
+
+      {feature.properties.ULT_EVENTO && (
+        <>
+          <Typography
+            style={{ color: theme.text.secondary, fontSize: 11 }}
+            variant="caption"
+          >
+            {t(`dashboard.infoPanel.list.item.lastEvent`)}
+          </Typography>
+          <Typography style={{ color: theme.text.primary }} variant="body1">
+            {feature.properties.ULT_EVENTO}
+          </Typography>
+        </>
+      )}
     </Popup>
   );
 }
