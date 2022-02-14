@@ -55,6 +55,7 @@ const useStyles = createUseStyles(() => ({
       top: '50%',
       right: 15,
       transform: 'translateY(-50%)',
+      marginTop: 61,
     },
   },
   refs: {

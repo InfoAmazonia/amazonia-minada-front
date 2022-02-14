@@ -6,7 +6,6 @@ import MapGL from 'react-map-gl';
 
 import { breakpoints } from '../../../constants/constraints';
 import { embedDefaults, mapDefaults } from '../../../constants/options';
-import FilteringContext from '../../../contexts/filtering';
 import MapContext from '../../../contexts/mapping';
 import Geodatin from './Geodatin';
 import Infoamazonia from './Infoamazonia';
@@ -62,9 +61,6 @@ export default function MapView({
   } = useContext(MapContext);
 
   const isSmd = useMediaQuery(breakpoints.max.smd);
-  const {
-    values: { mobileSearchHeight },
-  } = useContext(FilteringContext);
 
   /**
    * This function handles the viewport change according to the max bounds values.
@@ -117,14 +113,7 @@ export default function MapView({
         {zoomEnabled && <Zoom />}
         {legendEnabled && <Legend defaultOpen={legendOpenByDefault} />}
       </div>
-      <div
-        style={
-          isSmd
-            ? { top: mobileSearchHeight === 0 ? 15 : mobileSearchHeight + 30 }
-            : {}
-        }
-        className={classes.options}
-      >
+      <div style={isSmd ? { top: 130 } : {}} className={classes.options}>
         {visibilityButtonsEnabled && <Visibility />}
         {shareButtonEnabled && <Share />}
       </div>

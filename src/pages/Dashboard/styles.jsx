@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-import { breakpoints } from '../../constants/constraints';
+import { breakpoints, sizes } from '../../constants/constraints';
 
 const useStyles = createUseStyles(() => ({
   wrapper: {
@@ -25,6 +25,7 @@ const useStyles = createUseStyles(() => ({
 
     [breakpoints.max.smd]: {
       height: '100vh',
+      marginTop: -(sizes.infoBarHeaderHeight + 61),
     },
   },
 }));

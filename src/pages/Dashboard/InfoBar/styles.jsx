@@ -23,7 +23,6 @@ const useStyles = createUseStyles((theme) => ({
       width: '100%',
       minWidth: 'initial',
       maxWidth: 'initial',
-      marginTop: -61 - sizes.infoBarHeaderHeight,
     },
   },
   wrapperList: {
@@ -77,7 +76,7 @@ const useStyles = createUseStyles((theme) => ({
     [breakpoints.max.smd]: {
       position: 'absolute',
       padding: 15,
-      top: `calc(61px + ${sizes.infoBarHeaderHeight}px - 100vh)`,
+      top: `calc(112px + ${sizes.infoBarHeaderHeight}px - 100vh)`,
       left: 0,
       width: '100%',
       zIndex: 100,
