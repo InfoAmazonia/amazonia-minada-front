@@ -7,6 +7,7 @@ const useStyles = createUseStyles(() => ({
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
+    marginBottom: 20,
   },
   statisticItems: {
     width: '90%',

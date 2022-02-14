@@ -669,8 +669,8 @@ export default function Statistics() {
             <>
               {generalStatisticsData && (
                 <>
-                  <DataTypeSelector />
                   <GeneralStatistics statistics={generalStatisticsData} />
+                  <DataTypeSelector />
                 </>
               )}
               {semiCircleData && (
