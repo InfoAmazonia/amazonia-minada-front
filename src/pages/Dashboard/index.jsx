@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Map from '../../components/Dashboard/MapView';
+import Disclaimer from '../../components/Disclaimer';
 import { FilteringProvider } from '../../contexts/filtering';
 import { MapProvider } from '../../contexts/mapping';
 import InfoBar from './InfoBar';
@@ -20,6 +21,7 @@ export default function Dashboard() {
           <div className={classes.mapWrapper}>
             <Map northEnabled zoomButtonsEnabled visibilityButtonsEnabled />
           </div>
+          <Disclaimer />
         </div>
       </MapProvider>
     </FilteringProvider>
