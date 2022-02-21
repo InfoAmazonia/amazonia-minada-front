@@ -40,6 +40,7 @@ export function MapProvider({ children }) {
   const [cursor, setCursor] = useState('pointer');
   const [drag, setDrag] = useState(false);
   const [popup, setPopup] = useState(null);
+  const [openDisclaimer, setOpenDisclaimer] = useState(true);
 
   /**
    * Handles the UC's visibility and opacity.
@@ -619,12 +620,14 @@ export function MapProvider({ children }) {
           shapesLoaded,
           cursor,
           popup,
+          openDisclaimer,
         },
         setters: {
           setViewport,
           setMapLoaded,
           setShapesLoaded,
           setDrag,
+          setOpenDisclaimer,
         },
         functions: {
           handleUcVisibility,

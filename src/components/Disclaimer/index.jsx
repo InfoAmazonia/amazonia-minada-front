@@ -3,10 +3,11 @@
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { Typography, IconButton, Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-jss';
 
+import MapContext from '../../contexts/mapping';
 import useStyles from './styles';
 
 /**
@@ -17,7 +18,10 @@ export default function Disclaimer() {
   const theme = useTheme();
   const { t } = useTranslation();
 
-  const [openDisclaimer, setOpenDisclaimer] = useState(true);
+  const {
+    values: { openDisclaimer },
+    setters: { setOpenDisclaimer },
+  } = useContext(MapContext);
 
   /**
    * This function handles the share dialog closing.
@@ -96,7 +100,7 @@ export default function Disclaimer() {
           disableElevation
           onClick={() => handleDisclaimerClose()}
         >
-          Acessar a plataforma
+          Fechar
         </Button>
       </div>
     </Dialog>

@@ -8,6 +8,7 @@ import { breakpoints } from '../../../constants/constraints';
 import { embedDefaults, mapDefaults } from '../../../constants/options';
 import MapContext from '../../../contexts/mapping';
 import AmazonWatch from './AmazonWatch';
+import DisclaimerButton from './DisclaimerButton';
 import Geodatin from './Geodatin';
 import Infoamazonia from './Infoamazonia';
 import Legend from './Legend';
@@ -111,6 +112,7 @@ export default function MapView({
       <Loader loading={!shapesLoaded} />
       <div className={classes.legendContainerExpanded}>
         {northEnabled && <North />}
+        <DisclaimerButton />
         {zoomEnabled && <Zoom />}
         {legendEnabled && <Legend defaultOpen={legendOpenByDefault} />}
       </div>
