@@ -186,7 +186,7 @@ export default function List({ tabPanelRef }) {
             <ul className={classes.listContent}>
               {contentList.map((item) => (
                 <RequirementListItem
-                  key={`${item.process}-${item.type}`}
+                  key={`${item.key}-${item.type}`}
                   data={item}
                 />
               ))}
