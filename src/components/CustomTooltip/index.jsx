@@ -9,6 +9,8 @@ function CustomTooltip(props) {
   return (
     <Tooltip
       arrow
+      enterTouchDelay={1}
+      disableFocusListener
       classes={{ arrow: classes.arrow, tooltip: classes.tooltip }}
       {...props}
     />
