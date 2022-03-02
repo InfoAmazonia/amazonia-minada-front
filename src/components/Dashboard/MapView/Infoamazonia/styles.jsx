@@ -9,13 +9,6 @@ const useStyles = createUseStyles(() => ({
     '@media (max-width: 1100px)': {
       width: 21,
     },
-    '&::after': {
-      content: '""',
-      width: '100%',
-      height: '100%',
-      position: 'absolute',
-      left: 0,
-    },
   },
   logo: {
     width: '100%',
