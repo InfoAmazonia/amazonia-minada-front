@@ -2,7 +2,7 @@ import { useMediaQuery } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { useTheme } from 'react-jss';
-import MapGL from 'react-map-gl';
+import MapGL, { AttributionControl } from 'react-map-gl';
 
 import { breakpoints } from '../../../constants/constraints';
 import { embedDefaults, mapDefaults } from '../../../constants/options';
@@ -146,7 +146,12 @@ export default function MapView({
         onClick={(e) => {
           onClick(e);
         }}
+        attributionControl={false}
       >
+        <AttributionControl
+          compact
+          style={{ display: 'absolute', bottom: 0, right: 0 }}
+        />
         {popup}
         <div className={classes.refs}>
           <Infoamazonia />
