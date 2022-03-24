@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { CircularProgress, Typography } from '@mui/material';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -216,7 +217,14 @@ export default function Statistics() {
                 'dashboard.infoPanel.statistics.generalStatistics.illegalRequirements'
               ),
               data: t('general.number', {
-                value: data.requirementsIncidence.total,
+                value:
+                  ucVisibility && tiVisibility
+                    ? data.requirementsIncidence.total
+                    : ucVisibility
+                    ? data.requirementsIncidence.unity
+                    : tiVisibility
+                    ? data.requirementsIncidence.reserve
+                    : 0,
               }),
             },
             {
@@ -224,7 +232,14 @@ export default function Statistics() {
                 'dashboard.infoPanel.statistics.generalStatistics.totalArea'
               ),
               data: `${t('general.number', {
-                value: data.requiredArea.total,
+                value:
+                  ucVisibility && tiVisibility
+                    ? data.requiredArea.total
+                    : ucVisibility
+                    ? data.requiredArea.unity
+                    : tiVisibility
+                    ? data.requiredArea.reserve
+                    : 0,
               })} ha`,
             },
           ]);
@@ -234,7 +249,7 @@ export default function Statistics() {
     return () => {
       isSubscribed = false;
     };
-  }, [searchValue]);
+  }, [searchValue, ucVisibility, tiVisibility]);
 
   /**
    * This useEffect updates semi circle data when data or datatype is changed.
