@@ -27,7 +27,7 @@ jobs:
       - name: Build project      
         run: npm run build
         env:          
-          REACT_APP_MAPBOX_TOKEN: ${{ secrets.REACT_APP_MAPBOX_TOKEN }}
+          REACT_APP_MAPBOX_TOKEN: "${{ secrets.REACT_APP_MAPBOX_TOKEN }}"
           REACT_APP_API_URL: ${{ vars.REACT_APP_API_URL }}
           CI: ${{ vars.CI }}
 
