@@ -29,6 +29,7 @@ jobs:
         env:          
           REACT_APP_MAPBOX_TOKEN: ${{ secrets.REACT_APP_MAPBOX_TOKEN }}
           REACT_APP_API_URL: ${{ vars.REACT_APP_API_URL }}
+          CI: ${{ vars.CI }}
 
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
