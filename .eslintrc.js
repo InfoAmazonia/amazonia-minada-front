@@ -23,6 +23,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'no-param-reassign': 'off',
     'no-console': 'off',
+    "react/no-unknown-property": 'warn',
     'react/jsx-props-no-spreading': 'off',
     'react/no-this-in-sfc': 'off',
     'import-helpers/order-imports': [
