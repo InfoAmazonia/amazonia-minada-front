@@ -71,5 +71,19 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.25.1",
     "eslint-plugin-react-hooks": "^4.2.0"
+  },
+  "resolutions": {
+    "webpack": "4.47.0",
+    "**/postcss-safe-parser/postcss": "8.5.31",
+    "**/babel-loader": "8.4.1",
+    "**/@svgr/webpack/loader-utils": "2.0.4",
+    "**/adjust-sourcemap-loader/loader-utils": "2.0.4",
+    "**/babel-loader/loader-utils": "2.0.4",
+    "**/css-loader/loader-utils": "2.0.4",
+    "**/file-loader/loader-utils": "2.0.4",
+    "**/react-dev-utils/loader-utils": "2.0.4",
+    "**/sass-loader/loader-utils": "2.0.4",
+    "**/style-loader/loader-utils": "2.0.4",
+    "**/url-loader/loader-utils": "2.0.4"
   }
 }
